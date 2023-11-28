@@ -19,10 +19,6 @@ public:
 
 private slots:
 
-    ///
-    /// \brief hide play button, welcome lable
-    /// and display next screen (map, markers)
-    ///
     void on_playButton_clicked();
 
     void on_backButton_clicked();
@@ -32,16 +28,19 @@ private:
 
     QLabel *backgroundLabel;
 
-    // play button clicked
-    void fadeOutWelcomeLabel();
-    void fadeOutPlayButton();
+    // widgets fade in/out
     void fadeInWelcomeLabel();
+    void fadeOutWelcomeLabel();
+    void fadeInPlayButton();
+    void fadeOutPlayButton();
     void fadeInBackArrow();
+    void fadeOutBackArrow();
+    void fadeInMarkers();
+    void fadeOutMarkers();
     void fadeEffect(double startValue, double endValue, QString widget);
     void setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff);
 
 signals:
     void hideWidgets();
-    //void showWidgets();
 };
 #endif // VIEW_H

@@ -2,5 +2,6 @@
     <qresource prefix="/icons">
         <file>left-arrow.png</file>
         <file>asia_map.jpg</file>
+        <file>marker.png</file>
     </qresource>
 </RCC>
