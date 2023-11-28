@@ -56,6 +56,9 @@
     <property name="text">
      <string>Welcome!</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
    <widget class="QPushButton" name="backButton">
     <property name="geometry">
@@ -92,7 +95,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>24</height>
     </rect>
    </property>
   </widget>
