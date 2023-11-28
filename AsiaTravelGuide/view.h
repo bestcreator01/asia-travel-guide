@@ -3,6 +3,7 @@
 
 #include <QGraphicsOpacityEffect>
 #include <QMainWindow>
+#include <QLabel>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class view; }
@@ -29,16 +30,16 @@ private slots:
 private:
     Ui::view *ui;
 
-    // play button clicked
+    QLabel *backgroundLabel;
 
+    // play button clicked
     void fadeOutWelcomeLabel();
     void fadeOutPlayButton();
-    void hideStuff();
-    void hideAll();
-    void fadeInLabel();
+    void fadeInWelcomeLabel();
     void fadeInBackArrow();
     void fadeEffect(double startValue, double endValue, QString widget);
     void setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff);
+
 signals:
     void hideWidgets();
     //void showWidgets();

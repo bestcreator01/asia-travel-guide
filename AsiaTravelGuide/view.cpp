@@ -16,16 +16,17 @@ view::view(QWidget *parent)
     this->setWindowTitle("Asia Travel Guide");
     QIcon backArrowIcon(":/icons/left-arrow.png");
 
-    // set background
-    QPixmap background(":/icons/asia_map.png");
-    QPalette palette;
-    palette.setBrush(QPalette::Window, background.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    // Background label
+    backgroundLabel = new QLabel(this);
+    QPixmap background(":/icons/asia_map.jpg");
+    backgroundLabel->setPixmap(background.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    backgroundLabel->setGeometry(0, 0, this->width(), this->height());  // Set to cover the entire window
+    backgroundLabel->lower();
 
-//    QGraphicsOpacityEffect *opacityEffect = new QGraphicsOpacityEffect(this);
-//    opacityEffect->setOpacity(0.6);
-//    this->centralWidget()->setGraphicsEffect(opacityEffect);
-    this->centralWidget()->setAutoFillBackground(true);
-    this->centralWidget()->setPalette(palette);
+    // Set initial background opacity
+    QGraphicsOpacityEffect *backgroundOpacityEffect = new QGraphicsOpacityEffect(backgroundLabel);
+    backgroundOpacityEffect->setOpacity(0.5);
+    backgroundLabel->setGraphicsEffect(backgroundOpacityEffect);
 
     ui->backButton->setIcon(backArrowIcon);
     ui->backButton->hide();
@@ -36,31 +37,30 @@ view::~view()
     delete ui;
 }
 
-
 void view::on_playButton_clicked()
 {
     fadeOutPlayButton();
     fadeOutWelcomeLabel();
     fadeInBackArrow();
 
+    QGraphicsOpacityEffect *effect = dynamic_cast<QGraphicsOpacityEffect*>(backgroundLabel->graphicsEffect());
+    QPropertyAnimation *opacityAnimation = new QPropertyAnimation(effect, "opacity");
+    opacityAnimation->setDuration(1000);
+    opacityAnimation->setStartValue(effect->opacity());
+    opacityAnimation->setEndValue(1.0);
+    opacityAnimation->start(QPropertyAnimation::DeleteWhenStopped);
 }
 
-void view::hideStuff()
+void view::fadeOutWelcomeLabel()
 {
-    QTimer::singleShot(1000, this, &view::fadeOutWelcomeLabel);
-    QTimer::singleShot(1000, this, &view::fadeOutPlayButton);
-
-    ui->backButton->show();
-}
-
-void view::fadeOutWelcomeLabel(){
     fadeEffect(1.0, 0.0, "welcomeLabel");
-    ui->welcomeLabel->hide();
+    QTimer::singleShot(1000, this, [this] {ui->welcomeLabel->hide();});
 }
 
-void view::fadeOutPlayButton(){
+void view::fadeOutPlayButton()
+{
     fadeEffect(1.0, 0.0, "playButton");
-    ui->playButton->hide();
+    QTimer::singleShot(1000, this, [this] {ui->playButton->hide();});
 }
 
 void view::fadeInBackArrow()
@@ -77,6 +77,13 @@ void view::on_backButton_clicked()
 
     fadeEffect(0.0, 1.0, "playButton");
     fadeEffect(0.0, 1.0, "welcomeLabel");
+
+    QGraphicsOpacityEffect *effect = dynamic_cast<QGraphicsOpacityEffect*>(backgroundLabel->graphicsEffect());
+    QPropertyAnimation *opacityAnimation = new QPropertyAnimation(effect, "opacity");
+    opacityAnimation->setDuration(1000);
+    opacityAnimation->setStartValue(effect->opacity());
+    opacityAnimation->setEndValue(0.5);
+    opacityAnimation->start(QPropertyAnimation::DeleteWhenStopped);
 }
 
 void view::fadeEffect(double startValue, double endValue, QString widget)
