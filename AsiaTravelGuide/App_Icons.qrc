@@ -4,5 +4,9 @@
         <file>marker.png</file>
         <file>asia-map.png</file>
         <file>india-map.png</file>
+        <file>taj.png</file>
+        <file>hawa-mahal.png</file>
+        <file>biryani.png</file>
+        <file>panipuri.png</file>
     </qresource>
 </RCC>

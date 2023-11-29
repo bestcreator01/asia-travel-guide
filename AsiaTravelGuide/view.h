@@ -43,6 +43,8 @@ private:
     void fadeOutBackArrow();
     void fadeInMarkers();
     void fadeOutMarkers();
+    void fadeInLandMarks();
+    void fadeOutLandMarks();
     void fadeEffect(double startValue, double endValue, QString widget);
     void setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff);
 
