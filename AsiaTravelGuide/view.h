@@ -22,12 +22,9 @@ public:
 private slots:
 
     void on_playButton_clicked();
-
     void on_backButton_clicked();
-
     void on_indiaButton_clicked();
     void updateState(QString state);
-
 
 private:
     Ui::view *ui;
@@ -44,14 +41,16 @@ private:
     void fadeInMarkers();
     void fadeOutMarkers();
     void fadeInLandMarks();
-    void fadeOutLandMarks();
-    void fadeEffect(double startValue, double endValue, QString widget);
+    void hideLandMarks();
+    void fadeEffect(double startValue, double endValue, int duration, QString widget);
     void setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff);
 
     void fadeInBackgroundLabel();
     void fadeOutBackgroundLabel();
     void setBgLabel(QPixmap background);
     void setBgLabelOpacity();
+
+    void disableButtons();
 signals:
     void hideWidgets();
     void changedState(QString state);

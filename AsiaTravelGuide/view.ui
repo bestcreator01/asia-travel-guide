@@ -156,6 +156,22 @@
      <string/>
     </property>
    </widget>
+   <widget class="QPushButton" name="quizButton">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>480</y>
+      <width>91</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(136, 135, 137)</string>
+    </property>
+    <property name="text">
+     <string>Quiz</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

@@ -40,6 +40,7 @@ view::view(Model& model, QWidget *parent)
     ui->paniPuri->setIcon(panipuri);
     ui->biryani->setIcon(biryani);
     ui->indiaButton->hide();
+    ui->quizButton->hide();
     // landmark spots
     ui->tajMahal->hide();
     ui->hawaMahal->hide();
@@ -56,6 +57,11 @@ view::view(Model& model, QWidget *parent)
 
     connect(this, &view::changedState, &model, &Model::changeState);
     connect(&model, &Model::changedScreenState, this, &view::updateState);
+
+    connect(ui->hawaMahal, &QPushButton::clicked, this, &view::disableButtons);
+    connect(ui->tajMahal, &QPushButton::clicked, this, &view::disableButtons);
+    connect(ui->paniPuri, &QPushButton::clicked, this, &view::disableButtons);
+    connect(ui->biryani, &QPushButton::clicked, this, &view::disableButtons);
 }
 
 view::~view()
@@ -94,6 +100,7 @@ void view::on_playButton_clicked()
 
 void view::on_backButton_clicked()
 {
+    // currentState == "AsiaMap"
     if(previousState == "Welcome")
     {
         emit changedState("Welcome");
@@ -103,10 +110,12 @@ void view::on_backButton_clicked()
         fadeOutMarkers();
         setBgLabelOpacity();
     }
+    // currentState == "indiaMap"
     else if(previousState == "AsiaMap")
     {
         emit changedState("AsiaMap");
         fadeInMarkers();
+        hideLandMarks();
         QPixmap background(":/icons/asia-map.png");
         setBgLabel(background);
         fadeInBackgroundLabel();
@@ -116,60 +125,60 @@ void view::on_backButton_clicked()
 void view::fadeInBackgroundLabel()
 {
     backgroundLabel->show();
-    fadeEffect(0.0, 1.0, "backgroundLabel");
+    fadeEffect(0.0, 1.0, 1000, "backgroundLabel");
 }
 
 void view::fadeOutBackgroundLabel()
 {
     QTimer::singleShot(1000, this, [this] {QPixmap background(":/icons/india-map.png"); setBgLabel(background);});
-    fadeEffect(1.0, 0.0, "backgroundLabel");
+    fadeEffect(1.0, 0.0, 1000, "backgroundLabel");
 }
 
 void view::fadeInWelcomeLabel()
 {
     ui->welcomeLabel->show();
-    fadeEffect(0.0, 1.0, "welcomeLabel");
+    fadeEffect(0.0, 1.0, 1000, "welcomeLabel");
 }
 
 void view::fadeOutWelcomeLabel()
 {
-    fadeEffect(1.0, 0.0, "welcomeLabel");
+    fadeEffect(1.0, 0.0, 1000, "welcomeLabel");
     QTimer::singleShot(1000, this, [this] {ui->welcomeLabel->hide();});
 }
 
 void view::fadeInPlayButton()
 {
     ui->playButton->show();
-    fadeEffect(0.0, 1.0, "playButton");
+    fadeEffect(0.0, 1.0, 1000, "playButton");
 }
 
 void view::fadeOutPlayButton()
 {
-    fadeEffect(1.0, 0.0, "playButton");
+    fadeEffect(1.0, 0.0, 1000, "playButton");
     QTimer::singleShot(1000, this, [this] {ui->playButton->hide();});
 }
 
 void view::fadeInBackArrow()
 {
     ui->backButton->show();
-    fadeEffect(0.0, 1.0, "backButton");
+    fadeEffect(0.0, 1.0, 1000, "backButton");
 }
 
 void view::fadeOutBackArrow()
 {
-    fadeEffect(1.0, 0.0, "backButton");
+    fadeEffect(1.0, 0.0, 1000, "backButton");
     QTimer::singleShot(1000, this, [this] {ui->backButton->hide();});
 }
 
 void view::fadeInMarkers()
 {
     ui->indiaButton->show();
-    fadeEffect(0.0, 1.0, "indiaButton");
+    fadeEffect(0.0, 1.0, 1000, "indiaButton");
 }
 
 void view::fadeOutMarkers()
 {
-    fadeEffect(1.0, 0.0, "indiaButton");
+    fadeEffect(1.0, 0.0, 1000, "indiaButton");
     QTimer::singleShot(1000, this, [this] {ui->indiaButton->hide();});
 }
 
@@ -179,20 +188,21 @@ void view::fadeInLandMarks()
     ui->hawaMahal->show();
     ui->paniPuri->show();
     ui->biryani->show();
-    fadeEffect(0.0, 1.0, "landMarksButton");
-
+    fadeEffect(0.0, 1.0, 1500, "tajMahalButton");
+    fadeEffect(0.0, 1.0, 1500, "hawaMahalButton");
+    fadeEffect(0.0, 1.0, 1500, "paniPuriButton");
+    fadeEffect(0.0, 1.0, 1500, "biryaniButton");
 }
 
-void view::fadeOutLandMarks()
+void view::hideLandMarks()
 {
-    fadeEffect(1.0, 0.0, "landMarksButton");
-    QTimer::singleShot(1000, this, [this] { ui->tajMahal->hide();
-                                            ui->hawaMahal->hide();
-                                            ui->paniPuri->hide();
-                                            ui->biryani->hide();});
+    ui->tajMahal->hide();
+    ui->hawaMahal->hide();
+    ui->paniPuri->hide();
+    ui->biryani->hide();
 }
 
-void view::fadeEffect(double startValue, double endValue, QString widget)
+void view::fadeEffect(double startValue, double endValue, int duration, QString widget)
 {
     QGraphicsOpacityEffect *eff = new QGraphicsOpacityEffect(this);
     setWidgetGraphicsEffect(widget, eff);
@@ -200,7 +210,7 @@ void view::fadeEffect(double startValue, double endValue, QString widget)
     animation->setStartValue(startValue);
     animation->setEndValue(endValue);
 
-    animation->setDuration(1000);
+    animation->setDuration(duration);
     animation->start(QPropertyAnimation::DeleteWhenStopped);
 }
 
@@ -226,14 +236,22 @@ void view::setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff)
     {
         backgroundLabel->setGraphicsEffect(eff);
     }
-    else if (name == "landMarksButton")
+    else if(name == "tajMahalButton")
     {
         ui->tajMahal->setGraphicsEffect(eff);
+    }
+    else if(name == "hawaMahalButton")
+    {
         ui->hawaMahal->setGraphicsEffect(eff);
+    }
+    else if(name == "paniPuriButton")
+    {
         ui->paniPuri->setGraphicsEffect(eff);
+    }
+    else if(name == "biryaniButton")
+    {
         ui->biryani->setGraphicsEffect(eff);
     }
-
 }
 
 void view::setBgLabel(QPixmap background)
@@ -254,3 +272,11 @@ void view::on_indiaButton_clicked()
     fadeInLandMarks();
 }
 
+void view::disableButtons()
+{
+    ui->backButton->setDisabled(true);
+    ui->tajMahal->setDisabled(true);
+    ui->hawaMahal->setDisabled(true);
+    ui->paniPuri->setDisabled(true);
+    ui->biryani->setDisabled(true);
+}
