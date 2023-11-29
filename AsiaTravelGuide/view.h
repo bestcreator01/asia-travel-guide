@@ -4,6 +4,7 @@
 #include <QGraphicsOpacityEffect>
 #include <QMainWindow>
 #include <QLabel>
+#include "model.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class view; }
@@ -12,9 +13,10 @@ QT_END_NAMESPACE
 class view : public QMainWindow
 {
     Q_OBJECT
+    QString previousState;
 
 public:
-    view(QWidget *parent = nullptr);
+    view(Model& model, QWidget *parent = nullptr);
     ~view();
 
 private slots:
@@ -24,6 +26,8 @@ private slots:
     void on_backButton_clicked();
 
     void on_indiaButton_clicked();
+    void updateState(QString state);
+
 
 private:
     Ui::view *ui;
@@ -47,5 +51,6 @@ private:
     void setBgLabel(QPixmap background);
 signals:
     void hideWidgets();
+    void changedState(QString state);
 };
 #endif // VIEW_H

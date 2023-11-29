@@ -7,16 +7,18 @@
 class Model : public QObject
 {
     Q_OBJECT
+    //enum State{Welcome, AsiaMap, CountryMap};
+
 public:
     Model(QObject *parent = nullptr);
 
 
 public slots:
-
+    void changeState(QString state);
 
 
 signals:
-
+    void changedScreenState(QString state);
 
 
 private:
@@ -26,6 +28,7 @@ private:
 
 //    Country currentCountry;
 //    Place currentPlace;
+
 
 
 

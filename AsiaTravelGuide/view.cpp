@@ -1,13 +1,13 @@
 #include "view.h"
 #include "ui_view.h"
-
+#include "model.h"
 #include <QGraphicsOpacityEffect>
 #include <QHBoxLayout>
 #include <QPropertyAnimation>
 #include <QTimer>
 #include <QPalette>
 
-view::view(QWidget *parent)
+view::view(Model& model, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::view)
 {
@@ -35,6 +35,9 @@ view::view(QWidget *parent)
     QGraphicsOpacityEffect *backgroundOpacityEffect = new QGraphicsOpacityEffect(backgroundLabel);
     backgroundOpacityEffect->setOpacity(0.5);
     backgroundLabel->setGraphicsEffect(backgroundOpacityEffect);
+
+    connect(this, &view::changedState, &model, &Model::changeState);
+    connect(&model, &Model::changedScreenState, this, &view::updateState);
 }
 
 view::~view()
@@ -42,8 +45,14 @@ view::~view()
     delete ui;
 }
 
+void view::updateState(QString state)
+{
+    previousState = state;
+}
+
 void view::on_playButton_clicked()
 {
+    emit changedState("AsiaMap");
     fadeOutPlayButton();
     fadeOutWelcomeLabel();
     fadeInBackArrow();
@@ -60,18 +69,20 @@ void view::on_playButton_clicked()
 
 void view::on_backButton_clicked()
 {
-    fadeInWelcomeLabel();
-    fadeInPlayButton();
-    fadeOutBackArrow();
-    fadeOutMarkers();
-
-    // background opacity 100% -> 50%
-    QGraphicsOpacityEffect *effect = dynamic_cast<QGraphicsOpacityEffect*>(backgroundLabel->graphicsEffect());
-    QPropertyAnimation *opacityAnimation = new QPropertyAnimation(effect, "opacity");
-    opacityAnimation->setDuration(1000);
-    opacityAnimation->setStartValue(effect->opacity());
-    opacityAnimation->setEndValue(0.5);
-    opacityAnimation->start(QPropertyAnimation::DeleteWhenStopped);
+    if(previousState == "Welcome")
+    {
+        fadeInWelcomeLabel();
+        fadeInPlayButton();
+        fadeOutBackArrow();
+        fadeOutMarkers();
+    }
+    else if(previousState == "AsiaMap")
+    {
+        fadeInMarkers();
+        QPixmap background(":/icons/asia_map.jpg");
+        setBgLabel(background);
+        fadeInBackgroundLabel();
+    }
 }
 
 void view::fadeInBackgroundLabel()
@@ -179,6 +190,7 @@ void view::setBgLabel(QPixmap background)
 
 void view::on_indiaButton_clicked()
 {
+    emit changedState("CountryMap");
     ui->indiaButton->hide();
     QPixmap background(":/icons/india_map.png");
     setBgLabel(background);
