@@ -32,9 +32,7 @@ view::view(Model& model, QWidget *parent)
     setBgLabel(background);
 
     // Set initial background opacity
-    QGraphicsOpacityEffect *backgroundOpacityEffect = new QGraphicsOpacityEffect(backgroundLabel);
-    backgroundOpacityEffect->setOpacity(0.5);
-    backgroundLabel->setGraphicsEffect(backgroundOpacityEffect);
+    setBgLabelOpacity();
 
     connect(this, &view::changedState, &model, &Model::changeState);
     connect(&model, &Model::changedScreenState, this, &view::updateState);
@@ -43,6 +41,13 @@ view::view(Model& model, QWidget *parent)
 view::~view()
 {
     delete ui;
+}
+
+void view::setBgLabelOpacity()
+{
+    QGraphicsOpacityEffect *backgroundOpacityEffect = new QGraphicsOpacityEffect(backgroundLabel);
+    backgroundOpacityEffect->setOpacity(0.5);
+    backgroundLabel->setGraphicsEffect(backgroundOpacityEffect);
 }
 
 void view::updateState(QString state)
@@ -76,6 +81,7 @@ void view::on_backButton_clicked()
         fadeInPlayButton();
         fadeOutBackArrow();
         fadeOutMarkers();
+        setBgLabelOpacity();
     }
     else if(previousState == "AsiaMap")
     {

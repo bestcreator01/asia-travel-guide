@@ -49,6 +49,7 @@ private:
     void fadeInBackgroundLabel();
     void fadeOutBackgroundLabel();
     void setBgLabel(QPixmap background);
+    void setBgLabelOpacity();
 signals:
     void hideWidgets();
     void changedState(QString state);
