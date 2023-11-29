@@ -71,6 +71,7 @@ void view::on_backButton_clicked()
 {
     if(previousState == "Welcome")
     {
+        emit changedState("Welcome");
         fadeInWelcomeLabel();
         fadeInPlayButton();
         fadeOutBackArrow();
@@ -78,6 +79,7 @@ void view::on_backButton_clicked()
     }
     else if(previousState == "AsiaMap")
     {
+        emit changedState("AsiaMap");
         fadeInMarkers();
         QPixmap background(":/icons/asia_map.jpg");
         setBgLabel(background);
