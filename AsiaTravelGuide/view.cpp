@@ -28,7 +28,7 @@ view::view(Model& model, QWidget *parent)
 
     // Background label
     backgroundLabel = new QLabel(this);
-    QPixmap background(":/icons/asia_map.jpg");
+    QPixmap background(":/icons/asia-map.png");
     setBgLabel(background);
 
     // Set initial background opacity
@@ -87,7 +87,7 @@ void view::on_backButton_clicked()
     {
         emit changedState("AsiaMap");
         fadeInMarkers();
-        QPixmap background(":/icons/asia_map.jpg");
+        QPixmap background(":/icons/asia-map.png");
         setBgLabel(background);
         fadeInBackgroundLabel();
     }
@@ -101,7 +101,7 @@ void view::fadeInBackgroundLabel()
 
 void view::fadeOutBackgroundLabel()
 {
-    QTimer::singleShot(1000, this, [this] {QPixmap background(":/icons/india_map.png"); setBgLabel(background);});
+    QTimer::singleShot(1000, this, [this] {QPixmap background(":/icons/india-map.png"); setBgLabel(background);});
     fadeEffect(1.0, 0.0, "backgroundLabel");
 }
 
@@ -200,7 +200,7 @@ void view::on_indiaButton_clicked()
 {
     emit changedState("CountryMap");
     ui->indiaButton->hide();
-    QPixmap background(":/icons/india_map.png");
+    QPixmap background(":/icons/india-map.png");
     setBgLabel(background);
     fadeOutBackgroundLabel();
     fadeInBackgroundLabel();
