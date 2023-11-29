@@ -23,6 +23,8 @@ private slots:
 
     void on_backButton_clicked();
 
+    void on_indiaButton_clicked();
+
 private:
     Ui::view *ui;
 
@@ -40,6 +42,9 @@ private:
     void fadeEffect(double startValue, double endValue, QString widget);
     void setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff);
 
+    void fadeInBackgroundLabel();
+    void fadeOutBackgroundLabel();
+    void setBgLabel(QPixmap background);
 signals:
     void hideWidgets();
 };

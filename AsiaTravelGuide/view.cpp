@@ -29,9 +29,7 @@ view::view(QWidget *parent)
     // Background label
     backgroundLabel = new QLabel(this);
     QPixmap background(":/icons/asia_map.jpg");
-    backgroundLabel->setPixmap(background.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-    backgroundLabel->setGeometry(0, 0, this->width(), this->height());  // Set to cover the entire window
-    backgroundLabel->lower();
+    setBgLabel(background);
 
     // Set initial background opacity
     QGraphicsOpacityEffect *backgroundOpacityEffect = new QGraphicsOpacityEffect(backgroundLabel);
@@ -74,6 +72,18 @@ void view::on_backButton_clicked()
     opacityAnimation->setStartValue(effect->opacity());
     opacityAnimation->setEndValue(0.5);
     opacityAnimation->start(QPropertyAnimation::DeleteWhenStopped);
+}
+
+void view::fadeInBackgroundLabel()
+{
+    backgroundLabel->show();
+    fadeEffect(0.0, 1.0, "backgroundLabel");
+}
+
+void view::fadeOutBackgroundLabel()
+{
+    QTimer::singleShot(1000, this, [this] {QPixmap background(":/icons/india_map.png"); setBgLabel(background);});
+    fadeEffect(1.0, 0.0, "backgroundLabel");
 }
 
 void view::fadeInWelcomeLabel()
@@ -154,4 +164,25 @@ void view::setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff)
     {
         ui->indiaButton->setGraphicsEffect(eff);
     }
+    else if(name == "backgroundLabel")
+    {
+        backgroundLabel->setGraphicsEffect(eff);
+    }
 }
+
+void view::setBgLabel(QPixmap background)
+{
+    backgroundLabel->setPixmap(background.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    backgroundLabel->setGeometry(0, 0, this->width(), this->height());  // Set to cover the entire window
+    backgroundLabel->lower();
+}
+
+void view::on_indiaButton_clicked()
+{
+    ui->indiaButton->hide();
+    QPixmap background(":/icons/india_map.png");
+    setBgLabel(background);
+    fadeOutBackgroundLabel();
+    fadeInBackgroundLabel();
+}
+
