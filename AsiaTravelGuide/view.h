@@ -29,6 +29,12 @@ private slots:
 
     void on_hawaMahal_clicked();
 
+    void on_tajMahal_clicked();
+
+    void on_paniPuri_clicked();
+
+    void on_biryani_clicked();
+
 private:
     Ui::view *ui;
 
@@ -56,6 +62,8 @@ private:
     void setBgLabelOpacity();
 
     void disableButtons();
+    void enableButtonsAndCheck();
+    int count;
 signals:
     void hideWidgets();
     void changedState(QString state);

@@ -16,6 +16,7 @@ public:
     Ui::Form *ui;
     explicit Form(QWidget *parent = nullptr);
     ~Form();
+
 public slots:
     void receiveSignalToSetTextIndia(QString name);
 
@@ -23,6 +24,11 @@ private slots:
     void on_nextButton_clicked();
 
     void on_backButton_clicked();
+
+    void on_backToMapButton_clicked();
+
+signals:
+    void windowClosed();
 
 private:
     //Ui::Form *ui;

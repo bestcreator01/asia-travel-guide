@@ -64,6 +64,8 @@ view::view(Model& model, QWidget *parent)
     connect(ui->biryani, &QPushButton::clicked, this, &view::disableButtons);
 
     connect(this, &view::informModelToSend, &indiaWindow, &Form::receiveSignalToSetTextIndia);
+
+    connect(&indiaWindow, &Form::windowClosed, this, &view::enableButtonsAndCheck);
 }
 
 view::~view()
@@ -285,7 +287,55 @@ void view::disableButtons()
 
 void view::on_hawaMahal_clicked()
 {
+    count = 0;
     indiaWindow.show();
     emit informModelToSend("HawaMahal");
+}
+
+
+void view::on_tajMahal_clicked()
+{
+    count = 1;
+    indiaWindow.show();
+    emit informModelToSend("TajMahal");
+}
+
+
+void view::on_paniPuri_clicked()
+{
+    count = 2;
+    indiaWindow.show();
+    emit informModelToSend("PaniPuri");
+}
+
+
+void view::on_biryani_clicked()
+{
+    count = 3;
+    indiaWindow.show();
+    emit informModelToSend("Biryani");
+}
+
+void view::enableButtonsAndCheck()
+{
+    ui->hawaMahal->setEnabled(true);
+    ui->tajMahal->setEnabled(true);
+    ui->paniPuri->setEnabled(true);
+    ui->biryani->setEnabled(true);
+
+    // checkmark
+//    if (count == 0)
+//    {
+
+//    }
+//    else if (count == 1)
+//    {
+//    }
+//    else if (count == 2)
+//    {
+//    }
+//    else if (count == 3)
+//    {
+//    }
 }
 

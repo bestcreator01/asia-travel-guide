@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1024</width>
-    <height>701</height>
+    <width>996</width>
+    <height>722</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,9 +17,9 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>320</y>
-     <width>831</width>
-     <height>321</height>
+     <y>500</y>
+     <width>931</width>
+     <height>141</height>
     </rect>
    </property>
    <property name="font">
@@ -42,10 +42,10 @@
   <widget class="QPushButton" name="nextButton">
    <property name="geometry">
     <rect>
-     <x>799</x>
-     <y>663</y>
-     <width>51</width>
-     <height>31</height>
+     <x>870</x>
+     <y>650</y>
+     <width>71</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="text">
@@ -56,26 +56,49 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>660</y>
-     <width>41</width>
-     <height>31</height>
+     <y>650</y>
+     <width>71</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="text">
     <string>Back</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="image">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>120</y>
-     <width>49</width>
-     <height>16</height>
+     <x>30</x>
+     <y>20</y>
+     <width>931</width>
+     <height>471</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>6</pointsize>
+    </font>
+   </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="backToMapButton">
+   <property name="geometry">
+    <rect>
+     <x>820</x>
+     <y>620</y>
+     <width>141</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Rockwell</family>
+    </font>
+   </property>
+   <property name="text">
+    <string>Go back to the map</string>
    </property>
   </widget>
  </widget>
