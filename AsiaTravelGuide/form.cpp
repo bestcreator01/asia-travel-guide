@@ -7,11 +7,11 @@ Form::Form(QWidget *parent) :
     ui(new Ui::Form)
 {
     ui->setupUi(this);
-    QPixmap background(":/icons/hawa-mahal_Image.jpg");
-    ui->image->setPixmap(background.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
     //ui->bgImage->setGeometry(0, 0, this->width(), this->height());  // Set to cover the entire window
     ui->image->lower();
-    ui->backToMapButton->hide();
+
+    ui->nextButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
+    ui->backButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
 
     landMarkInfo[0] = "Hawa Mahal is a palace in the city of Jaipur, India. Built from red and pink sandstone, "
                       "\nit is on the edge of the City Palace, Jaipur. "
@@ -85,24 +85,32 @@ void Form::receiveSignalToSetTextIndia(QString name)
     {
         current = 0;
         flag = true;
+        QPixmap hawaMahal(":/icons/hawa-mahal_Image.jpg");
+        ui->image->setPixmap(hawaMahal.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
         ui->description->setText(landMarkInfo[current]);
     }
     else if (name == "TajMahal")
     {
         current = 2;
         flag = true;
+        QPixmap tajMahal(":/icons/taj-mahal_Image.png");
+        ui->image->setPixmap(tajMahal.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
         ui->description->setText(landMarkInfo[current]);
     }
     else if (name == "PaniPuri")
     {
         current = 0;
         flag = false;
+        QPixmap paniPuri(":/icons/pani-puri_Image.jpg");
+        ui->image->setPixmap(paniPuri.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
         ui->description->setText(restaurantInfo[current]);
     }
     else if (name == "Biryani")
     {
         current = 2;
         flag = false;
+        QPixmap biryani(":/icons/biryani_Image.jpg");
+        ui->image->setPixmap(biryani.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
         ui->description->setText(restaurantInfo[current]);
     }
     ui->nextButton->show();
@@ -111,7 +119,7 @@ void Form::receiveSignalToSetTextIndia(QString name)
 
 void Form::on_nextButton_clicked()
 {
-    if(flag)
+    if (flag)
     {
         ui->description->setText(landMarkInfo[++current]);
     }
@@ -121,13 +129,12 @@ void Form::on_nextButton_clicked()
     }
     ui->nextButton->hide();
     ui->backButton->show();
-    ui->backToMapButton->show();
 }
 
 
 void Form::on_backButton_clicked()
 {
-    if(flag)
+    if (flag)
     {
         ui->description->setText(landMarkInfo[--current]);
     }
@@ -137,20 +144,17 @@ void Form::on_backButton_clicked()
     }
     ui->nextButton->show();
     ui->backButton->hide();
-    ui->backToMapButton->hide();
 }
 
 
 void Form::on_backToMapButton_clicked()
 {
-    ui->backToMapButton->hide();
     this->hide();
     emit windowClosed();
 }
 
 void Form::closeEvent(QCloseEvent *bar)
 {
-    ui->backToMapButton->hide();
     emit windowClosed();
 }
 

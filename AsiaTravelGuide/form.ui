@@ -48,8 +48,14 @@
      <height>41</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Fixedsys</family>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
    <property name="text">
-    <string>Next</string>
+    <string>Next→</string>
    </property>
   </widget>
   <widget class="QPushButton" name="backButton">
@@ -61,8 +67,14 @@
      <height>41</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Fixedsys</family>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
    <property name="text">
-    <string>Back</string>
+    <string>← Back</string>
    </property>
   </widget>
   <widget class="QLabel" name="image">
@@ -81,24 +93,6 @@
    </property>
    <property name="text">
     <string/>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="backToMapButton">
-   <property name="geometry">
-    <rect>
-     <x>820</x>
-     <y>620</y>
-     <width>141</width>
-     <height>71</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Rockwell</family>
-    </font>
-   </property>
-   <property name="text">
-    <string>Go back to the map</string>
    </property>
   </widget>
  </widget>
