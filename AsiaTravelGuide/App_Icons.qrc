@@ -8,5 +8,9 @@
         <file>hawa-mahal.png</file>
         <file>biryani.png</file>
         <file>panipuri.png</file>
+        <file>biryani_Image.jpg</file>
+        <file>hawa-mahal_Image.jpg</file>
+        <file>pani-puri_Image.jpg</file>
+        <file>taj-mahal_Image.png</file>
     </qresource>
 </RCC>

@@ -19,11 +19,18 @@ public:
 public slots:
     void receiveSignalToSetTextIndia(QString name);
 
+private slots:
+    void on_nextButton_clicked();
+
+    void on_backButton_clicked();
+
 private:
     //Ui::Form *ui;
 
-    QString landMarkInfo[2];
-    QString restaurantInfo[2];
+    int current = 0;
+    bool flag = true;
+    QString landMarkInfo[4];
+    QString restaurantInfo[4];
 };
 
 #endif // FORM_H
