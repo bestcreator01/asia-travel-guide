@@ -13,7 +13,6 @@ class Form : public QWidget
     Q_OBJECT
 
 public:
-    Ui::Form *ui;
     explicit Form(QWidget *parent = nullptr);
     ~Form();
 
@@ -27,11 +26,13 @@ private slots:
 
     void on_backToMapButton_clicked();
 
+    void closeEvent(QCloseEvent *bar);
+
 signals:
     void windowClosed();
 
 private:
-    //Ui::Form *ui;
+    Ui::Form *ui;
 
     int current = 0;
     bool flag = true;

@@ -1,5 +1,6 @@
 #include "form.h"
 #include "ui_form.h"
+#include <QDebug>
 
 Form::Form(QWidget *parent) :
     QWidget(parent),
@@ -144,6 +145,12 @@ void Form::on_backToMapButton_clicked()
 {
     ui->backToMapButton->hide();
     this->hide();
+    emit windowClosed();
+}
+
+void Form::closeEvent(QCloseEvent *bar)
+{
+    ui->backToMapButton->hide();
     emit windowClosed();
 }
 
