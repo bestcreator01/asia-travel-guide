@@ -6,24 +6,16 @@ Form::Form(QWidget *parent) :
     ui(new Ui::Form)
 {
     ui->setupUi(this);
-}
 
-Form::~Form()
-{
-    delete ui;
-}
-
-void Form::receiveSignalToSetTextIndia(QString name)
-{
     landMarkInfo[0] = "Hawa Mahal is a palace in the city of Jaipur, India. Built from red and pink sandstone, "
-                      "it is on the edge of the City Palace, Jaipur. The structure was built in 1799 by the Maharaja Sawai Pratap Singh. "
-                      "Its five-floor exterior is akin to a honeycomb with its 953 small windows called Jharokhas decorated with intricate latticework. "
-                      "The original intent of the lattice design was to allow royal ladies to observe everyday life and festivals celebrated in the street "
-                      "below without being seen. This architectural feature also allowed cool air from the Venturi effect to pass through, "
-                      "thus making the whole area more pleasant during the high temperatures in summer. This amazing ventilation that the palace enjoys "
-                      "is the reason why it was named as the Hawa Mahal, which literally translates into the “Palace of the Winds”. "
-                      "It is the tallest building in the world that has been built without a foundation. "
-                      "It has a curved architecture that leans at an 87-degree angle, and a pyramidal shape which has helped it stay erect for centuries.";
+                      "\nit is on the edge of the City Palace, Jaipur. The structure was built in 1799 by the Maharaja Sawai Pratap Singh. "
+                      "\nIts five-floor exterior is akin to a honeycomb with its 953 small windows called Jharokhas decorated with intricate latticework. "
+                      "\nThe original intent of the lattice design was to allow royal ladies to observe everyday life and festivals celebrated in the street "
+                      "\nbelow without being seen. This architectural feature also allowed cool air from the Venturi effect to pass through, "
+                      "\nthus making the whole area more pleasant during the high temperatures in summer. This amazing ventilation that the palace enjoys "
+                      "\nis the reason why it was named as the Hawa Mahal, which literally translates into the “Palace of the Winds”. "
+                      "\nIt is the tallest building in the world that has been built without a foundation. "
+                      "\nIt has a curved architecture that leans at an 87-degree angle, and a pyramidal shape which has helped it stay erect for centuries.";
 
     landMarkInfo[1] = "Taj Mahal is an ivory-white marble mausoleum on the right bank of the river Yamuna in Agra, Uttar Pradesh, India. "
                       "It was commissioned in 1631 by the fifth Mughal emperor, Shah Jahan (r. 1628–1658) to house the tomb of his beloved wife, "
@@ -52,11 +44,18 @@ void Form::receiveSignalToSetTextIndia(QString name)
                         "which involves cooking over a low flame. This procedure involves sealing food in a round, heavy-bottomed pot, preferably a handi (clay pot), "
                         "and slowly cooking it. The dish may be served with chutney or raita, and salad.";
 
+}
+
+Form::~Form()
+{
+    delete ui;
+}
+
+void Form::receiveSignalToSetTextIndia(QString name)
+{
     if (name == "HawaMahal")
     {
-//        Form::ui->description->clear();
-        ui->description->setText("hi");
-        //qDebug() << landMarkInfo[0];
+        ui->description->setText(landMarkInfo[0]);
     }
     else if (name == "TajMahal")
     {

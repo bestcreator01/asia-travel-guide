@@ -24,12 +24,16 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>24</pointsize>
-     <bold>true</bold>
+     <family>Rockwell</family>
+     <pointsize>10</pointsize>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
-    <string>hihi</string>
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
  </widget>

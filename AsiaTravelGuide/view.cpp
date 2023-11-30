@@ -64,7 +64,6 @@ view::view(Model& model, QWidget *parent)
     connect(ui->biryani, &QPushButton::clicked, this, &view::disableButtons);
 
     connect(this, &view::informModelToSend, &indiaWindow, &Form::receiveSignalToSetTextIndia);
-    // new QWidget(.......)
 }
 
 view::~view()
@@ -286,7 +285,6 @@ void view::disableButtons()
 
 void view::on_hawaMahal_clicked()
 {
-    ui->label->setText("hahaha");
     indiaWindow.show();
     emit informModelToSend("HawaMahal");
 }
