@@ -7,7 +7,7 @@
 #include <QTimer>
 #include <QPalette>
 
-view::view(Model& model, QWidget *parent)
+view::view(Model& model, Form& form, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::view)
 {
@@ -62,6 +62,9 @@ view::view(Model& model, QWidget *parent)
     connect(ui->tajMahal, &QPushButton::clicked, this, &view::disableButtons);
     connect(ui->paniPuri, &QPushButton::clicked, this, &view::disableButtons);
     connect(ui->biryani, &QPushButton::clicked, this, &view::disableButtons);
+
+    connect(this, &view::informModelToSend, &form, &Form::receiveSignalToSetTextIndia);
+    // new QWidget(.......)
 }
 
 view::~view()
@@ -280,3 +283,11 @@ void view::disableButtons()
     ui->paniPuri->setDisabled(true);
     ui->biryani->setDisabled(true);
 }
+
+void view::on_hawaMahal_clicked()
+{
+    ui->label->setText("hahaha");
+    indiaWindow.show();
+    emit informModelToSend("HawaMahal");
+}
+

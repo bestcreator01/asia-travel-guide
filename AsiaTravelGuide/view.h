@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <QLabel>
 #include "model.h"
+#include "form.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class view; }
@@ -16,7 +17,7 @@ class view : public QMainWindow
     QString previousState;
 
 public:
-    view(Model& model, QWidget *parent = nullptr);
+    view(Model& model, Form& form, QWidget *parent = nullptr);
     ~view();
 
 private slots:
@@ -26,10 +27,14 @@ private slots:
     void on_indiaButton_clicked();
     void updateState(QString state);
 
+    void on_hawaMahal_clicked();
+
 private:
     Ui::view *ui;
 
     QLabel *backgroundLabel;
+
+    Form indiaWindow;
 
     // widgets fade in/out
     void fadeInWelcomeLabel();
@@ -54,5 +59,7 @@ private:
 signals:
     void hideWidgets();
     void changedState(QString state);
+
+    void informModelToSend(QString name);
 };
 #endif // VIEW_H

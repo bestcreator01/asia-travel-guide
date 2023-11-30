@@ -4,6 +4,7 @@
 #include <QObject>
 
 
+
 class Model : public QObject
 {
     Q_OBJECT
@@ -15,13 +16,16 @@ public:
 
 public slots:
     void changeState(QString state);
+//    void receiveSignalToSendTextIndia(QString name);
 
 
 signals:
     void changedScreenState(QString state);
-
+//    void sendDescriptions(QString description);
 
 private:
+//    QString landMarkInfo[2];
+//    QString restaurantInfo[2];
 
 //    enum Country{India, Korea, Thailand};
 //    enum Place{Restaurant, Landmark};
