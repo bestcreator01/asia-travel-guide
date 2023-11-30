@@ -17,7 +17,7 @@ class view : public QMainWindow
     QString previousState;
 
 public:
-    view(Model& model, Form& form, QWidget *parent = nullptr);
+    view(Model& model, QWidget *parent = nullptr);
     ~view();
 
 private slots:

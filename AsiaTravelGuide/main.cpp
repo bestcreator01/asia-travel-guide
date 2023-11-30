@@ -6,8 +6,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     Model m;
-    Form f;
-    view w(m, f);
+    view w(m);
     w.show();
     return a.exec();
 }

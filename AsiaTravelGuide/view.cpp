@@ -7,7 +7,7 @@
 #include <QTimer>
 #include <QPalette>
 
-view::view(Model& model, Form& form, QWidget *parent)
+view::view(Model& model, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::view)
 {
@@ -63,7 +63,7 @@ view::view(Model& model, Form& form, QWidget *parent)
     connect(ui->paniPuri, &QPushButton::clicked, this, &view::disableButtons);
     connect(ui->biryani, &QPushButton::clicked, this, &view::disableButtons);
 
-    connect(this, &view::informModelToSend, &form, &Form::receiveSignalToSetTextIndia);
+    connect(this, &view::informModelToSend, &indiaWindow, &Form::receiveSignalToSetTextIndia);
     // new QWidget(.......)
 }
 

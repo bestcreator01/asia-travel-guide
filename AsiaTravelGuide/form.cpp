@@ -54,9 +54,8 @@ void Form::receiveSignalToSetTextIndia(QString name)
 
     if (name == "HawaMahal")
     {
-        Form::ui->description->clear();
-        //ui->description->setText("hi");
-        update();
+//        Form::ui->description->clear();
+        ui->description->setText("hi");
         //qDebug() << landMarkInfo[0];
     }
     else if (name == "TajMahal")
