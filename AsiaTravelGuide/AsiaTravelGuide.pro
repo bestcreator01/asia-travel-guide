@@ -12,15 +12,18 @@ SOURCES += \
     form.cpp \
     main.cpp \
     model.cpp \
+    quiz.cpp \
     view.cpp
 
 HEADERS += \
     form.h \
     model.h \
+    quiz.h \
     view.h
 
 FORMS += \
     form.ui \
+    quiz.ui \
     view.ui
 
 # Default rules for deployment.

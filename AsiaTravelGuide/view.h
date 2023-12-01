@@ -6,6 +6,7 @@
 #include <QLabel>
 #include "model.h"
 #include "form.h"
+#include "quiz.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class view; }
@@ -35,12 +36,15 @@ private slots:
 
     void on_biryani_clicked();
 
+    void on_quizButton_clicked();
+
 private:
     Ui::view *ui;
 
     QLabel *backgroundLabel;
 
     Form indiaWindow;
+    Quiz quizWindow;
 
     // widgets fade in/out
     void fadeInWelcomeLabel();
@@ -63,6 +67,7 @@ private:
 
     void disableButtons();
     void enableButtonsAndCheck();
+    void showInfo(QString);
     int count;
 signals:
     void hideWidgets();

@@ -40,7 +40,7 @@ view::view(Model& model, QWidget *parent)
     ui->paniPuri->setIcon(panipuri);
     ui->biryani->setIcon(biryani);
     ui->indiaButton->hide();
-    ui->quizButton->hide();
+    ui->quizButton->show(); // Original is hide
     // landmark spots
     ui->tajMahal->hide();
     ui->hawaMahal->hide();
@@ -57,11 +57,6 @@ view::view(Model& model, QWidget *parent)
 
     connect(this, &view::changedState, &model, &Model::changeState);
     connect(&model, &Model::changedScreenState, this, &view::updateState);
-
-    connect(ui->hawaMahal, &QPushButton::clicked, this, &view::disableButtons);
-    connect(ui->tajMahal, &QPushButton::clicked, this, &view::disableButtons);
-    connect(ui->paniPuri, &QPushButton::clicked, this, &view::disableButtons);
-    connect(ui->biryani, &QPushButton::clicked, this, &view::disableButtons);
 
     connect(this, &view::informModelToSend, &indiaWindow, &Form::receiveSignalToSetTextIndia);
 
@@ -285,35 +280,43 @@ void view::disableButtons()
     ui->biryani->setDisabled(true);
 }
 
+void view::showInfo(QString info)
+{
+    indiaWindow.show();
+    emit informModelToSend(info);
+    disableButtons();
+}
+
 void view::on_hawaMahal_clicked()
 {
     count = 0;
-    indiaWindow.show();
-    emit informModelToSend("HawaMahal");
+    showInfo("HawaMahal");
 }
 
 
 void view::on_tajMahal_clicked()
 {
     count = 1;
-    indiaWindow.show();
-    emit informModelToSend("TajMahal");
+    showInfo("TajMahal");
 }
 
 
 void view::on_paniPuri_clicked()
 {
     count = 2;
-    indiaWindow.show();
-    emit informModelToSend("PaniPuri");
+    showInfo("PaniPuri");
 }
 
 
 void view::on_biryani_clicked()
 {
     count = 3;
-    indiaWindow.show();
-    emit informModelToSend("Biryani");
+    showInfo("Biryani");
+}
+
+void view::on_quizButton_clicked()
+{
+    quizWindow.show();
 }
 
 void view::enableButtonsAndCheck()
@@ -322,6 +325,7 @@ void view::enableButtonsAndCheck()
     ui->tajMahal->setEnabled(true);
     ui->paniPuri->setEnabled(true);
     ui->biryani->setEnabled(true);
+    ui->backButton->setEnabled(true);
 
     // checkmark
 //    if (count == 0)
@@ -338,4 +342,3 @@ void view::enableButtonsAndCheck()
 //    {
 //    }
 }
-
