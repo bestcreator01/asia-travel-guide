@@ -24,7 +24,7 @@ private slots:
 
     void on_backButton_clicked();
 
-    void on_backToMapButton_clicked();
+    //void on_backToMapButton_clicked();
 
     void closeEvent(QCloseEvent *bar);
 

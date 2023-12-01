@@ -6,6 +6,7 @@ Quiz::Quiz(QWidget *parent) :
     ui(new Ui::Quiz)
 {
     ui->setupUi(this);
+    ui->nextButton->hide();
 
     // first question
     question1 = "The Taj Mahal is renowned for its distinctive features, "
@@ -43,7 +44,15 @@ Quiz::Quiz(QWidget *parent) :
     option3 = "Dum method"; // Correct
     option4 = "Stir-frying";
     questionBank[question4] = {option1, option2, option3, option4};
+    questions.push_back(question1);
+    questions.push_back(question2);
+    questions.push_back(question3);
+    questions.push_back(question4);
 
+    std::random_device rd;
+    std::mt19937 g(rd());
+
+    std::shuffle(questions.begin(), questions.end(), g);
 }
 
 
@@ -54,13 +63,15 @@ Quiz::~Quiz()
 
 void Quiz::showRandomQuestion()
 {
-    // randomize
-    QStringList questions = questionBank.keys();
-    randomQuestion = questions.at(QRandomGenerator::global()->bounded(questions.size()));
-    ui->question->setText(randomQuestion);
-
+    quesIndex = 0;
     std::random_device rd;
     std::mt19937 g(rd());
+
+    std::shuffle(questions.begin(), questions.end(), g);
+    // randomize
+    randomQuestion = questions[quesIndex];
+    ui->question->setText(randomQuestion);
+    update();
 
     std::shuffle(numbers.begin(), numbers.end(), g);
 
@@ -90,6 +101,8 @@ void Quiz::disableOptionButtons()
     ui->option2Button->setDisabled(true);
     ui->option3Button->setDisabled(true);
     ui->option4Button->setDisabled(true);
+    if (quesIndex != 3)
+        ui->nextButton->show();
 }
 
 void Quiz::on_option1Button_clicked()
@@ -150,3 +163,32 @@ void Quiz::on_option4Button_clicked()
         disableOptionButtons();
     }
 }
+
+void Quiz::on_nextButton_clicked()
+{
+    ui->nextButton->hide();
+    randomQuestion = questions[++quesIndex];
+    ui->question->setText(randomQuestion);
+    update();
+
+    // randomize
+    std::random_device rd;
+    std::mt19937 g(rd());
+
+    std::shuffle(numbers.begin(), numbers.end(), g);
+
+    ui->option1Button->setText(questionBank[randomQuestion][numbers[0]]);
+    ui->option2Button->setText(questionBank[randomQuestion][numbers[1]]);
+    ui->option3Button->setText(questionBank[randomQuestion][numbers[2]]);
+    ui->option4Button->setText(questionBank[randomQuestion][numbers[3]]);
+
+    resetButtons();
+    if (quesIndex == 3)
+        ui->nextButton->hide();
+}
+
+void Quiz::closeEvent(QCloseEvent *bar)
+{
+    quesIndex = 0;
+}
+

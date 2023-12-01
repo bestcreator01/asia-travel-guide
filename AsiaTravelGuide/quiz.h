@@ -32,12 +32,18 @@ private slots:
 
     void on_option4Button_clicked();
 
+    void on_nextButton_clicked();
+
+    void closeEvent(QCloseEvent *bar);
+
 private:
     Ui::Quiz *ui;
     QString randomQuestion;
     QString question1, question2, question3, question4;
     QString option1, option2, option3, option4;
     QList<int> numbers = {0, 1, 2, 3};
+    QList<QString> questions;
+    int quesIndex = 0;
 
     QMap<QString, QList<QString>> questionBank;
     void disableOptionButtons();

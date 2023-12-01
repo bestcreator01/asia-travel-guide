@@ -147,11 +147,11 @@ void Form::on_backButton_clicked()
 }
 
 
-void Form::on_backToMapButton_clicked()
-{
-    this->hide();
-    emit windowClosed();
-}
+//void Form::on_backToMapButton_clicked()
+//{
+//    this->hide();
+//    emit windowClosed();
+//}
 
 void Form::closeEvent(QCloseEvent *bar)
 {
