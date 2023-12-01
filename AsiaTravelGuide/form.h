@@ -2,7 +2,6 @@
 #define FORM_H
 
 #include <QWidget>
-#include "model.h"
 
 namespace Ui {
 class Form;
@@ -11,6 +10,7 @@ class Form;
 class Form : public QWidget
 {
     Q_OBJECT
+    QTimer *timer;
 
 public:
     explicit Form(QWidget *parent = nullptr);
@@ -38,6 +38,14 @@ private:
     bool flag = true;
     QString landMarkInfo[4];
     QString restaurantInfo[4];
+    QString currentText;
+    bool firstNextClicked = false;
+    bool firstBackClicked = false;
+//    void splitLandMarkText();
+//    void splitRestaurentText();
+    int now = 0;
+    void startTyping();
+    QStringList splittedText;
 };
 
 #endif // FORM_H

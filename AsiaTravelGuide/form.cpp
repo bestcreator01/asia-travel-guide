@@ -1,12 +1,16 @@
 #include "form.h"
 #include "ui_form.h"
 #include <QDebug>
+#include <QTimer>
+
 
 Form::Form(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Form)
 {
     ui->setupUi(this);
+    timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &Form::startTyping);
     //ui->bgImage->setGeometry(0, 0, this->width(), this->height());  // Set to cover the entire window
     ui->image->lower();
 
@@ -19,7 +23,7 @@ Form::Form(QWidget *parent) :
                       "\nIts five-floor exterior is akin to a honeycomb with its 953 small windows "
                       "\ncalled Jharokhas decorated with intricate latticework. "
                       "\nThe original intent of the lattice design was to allow royal "
-                      "ladies to observe everyday life and festivals celebrated in the street below without being seen.";
+                      "\nladies to observe everyday life and festivals celebrated in the street below without being seen.";
 
     landMarkInfo[1] = "This architectural feature also allowed cool air from the Venturi effect to pass through, "
                       "\nthus making the whole area more pleasant during the high temperatures in summer. "
@@ -79,6 +83,28 @@ Form::~Form()
     delete ui;
 }
 
+void Form::startTyping()
+{
+    ui->nextButton->hide();
+    ui->backButton->hide();
+    ui->description->setText(ui->description->text()+splittedText[now]);
+    ++now;
+    if(splittedText.length() == now)
+    {
+        timer->stop();
+        now = 0;
+        currentText = ui->description->text();
+        if(current == 0 || current == 2)
+        {
+            ui->nextButton->show();
+        }
+        else
+        {
+            ui->backButton->show();
+        }
+    }
+}
+
 void Form::receiveSignalToSetTextIndia(QString name)
 {
     if (name == "HawaMahal")
@@ -87,7 +113,8 @@ void Form::receiveSignalToSetTextIndia(QString name)
         flag = true;
         QPixmap hawaMahal(":/icons/hawa-mahal_Image.jpg");
         ui->image->setPixmap(hawaMahal.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-        ui->description->setText(landMarkInfo[current]);
+        splittedText = landMarkInfo[current].split("");
+        firstNextClicked = true;
     }
     else if (name == "TajMahal")
     {
@@ -95,7 +122,8 @@ void Form::receiveSignalToSetTextIndia(QString name)
         flag = true;
         QPixmap tajMahal(":/icons/taj-mahal_Image.png");
         ui->image->setPixmap(tajMahal.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-        ui->description->setText(landMarkInfo[current]);
+        splittedText = landMarkInfo[current].split("");
+        firstNextClicked = true;
     }
     else if (name == "PaniPuri")
     {
@@ -103,7 +131,8 @@ void Form::receiveSignalToSetTextIndia(QString name)
         flag = false;
         QPixmap paniPuri(":/icons/pani-puri_Image.jpg");
         ui->image->setPixmap(paniPuri.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-        ui->description->setText(restaurantInfo[current]);
+        splittedText = restaurantInfo[current].split("");
+        firstNextClicked = true;
     }
     else if (name == "Biryani")
     {
@@ -111,9 +140,11 @@ void Form::receiveSignalToSetTextIndia(QString name)
         flag = false;
         QPixmap biryani(":/icons/biryani_Image.jpg");
         ui->image->setPixmap(biryani.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-        ui->description->setText(restaurantInfo[current]);
+        splittedText = restaurantInfo[current].split("");
+        firstNextClicked = true;
     }
-    ui->nextButton->show();
+    ui->description->setText("");
+    timer->start(10);
     ui->backButton->hide();
 }
 
@@ -121,11 +152,35 @@ void Form::on_nextButton_clicked()
 {
     if (flag)
     {
-        ui->description->setText(landMarkInfo[++current]);
+        if(firstNextClicked)
+        {
+            splittedText = landMarkInfo[++current].split("");
+            ui->description->setText("");
+            timer->start(10);
+            firstNextClicked = false;
+            firstBackClicked = true;
+        }
+        else
+        {
+            ui->description->setText(currentText);
+            firstBackClicked = false;
+        }
     }
     else
     {
-        ui->description->setText(restaurantInfo[++current]);
+        if(firstNextClicked)
+        {
+            splittedText = restaurantInfo[++current].split("");
+            ui->description->setText("");
+            timer->start(10);
+            firstNextClicked = false;
+            firstBackClicked = true;
+        }
+        else
+        {
+            ui->description->setText(currentText);
+            firstBackClicked = false;
+        }
     }
     ui->nextButton->hide();
     ui->backButton->show();
@@ -136,11 +191,25 @@ void Form::on_backButton_clicked()
 {
     if (flag)
     {
-        ui->description->setText(landMarkInfo[--current]);
+        if(firstBackClicked)
+        {
+            ui->description->setText(landMarkInfo[--current]);
+        }
+        else
+        {
+            ui->description->setText(landMarkInfo[current]);
+        }
     }
     else
     {
-        ui->description->setText(restaurantInfo[--current]);
+        if(firstBackClicked)
+        {
+            ui->description->setText(restaurantInfo[--current]);
+        }
+        else
+        {
+            ui->description->setText(restaurantInfo[current]);
+        }
     }
     ui->nextButton->show();
     ui->backButton->hide();
