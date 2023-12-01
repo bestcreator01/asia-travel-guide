@@ -21,6 +21,7 @@ view::view(Model& model, QWidget *parent)
     QIcon hawa(":/icons/hawa-mahal.png");
     QIcon biryani(":/icons/biryani.png");
     QIcon panipuri(":/icons/panipuri.png");
+    QIcon quizIcon(":/icons/quiz.png");
 
     QPixmap checkPixmap(":/icons/check.png");
     QPixmap scaledPixmap = checkPixmap.scaled(ui->biryaniCheckLabel->size(), Qt::KeepAspectRatio);
@@ -43,6 +44,10 @@ view::view(Model& model, QWidget *parent)
     ui->paniPuri->setIcon(panipuri);
     ui->biryani->setIcon(biryani);
     ui->indiaButton->hide();
+    ui->quizButton->setText("");
+    ui->quizButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
+    ui->quizButton->setIconSize(QSize(70,70));
+    ui->quizButton->setIcon(quizIcon);
     ui->quizButton->hide();
 
     ui->biryaniCheckLabel->setPixmap(scaledPixmap);

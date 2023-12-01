@@ -13,5 +13,7 @@
         <file>pani-puri_Image.jpg</file>
         <file>taj-mahal_Image.png</file>
         <file>check.png</file>
+        <file>quiz.png</file>
     </qresource>
+    <qresource prefix="/"/>
 </RCC>
