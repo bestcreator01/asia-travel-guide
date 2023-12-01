@@ -22,6 +22,9 @@ view::view(Model& model, QWidget *parent)
     QIcon biryani(":/icons/biryani.png");
     QIcon panipuri(":/icons/panipuri.png");
 
+    QPixmap checkPixmap(":/icons/check.png");
+    QPixmap scaledPixmap = checkPixmap.scaled(ui->biryaniCheckLabel->size(), Qt::KeepAspectRatio);
+
     ui->backButton->setIcon(backArrowIcon);
     ui->backButton->hide();
     ui->indiaButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
@@ -40,7 +43,18 @@ view::view(Model& model, QWidget *parent)
     ui->paniPuri->setIcon(panipuri);
     ui->biryani->setIcon(biryani);
     ui->indiaButton->hide();
-    ui->quizButton->show(); // Original is hide
+    ui->quizButton->hide();
+
+    ui->biryaniCheckLabel->setPixmap(scaledPixmap);
+    ui->hawaMahalCheckLabel->setPixmap(scaledPixmap);
+    ui->tajMahalCheckLabel->setPixmap(scaledPixmap);
+    ui->paniPuriCheckLabel->setPixmap(scaledPixmap);
+
+    ui->biryaniCheckLabel->hide();
+    ui->hawaMahalCheckLabel->hide();
+    ui->tajMahalCheckLabel->hide();
+    ui->paniPuriCheckLabel->hide();
+
     // landmark spots
     ui->tajMahal->hide();
     ui->hawaMahal->hide();
@@ -122,6 +136,11 @@ void view::on_backButton_clicked()
         QPixmap background(":/icons/asia-map.png");
         setBgLabel(background);
         fadeInBackgroundLabel();
+
+        ui->biryaniCheckLabel->hide();
+        ui->tajMahalCheckLabel->hide();
+        ui->hawaMahalCheckLabel->hide();
+        ui->paniPuriCheckLabel->hide();
     }
 }
 
@@ -293,29 +312,49 @@ void view::showInfo(QString info)
 
 void view::on_hawaMahal_clicked()
 {
-    count = 0;
     showInfo("HawaMahal");
+
+    ui->hawaMahalCheckLabel->show();
+    indiaCompleteList.insert(HawaMaha);
+    if (indiaCompleteList.size() == 4){
+        ui->quizButton->show();
+    }
 }
 
 
 void view::on_tajMahal_clicked()
 {
-    count = 1;
     showInfo("TajMahal");
+
+    ui->tajMahalCheckLabel->show();
+    indiaCompleteList.insert(TajMahal);
+    if (indiaCompleteList.size() == 4){
+        ui->quizButton->show();
+    }
 }
 
 
 void view::on_paniPuri_clicked()
 {
-    count = 2;
     showInfo("PaniPuri");
+
+    ui->paniPuriCheckLabel->show();
+    indiaCompleteList.insert(PaniPuri);
+    if (indiaCompleteList.size() == 4){
+        ui->quizButton->show();
+    }
 }
 
 
 void view::on_biryani_clicked()
 {
-    count = 3;
     showInfo("Biryani");
+
+    ui->biryaniCheckLabel->show();
+    indiaCompleteList.insert(Biryani);
+    if (indiaCompleteList.size() == 4){
+        ui->quizButton->show();
+    }
 }
 
 void view::on_quizButton_clicked()

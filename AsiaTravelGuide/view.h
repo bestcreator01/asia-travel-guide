@@ -4,6 +4,7 @@
 #include <QGraphicsOpacityEffect>
 #include <QMainWindow>
 #include <QLabel>
+#include <QSet>
 #include "model.h"
 #include "form.h"
 #include "quiz.h"
@@ -69,6 +70,10 @@ private:
     void enableButtonsAndCheck();
     void showInfo(QString);
     int count;
+
+    enum IndiaPlace{HawaMaha, TajMahal, PaniPuri, Biryani};
+    QSet<IndiaPlace> indiaCompleteList;
+
 signals:
     void hideWidgets();
     void changedState(QString state);
