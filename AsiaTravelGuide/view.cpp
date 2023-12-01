@@ -141,6 +141,8 @@ void view::on_backButton_clicked()
         ui->tajMahalCheckLabel->hide();
         ui->hawaMahalCheckLabel->hide();
         ui->paniPuriCheckLabel->hide();
+
+        ui->quizButton->hide();
     }
 }
 
@@ -274,6 +276,29 @@ void view::setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff)
     {
         ui->biryani->setGraphicsEffect(eff);
     }
+
+    // checkmark labels
+    else if(name == "tajMahalCheckLabel")
+    {
+        ui->tajMahalCheckLabel->setGraphicsEffect(eff);
+    }
+    else if(name == "hawaMahalCheckLabel")
+    {
+        ui->hawaMahalCheckLabel->setGraphicsEffect(eff);
+    }
+    else if(name == "paniPuriCheckLabel")
+    {
+        ui->paniPuriCheckLabel->setGraphicsEffect(eff);
+    }
+    else if(name == "biryaniCheckLabel")
+    {
+        ui->biryaniCheckLabel->setGraphicsEffect(eff);
+    }
+
+    else if(name == "quizButton")
+    {
+        ui->quizButton->setGraphicsEffect(eff);
+    }
 }
 
 void view::setBgLabel(QPixmap background)
@@ -292,6 +317,35 @@ void view::on_indiaButton_clicked()
     fadeOutBackgroundLabel();
     fadeInBackgroundLabel();
     fadeInLandMarks();
+    displayCheckmarks();
+}
+
+void view::displayCheckmarks(){
+    if (indiaCompleteList.contains(TajMahal))
+    {
+        ui->tajMahalCheckLabel->show();
+        fadeEffect(0.0, 1.0, 1500, "tajMahalCheckLabel");
+    }
+    if (indiaCompleteList.contains(HawaMaha))
+    {
+        ui->hawaMahalCheckLabel->show();
+        fadeEffect(0.0, 1.0, 1500, "hawaMahalCheckLabel");
+    }
+    if (indiaCompleteList.contains(PaniPuri))
+    {
+        ui->paniPuriCheckLabel->show();
+        fadeEffect(0.0, 1.0, 1500, "paniPuriCheckLabel");
+    }
+    if (indiaCompleteList.contains(Biryani))
+    {
+        ui->biryaniCheckLabel->show();
+        fadeEffect(0.0, 1.0, 1500, "biryaniCheckLabel");
+    }
+    if (indiaCompleteList.size() == 4)
+    {
+        ui->quizButton->show();
+        fadeEffect(0.0, 1.0, 1500, "quizButton");
+    }
 }
 
 void view::disableButtons()
@@ -371,19 +425,4 @@ void view::enableButtonsAndCheck()
     ui->paniPuri->setEnabled(true);
     ui->biryani->setEnabled(true);
     ui->backButton->setEnabled(true);
-
-    // checkmark
-//    if (count == 0)
-//    {
-
-//    }
-//    else if (count == 1)
-//    {
-//    }
-//    else if (count == 2)
-//    {
-//    }
-//    else if (count == 3)
-//    {
-//    }
 }
