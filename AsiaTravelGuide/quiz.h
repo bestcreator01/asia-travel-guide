@@ -19,6 +19,7 @@ public:
 
 private:
     Ui::Quiz *ui;
+    QString question, option1, option2, option3, option4;
 
     QMap<QString, QList<QString>> questionBank;
 };
