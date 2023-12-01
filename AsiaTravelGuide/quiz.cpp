@@ -6,45 +6,147 @@ Quiz::Quiz(QWidget *parent) :
     ui(new Ui::Quiz)
 {
     ui->setupUi(this);
+
     // first question
-    question = "The Taj Mahal is renowned for its distinctive features, "
-               "including a large, white, domed mausoleum surrounded by four minarets. "
-               "What is the meaning of the name \"Taj Mahal\" in Urdu and Persian?";
+    question1 = "The Taj Mahal is renowned for its distinctive features, "
+               "\nincluding a large, white, domed mausoleum surrounded by four minarets. "
+               "\nWhat is the meaning of the name \"Taj Mahal\" in Urdu and Persian?";
     option1 = "Monument of Eternal Love";
     option2 = "Ivory Marvel";
     option3 = "Crown of Palaces"; // Correct
     option4 = "Pearl of Agra";
-    questionBank[question] = {option1, option2, option3, option4};
+    questionBank[question1] = {option1, option2, option3, option4};
     // second quesiton
-    question = "What was the original purpose of the intricate latticework and "
-               "numerous small windows (Jharokhas) in the design of Hawa Mahal?";
+    question2 = "What was the original purpose of the intricate latticework and "
+               "\nnumerous small windows (Jharokhas) in the design of Hawa Mahal?";
     option1 = "To serve as decorative elements for the palace's exterior";
     option2 = "To create a honeycomb-like pattern for aesthetic appeal";
     option3 = "To allow royal ladies to observe street activities without being seen"; // Correct
     option4 = "To enhance the structural stability of the palace";
-    questionBank[question] = {option1, option2, option3, option4};
+    questionBank[question2] = {option1, option2, option3, option4};
 
     // third question
-    question = "Pani Puri is a common street food in the Indian subcontinent."
-               "What makes the ingredients of Pani Puri as a snack in India?";
+    question3 = "Pani Puri is a common street food in the Indian subcontinent."
+               "\nWhat makes the ingredients of Pani Puri as a snack in India?";
     option1 = "deep-fried and breaded exterior";
     option2 = "yogurt, ginger, garlic, and herbs";
     option3 = "chili powder, chaat masala, potato mash, and chickpeas"; // Correct
     option4 = "peppers, turmeric, coriander, and cumin";
-    questionBank[question] = {option1, option2, option3, option4};
+    questionBank[question3] = {option1, option2, option3, option4};
 
     // fourth question
-    question = "What cooking method is most commonly used to prepare Biryani, "
-               "involving sealing food in a round, heavy-bottomed pot and slow cooking it over a low flame?";
+    question4 = "What cooking method is most commonly used to prepare Biryani, "
+               "\ninvolving sealing food in a round, heavy-bottomed pot "
+                "\nand slow cooking it over a low flame?";
     option1 = "Grilling";
     option2 = "Boiling";
     option3 = "Dum method"; // Correct
     option4 = "Stir-frying";
-    questionBank[question] = {option1, option2, option3, option4};
+    questionBank[question4] = {option1, option2, option3, option4};
 
 }
+
 
 Quiz::~Quiz()
 {
     delete ui;
+}
+
+void Quiz::showRandomQuestion()
+{
+    // randomize
+    QStringList questions = questionBank.keys();
+    randomQuestion = questions.at(QRandomGenerator::global()->bounded(questions.size()));
+    ui->question->setText(randomQuestion);
+
+    std::random_device rd;
+    std::mt19937 g(rd());
+
+    std::shuffle(numbers.begin(), numbers.end(), g);
+
+    ui->option1Button->setText(questionBank[randomQuestion][numbers[0]]);
+    ui->option2Button->setText(questionBank[randomQuestion][numbers[1]]);
+    ui->option3Button->setText(questionBank[randomQuestion][numbers[2]]);
+    ui->option4Button->setText(questionBank[randomQuestion][numbers[3]]);
+}
+
+void Quiz::resetButtons()
+{
+    ui->option1Button->setEnabled(true);
+    ui->option2Button->setEnabled(true);
+    ui->option3Button->setEnabled(true);
+    ui->option4Button->setEnabled(true);
+
+    ui->option1Button->setStyleSheet("");
+    ui->option2Button->setStyleSheet("");
+    ui->option3Button->setStyleSheet("");
+    ui->option4Button->setStyleSheet("");
+}
+
+void Quiz::disableOptionButtons()
+{
+    // disable all the option buttons
+    ui->option1Button->setDisabled(true);
+    ui->option2Button->setDisabled(true);
+    ui->option3Button->setDisabled(true);
+    ui->option4Button->setDisabled(true);
+}
+
+void Quiz::on_option1Button_clicked()
+{
+    if (ui->option1Button->text() != questionBank[randomQuestion][2])
+    {
+        ui->option1Button->setStyleSheet("background-color: red");
+        ui->option1Button->setDisabled(true);
+    }
+    else
+    {
+        ui->option1Button->setStyleSheet("background-color: green");
+        disableOptionButtons();
+    }
+}
+
+
+void Quiz::on_option2Button_clicked()
+{
+    if (ui->option2Button->text() != questionBank[randomQuestion][2])
+    {
+        ui->option2Button->setStyleSheet("background-color: red");
+        ui->option2Button->setDisabled(true);
+    }
+    else
+    {
+        ui->option2Button->setStyleSheet("background-color: green");
+        disableOptionButtons();
+    }
+}
+
+
+void Quiz::on_option3Button_clicked()
+{
+    if (ui->option3Button->text() != questionBank[randomQuestion][2])
+    {
+        ui->option3Button->setStyleSheet("background-color: red");
+        ui->option3Button->setDisabled(true);
+    }
+    else
+    {
+        ui->option3Button->setStyleSheet("background-color: green");
+        disableOptionButtons();
+    }
+}
+
+
+void Quiz::on_option4Button_clicked()
+{
+    if (ui->option4Button->text() != questionBank[randomQuestion][2])
+    {
+        ui->option4Button->setStyleSheet("background-color: red");
+        ui->option4Button->setDisabled(true);
+    }
+    else
+    {
+        ui->option4Button->setStyleSheet("background-color: green");
+        disableOptionButtons();
+    }
 }

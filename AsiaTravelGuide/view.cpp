@@ -61,6 +61,10 @@ view::view(Model& model, QWidget *parent)
     connect(this, &view::informModelToSend, &indiaWindow, &Form::receiveSignalToSetTextIndia);
 
     connect(&indiaWindow, &Form::windowClosed, this, &view::enableButtonsAndCheck);
+
+    connect(this, &view::generateRandomQuestion, &quizWindow, &Quiz::showRandomQuestion);
+    connect(this, &view::resetButtons, &quizWindow, &Quiz::resetButtons);
+
 }
 
 view::~view()
@@ -317,6 +321,8 @@ void view::on_biryani_clicked()
 void view::on_quizButton_clicked()
 {
     quizWindow.show();
+    emit generateRandomQuestion();
+    emit resetButtons();
 }
 
 void view::enableButtonsAndCheck()

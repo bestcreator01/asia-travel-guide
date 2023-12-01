@@ -74,5 +74,8 @@ signals:
     void changedState(QString state);
 
     void informModelToSend(QString name);
+
+    void generateRandomQuestion();
+    void resetButtons();
 };
 #endif // VIEW_H
