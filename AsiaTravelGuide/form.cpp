@@ -80,6 +80,10 @@ Form::Form(QWidget *parent) :
 
 Form::~Form()
 {
+    if (timer->isActive()) {
+        timer->stop();
+    }
+    delete timer;
     delete ui;
 }
 
