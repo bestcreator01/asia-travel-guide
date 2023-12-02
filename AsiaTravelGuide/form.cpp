@@ -228,7 +228,6 @@ void Form::closeEvent(QCloseEvent *bar)
     now = 0;
     firstBackClicked = false;
     firstNextClicked = false;
-    killTimer(timer->timerId());
     timer->stop();
     emit windowClosed();
 }
