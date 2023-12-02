@@ -80,10 +80,6 @@ Form::Form(QWidget *parent) :
 
 Form::~Form()
 {
-    if (timer->isActive()) {
-        timer->stop();
-    }
-    delete timer;
     delete ui;
 }
 
@@ -228,6 +224,12 @@ void Form::on_backButton_clicked()
 
 void Form::closeEvent(QCloseEvent *bar)
 {
+    currentText = "";
+    now = 0;
+    firstBackClicked = false;
+    firstNextClicked = false;
+    killTimer(timer->timerId());
+    timer->stop();
     emit windowClosed();
 }
 

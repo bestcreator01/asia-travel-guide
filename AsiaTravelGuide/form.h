@@ -30,6 +30,7 @@ private slots:
 
 signals:
     void windowClosed();
+    void stopTimer();
 
 private:
     Ui::Form *ui;
@@ -41,8 +42,6 @@ private:
     QString currentText;
     bool firstNextClicked = false;
     bool firstBackClicked = false;
-//    void splitLandMarkText();
-//    void splitRestaurentText();
     int now = 0;
     void startTyping();
     QStringList splittedText;
