@@ -10,6 +10,11 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <bold>false</bold>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>view</string>
   </property>
@@ -27,6 +32,7 @@
      <font>
       <family>Forte</family>
       <pointsize>28</pointsize>
+      <bold>false</bold>
      </font>
     </property>
     <property name="cursor">
@@ -73,6 +79,7 @@
      <font>
       <family>Forte</family>
       <pointsize>16</pointsize>
+      <bold>false</bold>
      </font>
     </property>
     <property name="cursor">
@@ -237,6 +244,25 @@
     </property>
     <property name="text">
      <string>pani puri</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="indiaLabel">
+    <property name="geometry">
+     <rect>
+      <x>324</x>
+      <y>440</y>
+      <width>31</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>India</string>
     </property>
    </widget>
   </widget>

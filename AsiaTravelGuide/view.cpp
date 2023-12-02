@@ -26,45 +26,52 @@ view::view(Model& model, QWidget *parent)
     QPixmap checkPixmap(":/icons/check.png");
     QPixmap scaledPixmap = checkPixmap.scaled(ui->biryaniCheckLabel->size(), Qt::KeepAspectRatio);
 
+    // back button
     ui->backButton->setIcon(backArrowIcon);
     ui->backButton->hide();
+
+    // country buttons
     ui->indiaButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
+    ui->indiaButton->setIconSize(QSize(50, 50));
+    ui->indiaButton->setIcon(markerIcon);
+    ui->indiaButton->hide();
+
+    ui->indiaLabel->hide();
+
+    // place buttons
     ui->tajMahal->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
     ui->hawaMahal->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
     ui->paniPuri->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
     ui->biryani->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
-    ui->indiaButton->setIconSize(QSize(50, 50));
     ui->tajMahal->setIconSize(QSize(50, 50));
     ui->hawaMahal->setIconSize(QSize(50, 50));
     ui->paniPuri->setIconSize(QSize(50, 50));
     ui->biryani->setIconSize(QSize(50, 50));
-    ui->indiaButton->setIcon(markerIcon);
     ui->tajMahal->setIcon(taj);
     ui->hawaMahal->setIcon(hawa);
     ui->paniPuri->setIcon(panipuri);
     ui->biryani->setIcon(biryani);
-    ui->indiaButton->hide();
+    ui->tajMahal->hide();
+    ui->hawaMahal->hide();
+    ui->paniPuri->hide();
+    ui->biryani->hide();
+
+    // quiz button
     ui->quizButton->setText("");
     ui->quizButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
     ui->quizButton->setIconSize(QSize(70,70));
     ui->quizButton->setIcon(quizIcon);
     ui->quizButton->hide();
 
+    // checkmarks
     ui->biryaniCheckLabel->setPixmap(scaledPixmap);
     ui->hawaMahalCheckLabel->setPixmap(scaledPixmap);
     ui->tajMahalCheckLabel->setPixmap(scaledPixmap);
     ui->paniPuriCheckLabel->setPixmap(scaledPixmap);
-
     ui->biryaniCheckLabel->hide();
     ui->hawaMahalCheckLabel->hide();
     ui->tajMahalCheckLabel->hide();
     ui->paniPuriCheckLabel->hide();
-
-    // landmark spots
-    ui->tajMahal->hide();
-    ui->hawaMahal->hide();
-    ui->paniPuri->hide();
-    ui->biryani->hide();
 
     // Background label
     backgroundLabel = new QLabel(this);
@@ -110,6 +117,7 @@ void view::on_playButton_clicked()
     fadeOutWelcomeLabel();
     fadeInBackArrow();
     fadeInMarkers();
+    fadeInCountryLabels();
 
     // background opacity 50% -> 100%
     QGraphicsOpacityEffect *effect = dynamic_cast<QGraphicsOpacityEffect*>(backgroundLabel->graphicsEffect());
@@ -131,6 +139,7 @@ void view::on_backButton_clicked()
         fadeOutBackArrow();
         fadeOutMarkers();
         setBgLabelOpacity();
+        fadeOutCountryLabels();
     }
     // currentState == "indiaMap"
     else if(previousState == "AsiaMap")
@@ -141,6 +150,7 @@ void view::on_backButton_clicked()
         QPixmap background(":/icons/asia-map.png");
         setBgLabel(background);
         fadeInBackgroundLabel();
+        fadeInCountryLabels();
 
         ui->biryaniCheckLabel->hide();
         ui->tajMahalCheckLabel->hide();
@@ -299,10 +309,13 @@ void view::setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff)
     {
         ui->biryaniCheckLabel->setGraphicsEffect(eff);
     }
-
     else if(name == "quizButton")
     {
         ui->quizButton->setGraphicsEffect(eff);
+    }
+    else if(name == "indiaLabel")
+    {
+        ui->indiaLabel->setGraphicsEffect(eff);
     }
 }
 
@@ -322,10 +335,21 @@ void view::on_indiaButton_clicked()
     fadeOutBackgroundLabel();
     fadeInBackgroundLabel();
     fadeInLandMarks();
-    displayCheckmarks();
+    fadeInCheckmarks();
+//    fadeOutCountryLabels();
+    ui->indiaLabel->hide(); // this is more natural
 }
 
-void view::displayCheckmarks(){
+void view::fadeInCountryLabels(){
+    ui->indiaLabel->show();
+    fadeEffect(0.0, 1.0, 1500, "indiaLabel");
+}
+
+void view::fadeOutCountryLabels(){
+    fadeEffect(1.0, 0.0, 1500, "indiaLabel");
+}
+
+void view::fadeInCheckmarks(){
     if (indiaCompleteList.contains(TajMahal))
     {
         ui->tajMahalCheckLabel->show();

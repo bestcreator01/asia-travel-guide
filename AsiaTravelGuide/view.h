@@ -71,7 +71,9 @@ private:
     void showInfo(QString);
     int count;
 
-    void displayCheckmarks();
+    void fadeInCountryLabels();
+    void fadeOutCountryLabels();
+    void fadeInCheckmarks();
     enum IndiaPlace{HawaMaha, TajMahal, PaniPuri, Biryani};
     QSet<IndiaPlace> indiaCompleteList;
 
