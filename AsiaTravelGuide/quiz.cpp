@@ -65,7 +65,7 @@ Quiz::Quiz(QWidget *parent) :
     //createConfetti();
 
     connect(&timer, &QTimer::timeout, this, &Quiz::updateWorld);
-    timer.start(10);
+    timer.start(6);
 }
 
 

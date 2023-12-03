@@ -8,7 +8,6 @@
 #include "model.h"
 #include "form.h"
 #include "quiz.h"
-#include "confettiwidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class view; }
@@ -47,7 +46,6 @@ private:
 
     Form indiaWindow;
     Quiz quizWindow;
-    ConfettiWidget confetti;
 
     // widgets fade in/out
     void fadeInWelcomeLabel();
