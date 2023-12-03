@@ -8,7 +8,6 @@
 #include <algorithm>
 #include <random>
 #include <Box2D/Box2D.h>
-#include <vector>
 #include <QTimer>
 #include <QPainter>
 
@@ -58,13 +57,16 @@ private:
     void disableOptionButtons();
 
     void createConfetti();
-    void createGround();
+    void createGround(float, float);
     void updateWorld();
+    void applyExplosionForce(b2Vec2, float);
 
     QTimer timer;
 
-    b2World *world;
-    std::vector<b2Body*> confettiPieces;
+    b2World *top;
+    b2World *bottom;
+    QList<b2Body*> confettiPieces;
+    QList<b2Body*> confettiPieces2;
 
     bool touchedGround;
 };

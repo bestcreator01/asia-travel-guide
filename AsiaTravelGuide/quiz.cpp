@@ -1,47 +1,51 @@
 #include "quiz.h"
+
 #include "ui_quiz.h"
 
-Quiz::Quiz(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::Quiz)
+Quiz::Quiz(QWidget *parent) : QWidget(parent),
+                              ui(new Ui::Quiz)
 {
     ui->setupUi(this);
     ui->nextButton->hide();
 
     // first question
-    question1 = "The Taj Mahal is renowned for its distinctive features, "
-               "\nincluding a large, white, domed mausoleum surrounded by four minarets. "
-               "\nWhat is the meaning of the name \"Taj Mahal\" in Urdu and Persian?";
+    question1 =
+        "The Taj Mahal is renowned for its distinctive features, "
+        "\nincluding a large, white, domed mausoleum surrounded by four minarets. "
+        "\nWhat is the meaning of the name \"Taj Mahal\" in Urdu and Persian?";
     option1 = "Monument of Eternal Love";
     option2 = "Ivory Marvel";
-    option3 = "Crown of Palaces"; // Correct
+    option3 = "Crown of Palaces";  // Correct
     option4 = "Pearl of Agra";
     questionBank[question1] = {option1, option2, option3, option4};
     // second quesiton
-    question2 = "What was the original purpose of the intricate latticework and "
-               "\nnumerous small windows (Jharokhas) in the design of Hawa Mahal?";
+    question2 =
+        "What was the original purpose of the intricate latticework and "
+        "\nnumerous small windows (Jharokhas) in the design of Hawa Mahal?";
     option1 = "To serve as decorative elements for the palace's exterior";
     option2 = "To create a honeycomb-like pattern for aesthetic appeal";
-    option3 = "To allow royal ladies to observe street activities without being seen"; // Correct
+    option3 = "To allow royal ladies to observe street activities without being seen";  // Correct
     option4 = "To enhance the structural stability of the palace";
     questionBank[question2] = {option1, option2, option3, option4};
 
     // third question
-    question3 = "Pani Puri is a common street food in the Indian subcontinent."
-               "\nWhat makes the ingredients of Pani Puri as a snack in India?";
+    question3 =
+        "Pani Puri is a common street food in the Indian subcontinent."
+        "\nWhat makes the ingredients of Pani Puri as a snack in India?";
     option1 = "deep-fried and breaded exterior";
     option2 = "yogurt, ginger, garlic, and herbs";
-    option3 = "chili powder, chaat masala, potato mash, and chickpeas"; // Correct
+    option3 = "chili powder, chaat masala, potato mash, and chickpeas";  // Correct
     option4 = "peppers, turmeric, coriander, and cumin";
     questionBank[question3] = {option1, option2, option3, option4};
 
     // fourth question
-    question4 = "What cooking method is most commonly used to prepare Biryani, "
-               "\ninvolving sealing food in a round, heavy-bottomed pot "
-                "\nand slow cooking it over a low flame?";
+    question4 =
+        "What cooking method is most commonly used to prepare Biryani, "
+        "\ninvolving sealing food in a round, heavy-bottomed pot "
+        "\nand slow cooking it over a low flame?";
     option1 = "Grilling";
     option2 = "Boiling";
-    option3 = "Dum method"; // Correct
+    option3 = "Dum method";  // Correct
     option4 = "Stir-frying";
     questionBank[question4] = {option1, option2, option3, option4};
     questions.push_back(question1);
@@ -55,24 +59,23 @@ Quiz::Quiz(QWidget *parent) :
     std::shuffle(questions.begin(), questions.end(), g);
 
     // Set up Box2D world
-    b2Vec2 gravity(0.0f, -20.0f);
-    world = new b2World(gravity);
+    b2Vec2 neg(0.0f, -20.0f);
+    b2Vec2 pos(0.0f, 20.0f);
+    top = new b2World(neg);
+    bottom = new b2World(pos);
 
     // Create ground
-    createGround();
-
-    // Create confetti
-    //createConfetti();
+    createGround(-7.0f, height() + 5.0f);
 
     connect(&timer, &QTimer::timeout, this, &Quiz::updateWorld);
-    timer.start(6);
+    timer.start(5);
 }
-
 
 Quiz::~Quiz()
 {
     delete ui;
-    delete world;
+    delete top;
+    delete bottom;
 }
 
 void Quiz::showRandomQuestion()
@@ -134,7 +137,6 @@ void Quiz::on_option1Button_clicked()
     }
 }
 
-
 void Quiz::on_option2Button_clicked()
 {
     if (ui->option2Button->text() != questionBank[randomQuestion][2])
@@ -150,7 +152,6 @@ void Quiz::on_option2Button_clicked()
     }
 }
 
-
 void Quiz::on_option3Button_clicked()
 {
     if (ui->option3Button->text() != questionBank[randomQuestion][2])
@@ -165,7 +166,6 @@ void Quiz::on_option3Button_clicked()
         createConfetti();
     }
 }
-
 
 void Quiz::on_option4Button_clicked()
 {
@@ -204,7 +204,7 @@ void Quiz::on_nextButton_clicked()
     if (quesIndex == 3)
         ui->nextButton->hide();
 
-    //QTimer::singleShot(1000, this, &Quiz::closePaint);
+    // QTimer::singleShot(1000, this, &Quiz::closePaint);
     closePaint();
 }
 
@@ -215,12 +215,14 @@ void Quiz::closeEvent(QCloseEvent *bar)
 
 void Quiz::closePaint()
 {
-    for (auto& confettiPiece : confettiPieces)
+    for (int i = 0; i < confettiPieces.size(); i++)
     {
-        world->DestroyBody(confettiPiece);
+        top->DestroyBody(confettiPieces[i]);
+        bottom->DestroyBody(confettiPieces2[i]);
     }
 
     confettiPieces.clear();
+    confettiPieces2.clear();
 
     update();
 }
@@ -232,66 +234,74 @@ void Quiz::createConfetti()
     {
         b2BodyDef confettiBodyDef;
         confettiBodyDef.type = b2_dynamicBody;
-        confettiBodyDef.position.Set(width() / 2, 500);
-        b2Body* confettiPiece = world->CreateBody(&confettiBodyDef);
+        confettiBodyDef.position.Set(width() / 2, height() / 2);
+        b2Body *confettiPiece1 = top->CreateBody(&confettiBodyDef);
+        b2Body *confettiPiece2 = bottom->CreateBody(&confettiBodyDef);
 
         b2PolygonShape confettiShape;
-        confettiShape.SetAsBox(0.1f, 0.1f); // Adjust the size as needed
+        confettiShape.SetAsBox(0.1f, 0.1f);  // Adjust the size as needed
 
         b2FixtureDef confettiFixtureDef;
         confettiFixtureDef.shape = &confettiShape;
         confettiFixtureDef.density = 1.0f;
         confettiFixtureDef.friction = 0.3f;
-        confettiFixtureDef.restitution = 0.5f;
+        confettiFixtureDef.restitution = 1.0f;
 
-        confettiPiece->CreateFixture(&confettiFixtureDef);
-        confettiPieces.push_back(confettiPiece);
+        confettiPiece1->CreateFixture(&confettiFixtureDef);
+        confettiPieces.push_back(confettiPiece1);
+
+        confettiPiece2->CreateFixture(&confettiFixtureDef);
+        confettiPieces2.push_back(confettiPiece2);
     }
     qDebug() << "Height: " << height() / 2;
 }
 
-void Quiz::createGround()
+void Quiz::createGround(float neg, float pos)
 {
     b2BodyDef groundBodyDef;
-    groundBodyDef.position.Set(0.0f, -5.0f);
-    b2Body *groundBody = world->CreateBody(&groundBodyDef);
+    groundBodyDef.position.Set(0.0f, neg);
+    b2Body *groundBody = top->CreateBody(&groundBodyDef);
+    groundBodyDef.position.Set(0.0f, pos);
+    b2Body *groundBody1 = bottom->CreateBody(&groundBodyDef);
 
     b2PolygonShape groundBox;
     groundBox.SetAsBox(width(), 1.0f);
     groundBody->CreateFixture(&groundBox, 0.0f);
+    groundBody1->CreateFixture(&groundBox, 0.0f);
 }
 
 void Quiz::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
 
-    // Update Box2D simulation
-    world->Step(1.0f / 60.0f, 6, 2);
-
     // Paint the scene
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
     // Draw confetti pieces
-    for (const auto& confettiPiece : confettiPieces)
+    for (int i = 0; i < confettiPieces.size(); i++)
     {
-        b2Vec2 position = confettiPiece->GetPosition();
+        b2Vec2 position = confettiPieces[i]->GetPosition();
         painter.drawRect(QRectF(position.x, position.y, 5, 5));
-//        if (position.y >= 500)
-//        {
-//            //touchedGround = true;
-//        }
-//        if (touchedGround)
-//        {
-//            painter.drawRect(QRectF(position.x, position.y, 5, 5)); // Adjust size as needed
-//        }
+        position = confettiPieces2[i]->GetPosition();
+        painter.drawRect(QRectF(position.x, position.y, 5, 5));
+
+        //        if (position.y >= 500)
+        //        {
+        //            //touchedGround = true;
+        //        }
+        //        if (touchedGround)
+        //        {
+        //            painter.drawRect(QRectF(position.x, position.y, 5, 5)); // Adjust size as needed
+        //        }
     }
-    //touchedGround = false;
+    // touchedGround = false;
 }
 
-void Quiz::updateWorld() {
+void Quiz::updateWorld()
+{
     // It is generally best to keep the time step and iterations fixed.
-    world->Step(1.0/60.0, 6, 2);
+    top->Step(1.0 / 60.0, 6, 2);
+    bottom->Step(1.0 / 60.0, 6, 2);
     update();
 }
-
