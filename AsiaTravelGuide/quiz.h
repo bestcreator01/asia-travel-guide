@@ -7,6 +7,10 @@
 #include <QRandomGenerator>
 #include <algorithm>
 #include <random>
+#include <Box2D/Box2D.h>
+#include <vector>
+#include <QTimer>
+#include <QPainter>
 
 namespace Ui {
 class Quiz;
@@ -36,6 +40,11 @@ private slots:
 
     void closeEvent(QCloseEvent *bar);
 
+    void closePaint();
+
+protected:
+    void paintEvent(QPaintEvent *event) override;
+
 private:
     Ui::Quiz *ui;
     QString randomQuestion;
@@ -47,6 +56,17 @@ private:
 
     QMap<QString, QList<QString>> questionBank;
     void disableOptionButtons();
+
+    void createConfetti();
+    void createGround();
+    void updateWorld();
+
+    QTimer timer;
+
+    b2World *world;
+    std::vector<b2Body*> confettiPieces;
+
+    bool touchedGround;
 };
 
 #endif // QUIZ_H
