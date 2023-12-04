@@ -307,7 +307,7 @@ void Quiz::paintEvent(QPaintEvent *event)
         }
         else
         {
-            bottomConfettiPieces[1]->ApplyForce(b2Vec2(0.0f, 1000.0f), bottomPosition, true);
+            bottomConfettiPieces[2]->ApplyForce(b2Vec2(0.0f, 5000.0f), bottomPosition, true);
         }
 
         if (topTouchedGround && bottomTouchedGround)
