@@ -70,7 +70,8 @@ private:
     QList<b2Body*> confettiPieces;
     QList<b2Body*> confettiPieces2;
 
-    bool touchedGround;
+    bool topTouchedGround;
+    bool bottomTouchedGround;
 };
 
 #endif // QUIZ_H
