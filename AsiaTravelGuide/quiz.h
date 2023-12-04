@@ -67,8 +67,8 @@ private:
     b2World *top;
     b2World *bottom;
     QVector<QColor> confettiColors;
-    QList<b2Body*> confettiPieces;
-    QList<b2Body*> confettiPieces2;
+    QList<b2Body*> topConfettiPieces;
+    QList<b2Body*> bottomConfettiPieces;
 
     bool topTouchedGround;
     bool bottomTouchedGround;

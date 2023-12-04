@@ -218,14 +218,14 @@ void Quiz::closeEvent(QCloseEvent *bar)
 
 void Quiz::closePaint()
 {
-    for (int i = 0; i < confettiPieces.size(); i++)
+    for (int i = 0; i < topConfettiPieces.size(); i++)
     {
-        top->DestroyBody(confettiPieces[i]);
-        bottom->DestroyBody(confettiPieces2[i]);
+        top->DestroyBody(topConfettiPieces[i]);
+        bottom->DestroyBody(bottomConfettiPieces[i]);
     }
 
-    confettiPieces.clear();
-    confettiPieces2.clear();
+    topConfettiPieces.clear();
+    bottomConfettiPieces.clear();
 
     update();
 }
@@ -248,8 +248,8 @@ void Quiz::createConfetti()
         confettiBodyDef.type = b2_dynamicBody;
         confettiBodyDef.position.Set(width() / 2, height() / 2);
 
-        b2Body *confettiPiece1 = top->CreateBody(&confettiBodyDef);
-        b2Body *confettiPiece2 = bottom->CreateBody(&confettiBodyDef);
+        b2Body *topConfettiPiece = top->CreateBody(&confettiBodyDef);
+        b2Body *bottomConfettiPiece = bottom->CreateBody(&confettiBodyDef);
 
         b2PolygonShape confettiShape;
         confettiShape.SetAsBox(0.1f, 0.1f);  // Adjust the size as needed
@@ -260,11 +260,11 @@ void Quiz::createConfetti()
         confettiFixtureDef.friction = 0.3f;
         confettiFixtureDef.restitution = 1.0f;
 
-        confettiPiece1->CreateFixture(&confettiFixtureDef);
-        confettiPieces.push_back(confettiPiece1);
+        topConfettiPiece->CreateFixture(&confettiFixtureDef);
+        topConfettiPieces.push_back(topConfettiPiece);
 
-        confettiPiece2->CreateFixture(&confettiFixtureDef);
-        confettiPieces2.push_back(confettiPiece2);
+        bottomConfettiPiece->CreateFixture(&confettiFixtureDef);
+        bottomConfettiPieces.push_back(bottomConfettiPiece);
     }
 }
 
@@ -291,14 +291,14 @@ void Quiz::paintEvent(QPaintEvent *event)
     painter.setRenderHint(QPainter::Antialiasing);
 
     // Draw confetti pieces
-    for (int i = 0; i < confettiPieces.size(); i++)
+    for (int i = 0; i < topConfettiPieces.size(); i++)
     {
         // Set the brush to the pre-generated color and no outline
         painter.setBrush(QBrush(confettiColors[i]));
         painter.setPen(Qt::NoPen);  // Set no outline
 
-        b2Vec2 topPosition = confettiPieces[i]->GetPosition();
-        b2Vec2 bottomPosition = confettiPieces2[i]->GetPosition();
+        b2Vec2 topPosition = topConfettiPieces[i]->GetPosition();
+        b2Vec2 bottomPosition = bottomConfettiPieces[i]->GetPosition();
 
         if (topPosition.y <= 0 && bottomPosition.y >= height())
         {
@@ -307,7 +307,7 @@ void Quiz::paintEvent(QPaintEvent *event)
         }
         else
         {
-            confettiPieces2[2]->ApplyForce(b2Vec2(0.0f, 5000.0f), bottomPosition, true);
+            bottomConfettiPieces[1]->ApplyForce(b2Vec2(0.0f, 1000.0f), bottomPosition, true);
         }
 
         if (topTouchedGround && bottomTouchedGround)
@@ -323,7 +323,6 @@ void Quiz::paintEvent(QPaintEvent *event)
 
 void Quiz::updateWorld()
 {
-    // It is generally best to keep the time step and iterations fixed.
     top->Step(1.0 / 60.0, 6, 2);
     bottom->Step(1.0 / 60.0, 6, 2);
     update();
