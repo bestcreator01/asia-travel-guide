@@ -56,6 +56,7 @@ private:
     QMap<QString, QList<QString>> questionBank;
     void disableOptionButtons();
 
+    void generateConfettiColors();
     void createConfetti();
     void createGround(float, float);
     void updateWorld();
@@ -65,6 +66,7 @@ private:
 
     b2World *top;
     b2World *bottom;
+    QVector<QColor> confettiColors;
     QList<b2Body*> confettiPieces;
     QList<b2Body*> confettiPieces2;
 

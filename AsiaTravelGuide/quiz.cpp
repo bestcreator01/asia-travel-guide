@@ -58,6 +58,9 @@ Quiz::Quiz(QWidget *parent) : QWidget(parent),
 
     std::shuffle(questions.begin(), questions.end(), g);
 
+    // Create random set of colors for confetti
+    generateConfettiColors();
+
     // Set up Box2D world
     b2Vec2 neg(0.0f, -20.0f);
     b2Vec2 pos(0.0f, 20.0f);
@@ -68,7 +71,7 @@ Quiz::Quiz(QWidget *parent) : QWidget(parent),
     createGround(-7.0f, height() + 5.0f);
 
     connect(&timer, &QTimer::timeout, this, &Quiz::updateWorld);
-    timer.start(5);
+    timer.start(3);
 }
 
 Quiz::~Quiz()
@@ -227,6 +230,15 @@ void Quiz::closePaint()
     update();
 }
 
+void Quiz::generateConfettiColors()
+{
+    for (int i = 0; i < 100; ++i)
+    {
+        QColor randomColor = QColor::fromRgb(rand() % 256, rand() % 256, rand() % 256);
+        confettiColors.push_back(randomColor);
+    }
+}
+
 void Quiz::createConfetti()
 {
     // Create confetti pieces
@@ -235,8 +247,21 @@ void Quiz::createConfetti()
         b2BodyDef confettiBodyDef;
         confettiBodyDef.type = b2_dynamicBody;
         confettiBodyDef.position.Set(width() / 2, height() / 2);
+
+        b2BodyDef confettiBodyDef2;
+        confettiBodyDef2.type = b2_dynamicBody;
+        confettiBodyDef2.position.Set(width() / 2, height() / 2);
+
+
+        b2Vec2 initialVelocity(0.0f, -1500.0f);
+        confettiBodyDef.linearVelocity = initialVelocity;
+
+        b2Vec2 initialVelocity2(0.0f, 1500.0f);
+        confettiBodyDef2.linearVelocity = initialVelocity2;
+
+
         b2Body *confettiPiece1 = top->CreateBody(&confettiBodyDef);
-        b2Body *confettiPiece2 = bottom->CreateBody(&confettiBodyDef);
+        b2Body *confettiPiece2 = bottom->CreateBody(&confettiBodyDef2);
 
         b2PolygonShape confettiShape;
         confettiShape.SetAsBox(0.1f, 0.1f);  // Adjust the size as needed
@@ -281,6 +306,10 @@ void Quiz::paintEvent(QPaintEvent *event)
     // Draw confetti pieces
     for (int i = 0; i < confettiPieces.size(); i++)
     {
+        // Set the brush to the pre-generated color and no outline
+        painter.setBrush(QBrush(confettiColors[i]));
+        painter.setPen(Qt::NoPen);  // Set no outline
+
         b2Vec2 position = confettiPieces[i]->GetPosition();
         painter.drawRect(QRectF(position.x, position.y, 5, 5));
         position = confettiPieces2[i]->GetPosition();
