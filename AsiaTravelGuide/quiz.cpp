@@ -10,12 +10,12 @@ Quiz::Quiz(QWidget *parent) : QWidget(parent),
     ui->nextButton->hide();
     this->setWindowTitle("QUIZ");
     backgroundLabel = new QLabel(this);
-    QMovie *movie = new QMovie(":/icons/clouds.gif");
-    movie->setScaledSize(this->size());
-    backgroundLabel->setMovie(movie);
+//    QMovie *movie = new QMovie(":/icons/clouds.gif");
+//    movie->setScaledSize(this->size());
+//    backgroundLabel->setMovie(movie);
     backgroundLabel->setGeometry(0, 0, this->width(), this->height());  // Set to cover the entire window
     backgroundLabel->lower();
-    movie->start();
+//    movie->start();
     // first question
     question1 =
         "The Taj Mahal is renowned for its distinctive features, "
