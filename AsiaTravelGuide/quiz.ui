@@ -20,7 +20,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">color: rgb(0, 0, 0)</string>
+   <string notr="true">color: rgb(255, 255, 255)</string>
   </property>
   <widget class="QPushButton" name="option1Button">
    <property name="geometry">
@@ -40,9 +40,6 @@
    </property>
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
    </property>
    <property name="text">
     <string>PushButton</string>
@@ -89,9 +86,6 @@
    </property>
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
    </property>
    <property name="text">
     <string>PushButton</string>
