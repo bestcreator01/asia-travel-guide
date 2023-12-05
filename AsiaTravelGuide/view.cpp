@@ -17,11 +17,19 @@ view::view(Model& model, QWidget *parent)
 
     QIcon backArrowIcon(":/icons/left-arrow.png");
     QIcon markerIcon(":/icons/marker.png");
+
+    // india place icons
     QIcon taj(":/icons/taj.png");
     QIcon hawa(":/icons/hawa-mahal.png");
     QIcon biryani(":/icons/biryani.png");
     QIcon panipuri(":/icons/panipuri.png");
     QIcon quizIcon(":/icons/quiz.png");
+
+    // korea place icons
+    QIcon gbgIcon(":/icons/gyeongbokgung.png");
+    QIcon bgsIcon(":/icons/bulguksa.png");
+    QIcon tbkIcon(":/icons/tteokbokki.png");
+    QIcon bssIcon(":/icons/bossam.png");
 
     QPixmap checkPixmap(":/icons/check.png");
     QPixmap scaledPixmap = checkPixmap.scaled(ui->biryaniCheckLabel->size(), Qt::KeepAspectRatio);
@@ -35,10 +43,15 @@ view::view(Model& model, QWidget *parent)
     ui->indiaButton->setIconSize(QSize(50, 50));
     ui->indiaButton->setIcon(markerIcon);
     ui->indiaButton->hide();
-
     ui->indiaLabel->hide();
 
-    // place buttons
+    ui->koreaButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
+    ui->koreaButton->setIconSize(QSize(50, 50));
+    ui->koreaButton->setIcon(markerIcon);
+    ui->koreaButton->hide();
+    ui->koreaLabel->hide();
+
+    // india place buttons
     ui->tajMahal->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
     ui->hawaMahal->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
     ui->paniPuri->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
@@ -51,20 +64,46 @@ view::view(Model& model, QWidget *parent)
     ui->hawaMahal->setIcon(hawa);
     ui->paniPuri->setIcon(panipuri);
     ui->biryani->setIcon(biryani);
+    ui->tajMahal->setText("");
+    ui->hawaMahal->setText("");
+    ui->paniPuri->setText("");
+    ui->biryani->setText("");
     ui->tajMahal->hide();
     ui->hawaMahal->hide();
     ui->paniPuri->hide();
     ui->biryani->hide();
+
+    // korea place buttons
+    ui->gyeongbokgungButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
+    ui->gyeongbokgungButton->setIconSize(QSize(60, 60));
+    ui->gyeongbokgungButton->setIcon(gbgIcon);
+    ui->gyeongbokgungButton->setText("");
+    ui->gyeongbokgungButton->hide();
+    ui->bulguksaButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
+    ui->bulguksaButton->setIconSize(QSize(60, 60));
+    ui->bulguksaButton->setIcon(bgsIcon);
+    ui->bulguksaButton->setText("");
+    ui->bulguksaButton->hide();
+    ui->tteokbokkiButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
+    ui->tteokbokkiButton->setIconSize(QSize(60, 60));
+    ui->tteokbokkiButton->setIcon(tbkIcon);
+    ui->tteokbokkiButton->setText("");
+    ui->tteokbokkiButton->hide();
+    ui->bossamButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
+    ui->bossamButton->setIconSize(QSize(60, 60));
+    ui->bossamButton->setIcon(bssIcon);
+    ui->bossamButton->setText("");
+    ui->bossamButton->hide();
 
     // quiz button
     ui->quizButton->setText("");
     ui->quizButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
     ui->quizButton->setIconSize(QSize(70,70));
     ui->quizButton->setIcon(quizIcon);
-    ui->quizButton->show();
+    ui->quizButton->hide();
     // TODO
 
-    // checkmarks
+    // india checkmarks
     ui->biryaniCheckLabel->setPixmap(scaledPixmap);
     ui->hawaMahalCheckLabel->setPixmap(scaledPixmap);
     ui->tajMahalCheckLabel->setPixmap(scaledPixmap);
@@ -73,6 +112,16 @@ view::view(Model& model, QWidget *parent)
     ui->hawaMahalCheckLabel->hide();
     ui->tajMahalCheckLabel->hide();
     ui->paniPuriCheckLabel->hide();
+
+    // korea checkmarks
+    ui->gyeongbokgungCheckLabel->setPixmap(scaledPixmap);
+    ui->bulguksaCheckLabel->setPixmap(scaledPixmap);
+    ui->tteokbokkiCheckLabel->setPixmap(scaledPixmap);
+    ui->bossamCheckLabel->setPixmap(scaledPixmap);
+    ui->gyeongbokgungCheckLabel->hide();
+    ui->bulguksaCheckLabel->hide();
+    ui->tteokbokkiCheckLabel->hide();
+    ui->bossamCheckLabel->hide();
 
     // Background label
     backgroundLabel = new QLabel(this);
@@ -91,7 +140,6 @@ view::view(Model& model, QWidget *parent)
 
     connect(this, &view::generateRandomQuestion, &quizWindow, &Quiz::showRandomQuestion);
     connect(this, &view::resetButtons, &quizWindow, &Quiz::resetButtons);
-
 }
 
 view::~view()
@@ -99,6 +147,11 @@ view::~view()
     delete ui;
 }
 
+void view::closeEvent(QCloseEvent *)
+{
+    indiaWindow.closeWindow();
+    quizWindow.closeWindow();
+}
 void view::setBgLabelOpacity()
 {
     QGraphicsOpacityEffect *backgroundOpacityEffect = new QGraphicsOpacityEffect(backgroundLabel);
@@ -158,6 +211,11 @@ void view::on_backButton_clicked()
         ui->hawaMahalCheckLabel->hide();
         ui->paniPuriCheckLabel->hide();
 
+        ui->gyeongbokgungCheckLabel->hide();
+        ui->bulguksaCheckLabel->hide();
+        ui->tteokbokkiCheckLabel->hide();
+        ui->bossamCheckLabel->hide();
+
         ui->quizButton->hide();
     }
 }
@@ -166,12 +224,6 @@ void view::fadeInBackgroundLabel()
 {
     backgroundLabel->show();
     fadeEffect(0.0, 1.0, 1000, "backgroundLabel");
-}
-
-void view::fadeOutBackgroundLabel()
-{
-    QTimer::singleShot(1000, this, [this] {QPixmap background(":/icons/india-map.png"); setBgLabel(background);});
-    fadeEffect(1.0, 0.0, 1000, "backgroundLabel");
 }
 
 void view::fadeInWelcomeLabel()
@@ -213,25 +265,45 @@ void view::fadeOutBackArrow()
 void view::fadeInMarkers()
 {
     ui->indiaButton->show();
+    ui->koreaButton->show();
     fadeEffect(0.0, 1.0, 1000, "indiaButton");
+    fadeEffect(0.0, 1.0, 1000, "koreaButton");
 }
 
 void view::fadeOutMarkers()
 {
     fadeEffect(1.0, 0.0, 1000, "indiaButton");
+    fadeEffect(1.0, 0.0, 1000, "koreaButton");
+
     QTimer::singleShot(1000, this, [this] {ui->indiaButton->hide();});
+    QTimer::singleShot(1000, this, [this] {ui->koreaButton->hide();});
+
 }
 
-void view::fadeInLandMarks()
+void view::fadeInLandMarks(Country country)
 {
-    ui->tajMahal->show();
-    ui->hawaMahal->show();
-    ui->paniPuri->show();
-    ui->biryani->show();
-    fadeEffect(0.0, 1.0, 1500, "tajMahalButton");
-    fadeEffect(0.0, 1.0, 1500, "hawaMahalButton");
-    fadeEffect(0.0, 1.0, 1500, "paniPuriButton");
-    fadeEffect(0.0, 1.0, 1500, "biryaniButton");
+    if (country == India)
+    {
+        ui->tajMahal->show();
+        ui->hawaMahal->show();
+        ui->paniPuri->show();
+        ui->biryani->show();
+        fadeEffect(0.0, 1.0, 1500, "tajMahalButton");
+        fadeEffect(0.0, 1.0, 1500, "hawaMahalButton");
+        fadeEffect(0.0, 1.0, 1500, "paniPuriButton");
+        fadeEffect(0.0, 1.0, 1500, "biryaniButton");
+    }
+    else if (country == Korea)
+    {
+        ui->gyeongbokgungButton->show();
+        ui->bulguksaButton->show();
+        ui->tteokbokkiButton->show();
+        ui->bossamButton->show();
+        fadeEffect(0.0, 1.0, 1500, "gyeongbokgungButton");
+        fadeEffect(0.0, 1.0, 1500, "bulguksaButton");
+        fadeEffect(0.0, 1.0, 1500, "tteokbokkiButton");
+        fadeEffect(0.0, 1.0, 1500, "bossamButton");
+    }
 }
 
 void view::hideLandMarks()
@@ -240,6 +312,11 @@ void view::hideLandMarks()
     ui->hawaMahal->hide();
     ui->paniPuri->hide();
     ui->biryani->hide();
+
+    ui->gyeongbokgungButton->hide();
+    ui->bulguksaButton->hide();
+    ui->tteokbokkiButton->hide();
+    ui->bossamButton->hide();
 }
 
 void view::fadeEffect(double startValue, double endValue, int duration, QString widget)
@@ -256,6 +333,7 @@ void view::fadeEffect(double startValue, double endValue, int duration, QString 
 
 void view::setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff)
 {
+    // system
     if(name == "backButton")
     {
         ui->backButton->setGraphicsEffect(eff);
@@ -268,14 +346,22 @@ void view::setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff)
     {
         ui->welcomeLabel->setGraphicsEffect(eff);
     }
-    else if(name == "indiaButton")
-    {
-        ui->indiaButton->setGraphicsEffect(eff);
-    }
     else if(name == "backgroundLabel")
     {
         backgroundLabel->setGraphicsEffect(eff);
     }
+
+    // country buttons
+    else if(name == "indiaButton")
+    {
+        ui->indiaButton->setGraphicsEffect(eff);
+    }
+    else if(name == "koreaButton")
+    {
+        ui->koreaButton->setGraphicsEffect(eff);
+    }
+
+    // india place buttons
     else if(name == "tajMahalButton")
     {
         ui->tajMahal->setGraphicsEffect(eff);
@@ -291,6 +377,24 @@ void view::setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff)
     else if(name == "biryaniButton")
     {
         ui->biryani->setGraphicsEffect(eff);
+    }
+
+    // korea place buttons
+    else if(name == "gyeongbokgungButton")
+    {
+        ui->gyeongbokgungButton->setGraphicsEffect(eff);
+    }
+    else if(name == "bulguksaButton")
+    {
+        ui->bulguksaButton->setGraphicsEffect(eff);
+    }
+    else if(name == "tteokbokkiButton")
+    {
+        ui->tteokbokkiButton->setGraphicsEffect(eff);
+    }
+    else if(name == "bossamButton")
+    {
+        ui->bossamButton->setGraphicsEffect(eff);
     }
 
     // checkmark labels
@@ -314,9 +418,15 @@ void view::setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff)
     {
         ui->quizButton->setGraphicsEffect(eff);
     }
+
+    // country labels
     else if(name == "indiaLabel")
     {
         ui->indiaLabel->setGraphicsEffect(eff);
+    }
+    else if(name == "koreaLabel")
+    {
+        ui->koreaLabel->setGraphicsEffect(eff);
     }
 }
 
@@ -330,52 +440,99 @@ void view::setBgLabel(QPixmap background)
 void view::on_indiaButton_clicked()
 {
     emit changedState("CountryMap");
-    ui->indiaButton->hide();
+
     QPixmap background(":/icons/india-map.png");
     setBgLabel(background);
-    fadeOutBackgroundLabel();
     fadeInBackgroundLabel();
-    fadeInLandMarks();
-    fadeInCheckmarks();
-//    fadeOutCountryLabels();
-    ui->indiaLabel->hide(); // this is more natural
+    fadeInLandMarks(India);
+    fadeInCheckmarks(India);
+
+    ui->indiaButton->hide();
+    ui->koreaButton->hide();
+    ui->koreaLabel->hide();
+    ui->indiaLabel->hide();
+}
+
+void view::on_koreaButton_clicked()
+{
+    emit changedState("CountryMap");
+
+    QPixmap background(":/icons/korea_map.png");
+    setBgLabel(background);
+    fadeInBackgroundLabel();
+    fadeInLandMarks(Korea);
+    fadeInCheckmarks(Korea);
+
+    ui->indiaButton->hide();
+    ui->koreaButton->hide();
+    ui->koreaLabel->hide();
+    ui->indiaLabel->hide();
 }
 
 void view::fadeInCountryLabels(){
     ui->indiaLabel->show();
+    ui->koreaLabel->show();
+
     fadeEffect(0.0, 1.0, 1500, "indiaLabel");
+    fadeEffect(0.0, 1.0, 1500, "koreaLabel");
 }
 
 void view::fadeOutCountryLabels(){
     fadeEffect(1.0, 0.0, 1500, "indiaLabel");
+    fadeEffect(1.0, 0.0, 1500, "koreaLabel");
 }
 
-void view::fadeInCheckmarks(){
-    if (indiaCompleteList.contains(TajMahal))
+void view::fadeInCheckmarks(Country country){
+
+    if (country == India)
     {
-        ui->tajMahalCheckLabel->show();
-        fadeEffect(0.0, 1.0, 1500, "tajMahalCheckLabel");
+        if (indiaCompleteList.contains(TajMahal))
+        {
+            ui->tajMahalCheckLabel->show();
+            fadeEffect(0.0, 1.0, 1500, "tajMahalCheckLabel");
+        }
+        if (indiaCompleteList.contains(HawaMaha))
+        {
+            ui->hawaMahalCheckLabel->show();
+            fadeEffect(0.0, 1.0, 1500, "hawaMahalCheckLabel");
+        }
+        if (indiaCompleteList.contains(PaniPuri))
+        {
+            ui->paniPuriCheckLabel->show();
+            fadeEffect(0.0, 1.0, 1500, "paniPuriCheckLabel");
+        }
+        if (indiaCompleteList.contains(Biryani))
+        {
+            ui->biryaniCheckLabel->show();
+            fadeEffect(0.0, 1.0, 1500, "biryaniCheckLabel");
+        }
+        if (indiaCompleteList.size() == 4)
+        {
+            ui->quizButton->show();
+            fadeEffect(0.0, 1.0, 1500, "quizButton");
+        }
     }
-    if (indiaCompleteList.contains(HawaMaha))
+    else if (country == Korea)
     {
-        ui->hawaMahalCheckLabel->show();
-        fadeEffect(0.0, 1.0, 1500, "hawaMahalCheckLabel");
+        if (koreaCompleteList.contains(Gyeongbokgung)){
+            ui->gyeongbokgungCheckLabel->show();
+        }
+        if (koreaCompleteList.contains(Bulguksa)){
+            ui->bulguksaCheckLabel->show();
+        }
+        if (koreaCompleteList.contains(Tteokbokki)){
+            ui->tteokbokkiCheckLabel->show();
+        }
+        if (koreaCompleteList.contains(Bossam)){
+            ui->bossamCheckLabel->show();
+        }
+        if (koreaCompleteList.size() == 4)
+        {
+            ui->quizButton->show();
+            fadeEffect(0.0, 1.0, 1500, "quizButton");
+        }
     }
-    if (indiaCompleteList.contains(PaniPuri))
-    {
-        ui->paniPuriCheckLabel->show();
-        fadeEffect(0.0, 1.0, 1500, "paniPuriCheckLabel");
-    }
-    if (indiaCompleteList.contains(Biryani))
-    {
-        ui->biryaniCheckLabel->show();
-        fadeEffect(0.0, 1.0, 1500, "biryaniCheckLabel");
-    }
-    if (indiaCompleteList.size() == 4)
-    {
-        ui->quizButton->show();
-        fadeEffect(0.0, 1.0, 1500, "quizButton");
-    }
+
 }
 
 void view::disableButtons()
@@ -456,3 +613,57 @@ void view::enableButtonsAndCheck()
     ui->biryani->setEnabled(true);
     ui->backButton->setEnabled(true);
 }
+
+
+
+void view::on_bulguksaButton_clicked()
+{
+//    showInfo("Bulguksa");
+
+    ui->bulguksaCheckLabel->show();
+    koreaCompleteList.insert(Bulguksa);
+    if (koreaCompleteList.size() == 4)
+    {
+        ui->quizButton->show(); // korea quiz button?
+    }
+}
+
+
+void view::on_gyeongbokgungButton_clicked()
+{
+    //    showInfo("Gyeongbokgung");
+
+    ui->gyeongbokgungCheckLabel->show();
+    koreaCompleteList.insert(Gyeongbokgung);
+    if (koreaCompleteList.size() == 4)
+    {
+        ui->quizButton->show(); // korea quiz button?
+    }
+}
+
+
+void view::on_tteokbokkiButton_clicked()
+{
+    //    showInfo("Tteokbokki");
+
+    ui->tteokbokkiCheckLabel->show();
+    koreaCompleteList.insert(Tteokbokki);
+    if (koreaCompleteList.size() == 4)
+    {
+        ui->quizButton->show(); // korea quiz button?
+    }
+}
+
+
+void view::on_bossamButton_clicked()
+{
+    //    showInfo("Bossam");
+
+    ui->bossamCheckLabel->show();
+    koreaCompleteList.insert(Bossam);
+    if (koreaCompleteList.size() == 4)
+    {
+        ui->quizButton->show(); // korea quiz button?
+    }
+}
+

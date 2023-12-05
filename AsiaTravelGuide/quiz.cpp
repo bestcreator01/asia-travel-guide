@@ -1,13 +1,21 @@
 #include "quiz.h"
-
+#include <QLabel>
 #include "ui_quiz.h"
+#include <QMovie>
 
 Quiz::Quiz(QWidget *parent) : QWidget(parent),
                               ui(new Ui::Quiz)
 {
     ui->setupUi(this);
     ui->nextButton->hide();
-
+    this->setWindowTitle("QUIZ");
+    backgroundLabel = new QLabel(this);
+//    QMovie *movie = new QMovie(":/icons/clouds.gif");
+//    movie->setScaledSize(this->size());
+//    backgroundLabel->setMovie(movie);
+    backgroundLabel->setGeometry(0, 0, this->width(), this->height());  // Set to cover the entire window
+    backgroundLabel->lower();
+//    movie->start();
     // first question
     question1 =
         "The Taj Mahal is renowned for its distinctive features, "
@@ -24,7 +32,8 @@ Quiz::Quiz(QWidget *parent) : QWidget(parent),
         "\nnumerous small windows (Jharokhas) in the design of Hawa Mahal?";
     option1 = "To serve as decorative elements for the palace's exterior";
     option2 = "To create a honeycomb-like pattern for aesthetic appeal";
-    option3 = "To allow royal ladies to observe street activities without being seen";  // Correct
+    option3 = "To allow royal ladies to observe street activities without "
+              "\nbeing seen";  // Correct
     option4 = "To enhance the structural stability of the palace";
     questionBank[question2] = {option1, option2, option3, option4};
 
@@ -59,8 +68,8 @@ Quiz::Quiz(QWidget *parent) : QWidget(parent),
     std::shuffle(questions.begin(), questions.end(), g);
 
     // Set up Box2D world
-    b2Vec2 neg(0.0f, -20.0f);
-    b2Vec2 pos(0.0f, 20.0f);
+    b2Vec2 neg(0.0f, -30.0f);
+    b2Vec2 pos(0.0f, 30.0f);
     top = new b2World(neg);
     bottom = new b2World(pos);
 
@@ -284,6 +293,11 @@ void Quiz::createGround(float neg, float pos)
     groundBody1->CreateFixture(&groundBox, 0.0f);
 }
 
+void Quiz::closeWindow()
+{
+    this->close();
+}
+
 void Quiz::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
@@ -309,7 +323,7 @@ void Quiz::paintEvent(QPaintEvent *event)
         }
         else
         {
-            bottomConfettiPieces[2]->ApplyForce(b2Vec2(0.0f, 5000.0f), bottomPosition, true);
+            bottomConfettiPieces[2]->ApplyForce(b2Vec2(0.0f, 10000.0f), bottomPosition, true);
         }
 
         if (topTouchedGround && bottomTouchedGround)

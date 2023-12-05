@@ -143,6 +143,7 @@ void Form::receiveSignalToSetTextIndia(QString name)
         splittedText = restaurantInfo[current].split("");
         firstNextClicked = true;
     }
+    this->setWindowTitle(name);
     ui->description->setText("");
     timer->start(10);
     ui->backButton->hide();
@@ -215,6 +216,10 @@ void Form::on_backButton_clicked()
     ui->backButton->hide();
 }
 
+void Form::closeWindow()
+{
+    this->close();
+}
 
 //void Form::on_backToMapButton_clicked()
 //{

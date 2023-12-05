@@ -15,6 +15,7 @@ class Form : public QWidget
 public:
     explicit Form(QWidget *parent = nullptr);
     ~Form();
+    void closeWindow();
 
 public slots:
     void receiveSignalToSetTextIndia(QString name);

@@ -10,6 +10,7 @@
 #include <Box2D/Box2D.h>
 #include <QTimer>
 #include <QPainter>
+#include <QLabel>
 
 namespace Ui {
 class Quiz;
@@ -18,6 +19,7 @@ class Quiz;
 class Quiz : public QWidget
 {
     Q_OBJECT
+    QLabel *backgroundLabel;
 
 public:
     explicit Quiz(QWidget *parent = nullptr);
@@ -25,7 +27,7 @@ public:
 
     void showRandomQuestion();
     void resetButtons();
-
+    void closeWindow();
 private slots:
     void on_option1Button_clicked();
 
