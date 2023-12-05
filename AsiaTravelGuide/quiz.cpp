@@ -7,6 +7,7 @@ Quiz::Quiz(QWidget *parent) : QWidget(parent),
 {
     ui->setupUi(this);
     ui->nextButton->hide();
+    this->setWindowTitle("QUIZ");
 
     // first question
     question1 =
@@ -24,7 +25,8 @@ Quiz::Quiz(QWidget *parent) : QWidget(parent),
         "\nnumerous small windows (Jharokhas) in the design of Hawa Mahal?";
     option1 = "To serve as decorative elements for the palace's exterior";
     option2 = "To create a honeycomb-like pattern for aesthetic appeal";
-    option3 = "To allow royal ladies to observe street activities without being seen";  // Correct
+    option3 = "To allow royal ladies to observe street activities without "
+              "\nbeing seen";  // Correct
     option4 = "To enhance the structural stability of the palace";
     questionBank[question2] = {option1, option2, option3, option4};
 

@@ -143,6 +143,7 @@ void Form::receiveSignalToSetTextIndia(QString name)
         splittedText = restaurantInfo[current].split("");
         firstNextClicked = true;
     }
+    this->setWindowTitle(name);
     ui->description->setText("");
     timer->start(10);
     ui->backButton->hide();
