@@ -58,9 +58,6 @@ Quiz::Quiz(QWidget *parent) : QWidget(parent),
 
     std::shuffle(questions.begin(), questions.end(), g);
 
-    // Create random set of colors for confetti
-    generateConfettiColors();
-
     // Set up Box2D world
     b2Vec2 neg(0.0f, -20.0f);
     b2Vec2 pos(0.0f, 20.0f);
@@ -214,6 +211,7 @@ void Quiz::on_nextButton_clicked()
 void Quiz::closeEvent(QCloseEvent *bar)
 {
     quesIndex = 0;
+    closePaint();
 }
 
 void Quiz::closePaint()
@@ -226,6 +224,7 @@ void Quiz::closePaint()
 
     topConfettiPieces.clear();
     bottomConfettiPieces.clear();
+    confettiColors.clear();
 
     update();
 }
@@ -241,6 +240,9 @@ void Quiz::generateConfettiColors()
 
 void Quiz::createConfetti()
 {
+    // Create random set of colors for confetti
+    generateConfettiColors();
+
     // Create confetti pieces
     for (int i = 0; i < 100; ++i)
     {
