@@ -15,6 +15,11 @@
         <file>check.png</file>
         <file>quiz.png</file>
         <file>clouds.gif</file>
+        <file>korea_map.png</file>
+        <file>gyeongbokgung.png</file>
+        <file>bulguksa.png</file>
+        <file>tteokbokki.png</file>
+        <file>bossam.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

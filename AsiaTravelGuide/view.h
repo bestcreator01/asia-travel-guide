@@ -40,8 +40,14 @@ private slots:
 
     void on_quizButton_clicked();
 
+    void on_koreaButton_clicked();
+
 private:
     Ui::view *ui;
+
+    enum Country {India, Korea, Thailand};
+    enum IndiaPlace{HawaMaha, TajMahal, PaniPuri, Biryani};
+    QSet<IndiaPlace> indiaCompleteList;
 
     QLabel *backgroundLabel;
 
@@ -57,13 +63,12 @@ private:
     void fadeOutBackArrow();
     void fadeInMarkers();
     void fadeOutMarkers();
-    void fadeInLandMarks();
+    void fadeInLandMarks(Country country);
     void hideLandMarks();
     void fadeEffect(double startValue, double endValue, int duration, QString widget);
     void setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff);
 
     void fadeInBackgroundLabel();
-    void fadeOutBackgroundLabel();
     void setBgLabel(QPixmap background);
     void setBgLabelOpacity();
 
@@ -75,8 +80,6 @@ private:
     void fadeInCountryLabels();
     void fadeOutCountryLabels();
     void fadeInCheckmarks();
-    enum IndiaPlace{HawaMaha, TajMahal, PaniPuri, Biryani};
-    QSet<IndiaPlace> indiaCompleteList;
 
 signals:
     void hideWidgets();
