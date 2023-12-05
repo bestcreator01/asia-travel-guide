@@ -71,8 +71,8 @@ Quiz::Quiz(QWidget *parent) : QWidget(parent),
     generateConfettiColors();
 
     // Set up Box2D world
-    b2Vec2 neg(0.0f, -20.0f);
-    b2Vec2 pos(0.0f, 20.0f);
+    b2Vec2 neg(0.0f, -30.0f);
+    b2Vec2 pos(0.0f, 30.0f);
     top = new b2World(neg);
     bottom = new b2World(pos);
 
@@ -321,7 +321,7 @@ void Quiz::paintEvent(QPaintEvent *event)
         }
         else
         {
-            bottomConfettiPieces[2]->ApplyForce(b2Vec2(0.0f, 5000.0f), bottomPosition, true);
+            bottomConfettiPieces[2]->ApplyForce(b2Vec2(0.0f, 10000.0f), bottomPosition, true);
         }
 
         if (topTouchedGround && bottomTouchedGround)
