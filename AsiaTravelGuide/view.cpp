@@ -66,7 +66,7 @@ view::view(Model& model, QWidget *parent)
     ui->quizButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
     ui->quizButton->setIconSize(QSize(70,70));
     ui->quizButton->setIcon(quizIcon);
-    ui->quizButton->hide();
+    ui->quizButton->show();
     // TODO
 
     // checkmarks
