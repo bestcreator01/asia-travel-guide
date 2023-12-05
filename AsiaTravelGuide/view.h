@@ -22,6 +22,7 @@ public:
     view(Model& model, QWidget *parent = nullptr);
     ~view();
 
+    void closeEvent(QCloseEvent *event);
 private slots:
 
     void on_playButton_clicked();

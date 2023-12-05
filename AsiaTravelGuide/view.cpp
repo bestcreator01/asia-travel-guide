@@ -91,7 +91,6 @@ view::view(Model& model, QWidget *parent)
 
     connect(this, &view::generateRandomQuestion, &quizWindow, &Quiz::showRandomQuestion);
     connect(this, &view::resetButtons, &quizWindow, &Quiz::resetButtons);
-
 }
 
 view::~view()
@@ -99,6 +98,11 @@ view::~view()
     delete ui;
 }
 
+void view::closeEvent(QCloseEvent *)
+{
+    indiaWindow.closeWindow();
+    quizWindow.closeWindow();
+}
 void view::setBgLabelOpacity()
 {
     QGraphicsOpacityEffect *backgroundOpacityEffect = new QGraphicsOpacityEffect(backgroundLabel);

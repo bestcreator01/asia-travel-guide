@@ -1,6 +1,7 @@
 #include "quiz.h"
-
+#include <QLabel>
 #include "ui_quiz.h"
+#include <QMovie>
 
 Quiz::Quiz(QWidget *parent) : QWidget(parent),
                               ui(new Ui::Quiz)
@@ -8,7 +9,13 @@ Quiz::Quiz(QWidget *parent) : QWidget(parent),
     ui->setupUi(this);
     ui->nextButton->hide();
     this->setWindowTitle("QUIZ");
-
+    backgroundLabel = new QLabel(this);
+    QMovie *movie = new QMovie(":/icons/clouds.gif");
+    movie->setScaledSize(this->size());
+    backgroundLabel->setMovie(movie);
+    backgroundLabel->setGeometry(0, 0, this->width(), this->height());  // Set to cover the entire window
+    backgroundLabel->lower();
+    movie->start();
     // first question
     question1 =
         "The Taj Mahal is renowned for its distinctive features, "
@@ -282,6 +289,11 @@ void Quiz::createGround(float neg, float pos)
     groundBox.SetAsBox(width(), 1.0f);
     groundBody->CreateFixture(&groundBox, 0.0f);
     groundBody1->CreateFixture(&groundBox, 0.0f);
+}
+
+void Quiz::closeWindow()
+{
+    this->close();
 }
 
 void Quiz::paintEvent(QPaintEvent *event)

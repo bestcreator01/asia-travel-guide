@@ -216,6 +216,10 @@ void Form::on_backButton_clicked()
     ui->backButton->hide();
 }
 
+void Form::closeWindow()
+{
+    this->close();
+}
 
 //void Form::on_backToMapButton_clicked()
 //{
