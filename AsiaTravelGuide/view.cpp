@@ -211,6 +211,11 @@ void view::on_backButton_clicked()
         ui->hawaMahalCheckLabel->hide();
         ui->paniPuriCheckLabel->hide();
 
+        ui->gyeongbokgungCheckLabel->hide();
+        ui->bulguksaCheckLabel->hide();
+        ui->tteokbokkiCheckLabel->hide();
+        ui->bossamCheckLabel->hide();
+
         ui->quizButton->hide();
     }
 }
@@ -510,16 +515,16 @@ void view::fadeInCheckmarks(Country country){
     else if (country == Korea)
     {
         if (koreaCompleteList.contains(Gyeongbokgung)){
-
+            ui->gyeongbokgungCheckLabel->show();
         }
         if (koreaCompleteList.contains(Bulguksa)){
-
+            ui->bulguksaCheckLabel->show();
         }
         if (koreaCompleteList.contains(Tteokbokki)){
-
+            ui->tteokbokkiCheckLabel->show();
         }
         if (koreaCompleteList.contains(Bossam)){
-
+            ui->bossamCheckLabel->show();
         }
         if (koreaCompleteList.size() == 4)
         {
