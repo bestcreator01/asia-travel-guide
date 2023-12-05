@@ -25,8 +25,6 @@ private slots:
 
     void on_backButton_clicked();
 
-    //void on_backToMapButton_clicked();
-
     void closeEvent(QCloseEvent *bar);
 
 signals:
@@ -46,6 +44,12 @@ private:
     int now = 0;
     void startTyping();
     QStringList splittedText;
+
+    void setLandmarkIndiaHelper(int currentNum, QString image);
+    void setRestaurantIndiaHelper(int currentNum, QString image);
+    void nextButtonHelper(QString info[]);
+    void backButtonHelper(QString info[]);
+    void buttonHelper(bool isNextButton);
 };
 
 #endif // FORM_H

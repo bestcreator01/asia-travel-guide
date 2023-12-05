@@ -109,39 +109,20 @@ void Form::receiveSignalToSetTextIndia(QString name)
 {
     if (name == "HawaMahal")
     {
-        current = 0;
-        flag = true;
-        QPixmap hawaMahal(":/icons/hawa-mahal_Image.jpg");
-        ui->image->setPixmap(hawaMahal.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-        splittedText = landMarkInfo[current].split("");
-        firstNextClicked = true;
+        setLandmarkIndiaHelper(0, ":/icons/hawa-mahal_Image.jpg");
     }
     else if (name == "TajMahal")
     {
-        current = 2;
-        flag = true;
-        QPixmap tajMahal(":/icons/taj-mahal_Image.png");
-        ui->image->setPixmap(tajMahal.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-        splittedText = landMarkInfo[current].split("");
-        firstNextClicked = true;
+        setLandmarkIndiaHelper(2, ":/icons/taj-mahal_Image.png");
     }
     else if (name == "PaniPuri")
-    {
-        current = 0;
-        flag = false;
-        QPixmap paniPuri(":/icons/pani-puri_Image.jpg");
-        ui->image->setPixmap(paniPuri.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-        splittedText = restaurantInfo[current].split("");
-        firstNextClicked = true;
+    {        
+        setRestaurantIndiaHelper(0, ":/icons/pani-puri_Image.jpg");
     }
     else if (name == "Biryani")
     {
-        current = 2;
-        flag = false;
-        QPixmap biryani(":/icons/biryani_Image.jpg");
-        ui->image->setPixmap(biryani.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-        splittedText = restaurantInfo[current].split("");
-        firstNextClicked = true;
+        setRestaurantIndiaHelper(2, ":/icons/biryani_Image.jpg");
+
     }
     this->setWindowTitle(name);
     ui->description->setText("");
@@ -151,81 +132,19 @@ void Form::receiveSignalToSetTextIndia(QString name)
 
 void Form::on_nextButton_clicked()
 {
-    if (flag)
-    {
-        if(firstNextClicked)
-        {
-            splittedText = landMarkInfo[++current].split("");
-            ui->description->setText("");
-            timer->start(10);
-            firstNextClicked = false;
-            firstBackClicked = true;
-        }
-        else
-        {
-            ui->description->setText(currentText);
-            firstBackClicked = false;
-        }
-    }
-    else
-    {
-        if(firstNextClicked)
-        {
-            splittedText = restaurantInfo[++current].split("");
-            ui->description->setText("");
-            timer->start(10);
-            firstNextClicked = false;
-            firstBackClicked = true;
-        }
-        else
-        {
-            ui->description->setText(currentText);
-            firstBackClicked = false;
-        }
-    }
-    ui->nextButton->hide();
-    ui->backButton->show();
+    buttonHelper(true);
 }
-
 
 void Form::on_backButton_clicked()
 {
-    if (flag)
-    {
-        if(firstBackClicked)
-        {
-            ui->description->setText(landMarkInfo[--current]);
-        }
-        else
-        {
-            ui->description->setText(landMarkInfo[current]);
-        }
-    }
-    else
-    {
-        if(firstBackClicked)
-        {
-            ui->description->setText(restaurantInfo[--current]);
-        }
-        else
-        {
-            ui->description->setText(restaurantInfo[current]);
-        }
-    }
-    ui->nextButton->show();
-    ui->backButton->hide();
+    buttonHelper(false);
 }
+
 
 void Form::closeWindow()
 {
     this->close();
 }
-
-//void Form::on_backToMapButton_clicked()
-//{
-//    this->hide();
-//    emit windowClosed();
-//}
 
 void Form::closeEvent(QCloseEvent *bar)
 {
@@ -235,5 +154,87 @@ void Form::closeEvent(QCloseEvent *bar)
     firstNextClicked = false;
     timer->stop();
     emit windowClosed();
+}
+
+/*
+ * HELPER METHODS
+ */
+
+void Form::setLandmarkIndiaHelper(int currentNum, QString image)
+{
+    current = currentNum;
+    flag = true;
+    QPixmap pixmap(image);
+    ui->image->setPixmap(pixmap.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    splittedText = landMarkInfo[current].split("");
+    firstNextClicked = true;
+}
+
+void Form::setRestaurantIndiaHelper(int currentNum, QString image)
+{
+    current = currentNum;
+    flag = false;
+    QPixmap pixmap(image);
+    ui->image->setPixmap(pixmap.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    splittedText = restaurantInfo[current].split("");
+    firstNextClicked = true;
+}
+
+void Form::nextButtonHelper(QString info[])
+{
+    if (firstNextClicked)
+    {
+        splittedText = info[++current].split("");
+        ui->description->setText("");
+        timer->start(10);
+        firstNextClicked = false;
+        firstBackClicked = true;
+    }
+    else
+    {
+        ui->description->setText(currentText);
+        firstBackClicked = false;
+    }
+}
+
+void Form::backButtonHelper(QString info[])
+{
+    if(firstBackClicked)
+    {
+        ui->description->setText(info[--current]);
+    }
+    else
+    {
+        ui->description->setText(info[current]);
+    }
+}
+
+void Form::buttonHelper(bool isNextButton)
+{
+    if (flag)
+    {
+        if (isNextButton)
+        {
+            nextButtonHelper(landMarkInfo);
+        }
+        else
+        {
+            backButtonHelper(landMarkInfo);
+        }
+    }
+    else
+    {
+        if (isNextButton)
+        {
+            nextButtonHelper(restaurantInfo);
+        }
+        else
+        {
+            backButtonHelper(restaurantInfo);
+        }
+    }
+
+    ui->nextButton->setVisible(!isNextButton);
+    ui->backButton->setVisible(isNextButton);
 }
 
