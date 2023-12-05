@@ -10,8 +10,17 @@
     <height>510</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>Academy Engraved LET</family>
+    <pointsize>18</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">color: rgb(0, 0, 0)</string>
   </property>
   <widget class="QPushButton" name="option1Button">
    <property name="geometry">
@@ -24,8 +33,8 @@
    </property>
    <property name="font">
     <font>
-     <family>Cascadia Code SemiBold</family>
-     <pointsize>8</pointsize>
+     <family>Arial Black</family>
+     <pointsize>14</pointsize>
      <bold>true</bold>
     </font>
    </property>
@@ -50,7 +59,8 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>11</pointsize>
+     <family>Arial Black</family>
+     <pointsize>14</pointsize>
      <bold>true</bold>
     </font>
    </property>
@@ -72,8 +82,8 @@
    </property>
    <property name="font">
     <font>
-     <family>Cascadia Code SemiBold</family>
-     <pointsize>8</pointsize>
+     <family>Arial Black</family>
+     <pointsize>14</pointsize>
      <bold>true</bold>
     </font>
    </property>
@@ -98,8 +108,8 @@
    </property>
    <property name="font">
     <font>
-     <family>Cascadia Mono SemiBold</family>
-     <pointsize>8</pointsize>
+     <family>Arial Black</family>
+     <pointsize>14</pointsize>
      <bold>true</bold>
     </font>
    </property>
@@ -121,8 +131,8 @@
    </property>
    <property name="font">
     <font>
-     <family>Cascadia Code SemiBold</family>
-     <pointsize>8</pointsize>
+     <family>Arial Black</family>
+     <pointsize>14</pointsize>
      <bold>true</bold>
     </font>
    </property>

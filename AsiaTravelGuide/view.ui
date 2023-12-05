@@ -261,6 +261,9 @@
       <bold>false</bold>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0)</string>
+    </property>
     <property name="text">
      <string>India</string>
     </property>
@@ -295,6 +298,9 @@
       <pointsize>15</pointsize>
       <bold>false</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0)</string>
     </property>
     <property name="text">
      <string>Korea</string>
