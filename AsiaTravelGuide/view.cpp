@@ -103,7 +103,7 @@ view::view(Model& model, QWidget *parent)
     ui->quizButton->hide();
     // TODO
 
-    // checkmarks
+    // india checkmarks
     ui->biryaniCheckLabel->setPixmap(scaledPixmap);
     ui->hawaMahalCheckLabel->setPixmap(scaledPixmap);
     ui->tajMahalCheckLabel->setPixmap(scaledPixmap);
@@ -112,6 +112,16 @@ view::view(Model& model, QWidget *parent)
     ui->hawaMahalCheckLabel->hide();
     ui->tajMahalCheckLabel->hide();
     ui->paniPuriCheckLabel->hide();
+
+    // korea checkmarks
+    ui->gyeongbokgungCheckLabel->setPixmap(scaledPixmap);
+    ui->bulguksaCheckLabel->setPixmap(scaledPixmap);
+    ui->tteokbokkiCheckLabel->setPixmap(scaledPixmap);
+    ui->bossamCheckLabel->setPixmap(scaledPixmap);
+    ui->gyeongbokgungCheckLabel->hide();
+    ui->bulguksaCheckLabel->hide();
+    ui->tteokbokkiCheckLabel->hide();
+    ui->bossamCheckLabel->hide();
 
     // Background label
     backgroundLabel = new QLabel(this);
@@ -430,7 +440,7 @@ void view::on_indiaButton_clicked()
     setBgLabel(background);
     fadeInBackgroundLabel();
     fadeInLandMarks(India);
-    fadeInCheckmarks();
+    fadeInCheckmarks(India);
 
     ui->indiaButton->hide();
     ui->koreaButton->hide();
@@ -446,7 +456,7 @@ void view::on_koreaButton_clicked()
     setBgLabel(background);
     fadeInBackgroundLabel();
     fadeInLandMarks(Korea);
-    fadeInCheckmarks();
+    fadeInCheckmarks(Korea);
 
     ui->indiaButton->hide();
     ui->koreaButton->hide();
@@ -467,32 +477,57 @@ void view::fadeOutCountryLabels(){
     fadeEffect(1.0, 0.0, 1500, "koreaLabel");
 }
 
-void view::fadeInCheckmarks(){
-    if (indiaCompleteList.contains(TajMahal))
+void view::fadeInCheckmarks(Country country){
+
+    if (country == India)
     {
-        ui->tajMahalCheckLabel->show();
-        fadeEffect(0.0, 1.0, 1500, "tajMahalCheckLabel");
+        if (indiaCompleteList.contains(TajMahal))
+        {
+            ui->tajMahalCheckLabel->show();
+            fadeEffect(0.0, 1.0, 1500, "tajMahalCheckLabel");
+        }
+        if (indiaCompleteList.contains(HawaMaha))
+        {
+            ui->hawaMahalCheckLabel->show();
+            fadeEffect(0.0, 1.0, 1500, "hawaMahalCheckLabel");
+        }
+        if (indiaCompleteList.contains(PaniPuri))
+        {
+            ui->paniPuriCheckLabel->show();
+            fadeEffect(0.0, 1.0, 1500, "paniPuriCheckLabel");
+        }
+        if (indiaCompleteList.contains(Biryani))
+        {
+            ui->biryaniCheckLabel->show();
+            fadeEffect(0.0, 1.0, 1500, "biryaniCheckLabel");
+        }
+        if (indiaCompleteList.size() == 4)
+        {
+            ui->quizButton->show();
+            fadeEffect(0.0, 1.0, 1500, "quizButton");
+        }
     }
-    if (indiaCompleteList.contains(HawaMaha))
+    else if (country == Korea)
     {
-        ui->hawaMahalCheckLabel->show();
-        fadeEffect(0.0, 1.0, 1500, "hawaMahalCheckLabel");
+        if (koreaCompleteList.contains(Gyeongbokgung)){
+
+        }
+        if (koreaCompleteList.contains(Bulguksa)){
+
+        }
+        if (koreaCompleteList.contains(Tteokbokki)){
+
+        }
+        if (koreaCompleteList.contains(Bossam)){
+
+        }
+        if (koreaCompleteList.size() == 4)
+        {
+            ui->quizButton->show();
+            fadeEffect(0.0, 1.0, 1500, "quizButton");
+        }
     }
-    if (indiaCompleteList.contains(PaniPuri))
-    {
-        ui->paniPuriCheckLabel->show();
-        fadeEffect(0.0, 1.0, 1500, "paniPuriCheckLabel");
-    }
-    if (indiaCompleteList.contains(Biryani))
-    {
-        ui->biryaniCheckLabel->show();
-        fadeEffect(0.0, 1.0, 1500, "biryaniCheckLabel");
-    }
-    if (indiaCompleteList.size() == 4)
-    {
-        ui->quizButton->show();
-        fadeEffect(0.0, 1.0, 1500, "quizButton");
-    }
+
 }
 
 void view::disableButtons()
@@ -574,4 +609,56 @@ void view::enableButtonsAndCheck()
     ui->backButton->setEnabled(true);
 }
 
+
+
+void view::on_bulguksaButton_clicked()
+{
+//    showInfo("Bulguksa");
+
+    ui->bulguksaCheckLabel->show();
+    koreaCompleteList.insert(Bulguksa);
+    if (koreaCompleteList.size() == 4)
+    {
+        ui->quizButton->show(); // korea quiz button?
+    }
+}
+
+
+void view::on_gyeongbokgungButton_clicked()
+{
+    //    showInfo("Gyeongbokgung");
+
+    ui->gyeongbokgungCheckLabel->show();
+    koreaCompleteList.insert(Gyeongbokgung);
+    if (koreaCompleteList.size() == 4)
+    {
+        ui->quizButton->show(); // korea quiz button?
+    }
+}
+
+
+void view::on_tteokbokkiButton_clicked()
+{
+    //    showInfo("Tteokbokki");
+
+    ui->tteokbokkiCheckLabel->show();
+    koreaCompleteList.insert(Tteokbokki);
+    if (koreaCompleteList.size() == 4)
+    {
+        ui->quizButton->show(); // korea quiz button?
+    }
+}
+
+
+void view::on_bossamButton_clicked()
+{
+    //    showInfo("Bossam");
+
+    ui->bossamCheckLabel->show();
+    koreaCompleteList.insert(Bossam);
+    if (koreaCompleteList.size() == 4)
+    {
+        ui->quizButton->show(); // korea quiz button?
+    }
+}
 

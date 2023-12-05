@@ -42,12 +42,24 @@ private slots:
 
     void on_koreaButton_clicked();
 
+    void on_bulguksaButton_clicked();
+
+    void on_gyeongbokgungButton_clicked();
+
+    void on_tteokbokkiButton_clicked();
+
+    void on_bossamButton_clicked();
+
 private:
     Ui::view *ui;
 
     enum Country {India, Korea, Thailand};
+
     enum IndiaPlace{HawaMaha, TajMahal, PaniPuri, Biryani};
     QSet<IndiaPlace> indiaCompleteList;
+
+    enum KoreaPlace{Gyeongbokgung, Bulguksa, Tteokbokki, Bossam};
+    QSet<KoreaPlace> koreaCompleteList;
 
     QLabel *backgroundLabel;
 
@@ -79,7 +91,7 @@ private:
 
     void fadeInCountryLabels();
     void fadeOutCountryLabels();
-    void fadeInCheckmarks();
+    void fadeInCheckmarks(Country country);
 
 signals:
     void hideWidgets();

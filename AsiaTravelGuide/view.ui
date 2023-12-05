@@ -370,6 +370,58 @@
      <string>bossam</string>
     </property>
    </widget>
+   <widget class="QLabel" name="bulguksaCheckLabel">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>240</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>bulguksa</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="bossamCheckLabel">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>160</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>bossam</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="gyeongbokgungCheckLabel">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>180</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>bossam</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="tteokbokkiCheckLabel">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>280</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>tteokbokki</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
