@@ -213,7 +213,6 @@ void Quiz::on_nextButton_clicked()
     if (quesIndex == 3)
         ui->nextButton->hide();
 
-    // QTimer::singleShot(1000, this, &Quiz::closePaint);
     closePaint();
 }
 
@@ -242,7 +241,7 @@ void Quiz::generateConfettiColors()
 {
     for (int i = 0; i < 100; ++i)
     {
-        QColor randomColor = QColor::fromRgb(rand() % 256, rand() % 256, rand() % 256);
+        QColor randomColor = QColor::fromRgb(arc4random() % 256, arc4random() % 256, arc4random() % 256);
         confettiColors.push_back(randomColor);
     }
 }
@@ -269,7 +268,7 @@ void Quiz::createConfetti()
         confettiFixtureDef.shape = &confettiShape;
         confettiFixtureDef.density = 1.0f;
         confettiFixtureDef.friction = 0.3f;
-        confettiFixtureDef.restitution = 1.0f;
+        confettiFixtureDef.restitution = 0.5f;
 
         topConfettiPiece->CreateFixture(&confettiFixtureDef);
         topConfettiPieces.push_back(topConfettiPiece);
@@ -316,21 +315,22 @@ void Quiz::paintEvent(QPaintEvent *event)
         b2Vec2 topPosition = topConfettiPieces[i]->GetPosition();
         b2Vec2 bottomPosition = bottomConfettiPieces[i]->GetPosition();
 
-        if (topPosition.y <= 0 && bottomPosition.y >= height())
-        {
-            topTouchedGround = true;
-            bottomTouchedGround = true;
-        }
-        else
-        {
-            bottomConfettiPieces[2]->ApplyForce(b2Vec2(0.0f, 10000.0f), bottomPosition, true);
-        }
+//        if (topPosition.y <= 0 && bottomPosition.y >= height())
+//        {
+//            topTouchedGround = true;
+//            bottomTouchedGround = true;
+//        }
+//        else
+//        {
+            bottomConfettiPieces[50]->ApplyForce(b2Vec2(0.0f, 10000.0f), bottomPosition, true);
+            topConfettiPieces[50]->ApplyForce(b2Vec2(0.0f, 10000.0f), topPosition, true);
+        //}
 
-        if (topTouchedGround && bottomTouchedGround)
-        {
+//        if (topTouchedGround && bottomTouchedGround)
+//        {
             painter.drawRect(QRectF(topPosition.x, topPosition.y, 5, 5));
             painter.drawRect(QRectF(bottomPosition.x, bottomPosition.y, 5, 5));
-        }
+        //}
     }
 
     topTouchedGround = false;
