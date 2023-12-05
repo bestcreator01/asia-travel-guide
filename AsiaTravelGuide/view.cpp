@@ -66,7 +66,7 @@ view::view(Model& model, QWidget *parent)
     ui->quizButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
     ui->quizButton->setIconSize(QSize(70,70));
     ui->quizButton->setIcon(quizIcon);
-    ui->quizButton->show();
+    ui->quizButton->hide();
     // TODO
 
     // checkmarks
@@ -341,7 +341,7 @@ void view::setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff)
     }
     else if(name == "koreaLabel")
     {
-        ui->indiaLabel->setGraphicsEffect(eff);
+        ui->koreaLabel->setGraphicsEffect(eff);
     }
 }
 
@@ -378,6 +378,7 @@ void view::fadeInCountryLabels(){
 
 void view::fadeOutCountryLabels(){
     fadeEffect(1.0, 0.0, 1500, "indiaLabel");
+    fadeEffect(1.0, 0.0, 1500, "koreaLabel");
 }
 
 void view::fadeInCheckmarks(){
