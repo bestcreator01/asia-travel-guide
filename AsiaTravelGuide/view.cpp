@@ -31,6 +31,9 @@ view::view(Model& model, QWidget *parent)
     QIcon tbkIcon(":/icons/tteokbokki.png");
     QIcon bssIcon(":/icons/bossam.png");
 
+    // thailand place icons
+
+
     QPixmap checkPixmap(":/icons/check.png");
     QPixmap scaledPixmap = checkPixmap.scaled(ui->biryaniCheckLabel->size(), Qt::KeepAspectRatio);
 
@@ -38,7 +41,7 @@ view::view(Model& model, QWidget *parent)
     ui->backButton->setIcon(backArrowIcon);
     ui->backButton->hide();
 
-    // country buttons
+    // country buttons/labels
     ui->indiaButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
     ui->indiaButton->setIconSize(QSize(50, 50));
     ui->indiaButton->setIcon(markerIcon);
@@ -50,6 +53,12 @@ view::view(Model& model, QWidget *parent)
     ui->koreaButton->setIcon(markerIcon);
     ui->koreaButton->hide();
     ui->koreaLabel->hide();
+
+    ui->thailandButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
+    ui->thailandButton->setIconSize(QSize(50, 50));
+    ui->thailandButton->setIcon(markerIcon);
+    ui->thailandButton->hide();
+    ui->thailandLabel->hide();
 
     // india place buttons
     ui->tajMahal->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
@@ -195,29 +204,39 @@ void view::on_backButton_clicked()
         setBgLabelOpacity();
         fadeOutCountryLabels();
     }
-    // currentState == "indiaMap"
+    // currentState == "CountryMap"
     else if(previousState == "AsiaMap")
     {
         emit changedState("AsiaMap");
-        fadeInMarkers();
-        hideLandMarks();
         QPixmap background(":/icons/asia-map.png");
         setBgLabel(background);
+
         fadeInBackgroundLabel();
+        fadeInMarkers();
         fadeInCountryLabels();
 
-        ui->biryaniCheckLabel->hide();
-        ui->tajMahalCheckLabel->hide();
-        ui->hawaMahalCheckLabel->hide();
-        ui->paniPuriCheckLabel->hide();
-
-        ui->gyeongbokgungCheckLabel->hide();
-        ui->bulguksaCheckLabel->hide();
-        ui->tteokbokkiCheckLabel->hide();
-        ui->bossamCheckLabel->hide();
-
+        hideLandMarks();
+        hideCheckMarks();
         ui->quizButton->hide();
     }
+}
+
+void view::hideCheckMarks(){
+
+    // india
+    ui->biryaniCheckLabel->hide();
+    ui->tajMahalCheckLabel->hide();
+    ui->hawaMahalCheckLabel->hide();
+    ui->paniPuriCheckLabel->hide();
+
+    // korea
+    ui->gyeongbokgungCheckLabel->hide();
+    ui->bulguksaCheckLabel->hide();
+    ui->tteokbokkiCheckLabel->hide();
+    ui->bossamCheckLabel->hide();
+
+    // thailand
+
 }
 
 void view::fadeInBackgroundLabel()
@@ -266,18 +285,21 @@ void view::fadeInMarkers()
 {
     ui->indiaButton->show();
     ui->koreaButton->show();
+    ui->thailandButton->show();
     fadeEffect(0.0, 1.0, 1000, "indiaButton");
     fadeEffect(0.0, 1.0, 1000, "koreaButton");
+    fadeEffect(0.0, 1.0, 1000, "thailandButton");
 }
 
 void view::fadeOutMarkers()
 {
     fadeEffect(1.0, 0.0, 1000, "indiaButton");
     fadeEffect(1.0, 0.0, 1000, "koreaButton");
+    fadeEffect(1.0, 0.0, 1000, "thailandButton");
 
     QTimer::singleShot(1000, this, [this] {ui->indiaButton->hide();});
     QTimer::singleShot(1000, this, [this] {ui->koreaButton->hide();});
-
+    QTimer::singleShot(1000, this, [this] {ui->thailandButton->hide();});
 }
 
 void view::fadeInLandMarks(Country country)
@@ -360,6 +382,24 @@ void view::setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff)
     {
         ui->koreaButton->setGraphicsEffect(eff);
     }
+    else if(name == "thailandButton")
+    {
+        ui->thailandButton->setGraphicsEffect(eff);
+    }
+
+    // country labels
+    else if(name == "indiaLabel")
+    {
+        ui->indiaLabel->setGraphicsEffect(eff);
+    }
+    else if(name == "koreaLabel")
+    {
+        ui->koreaLabel->setGraphicsEffect(eff);
+    }
+    else if(name == "thailandButton")
+    {
+        ui->thailandButton->setGraphicsEffect(eff);
+    }
 
     // india place buttons
     else if(name == "tajMahalButton")
@@ -418,16 +458,6 @@ void view::setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff)
     {
         ui->quizButton->setGraphicsEffect(eff);
     }
-
-    // country labels
-    else if(name == "indiaLabel")
-    {
-        ui->indiaLabel->setGraphicsEffect(eff);
-    }
-    else if(name == "koreaLabel")
-    {
-        ui->koreaLabel->setGraphicsEffect(eff);
-    }
 }
 
 void view::setBgLabel(QPixmap background)
@@ -449,8 +479,10 @@ void view::on_indiaButton_clicked()
 
     ui->indiaButton->hide();
     ui->koreaButton->hide();
+    ui->thailandButton->hide();
     ui->koreaLabel->hide();
     ui->indiaLabel->hide();
+    ui->thailandLabel->hide();
 }
 
 void view::on_koreaButton_clicked()
@@ -465,21 +497,45 @@ void view::on_koreaButton_clicked()
 
     ui->indiaButton->hide();
     ui->koreaButton->hide();
+    ui->thailandButton->hide();
     ui->koreaLabel->hide();
     ui->indiaLabel->hide();
+    ui->thailandLabel->hide();
+}
+
+
+void view::on_thailandButton_clicked()
+{
+    emit changedState("CountryMap");
+
+    QPixmap background(":/icons/thailand_map.png");
+    setBgLabel(background);
+    fadeInBackgroundLabel();
+    fadeInLandMarks(Thailand);
+    fadeInCheckmarks(Thailand);
+
+    ui->indiaButton->hide();
+    ui->koreaButton->hide();
+    ui->thailandButton->hide();
+    ui->koreaLabel->hide();
+    ui->indiaLabel->hide();
+    ui->thailandLabel->hide();
 }
 
 void view::fadeInCountryLabels(){
     ui->indiaLabel->show();
     ui->koreaLabel->show();
+    ui->thailandLabel->show();
 
     fadeEffect(0.0, 1.0, 1500, "indiaLabel");
     fadeEffect(0.0, 1.0, 1500, "koreaLabel");
+    fadeEffect(0.0, 1.0, 1500, "thailandLabel");
 }
 
 void view::fadeOutCountryLabels(){
     fadeEffect(1.0, 0.0, 1500, "indiaLabel");
     fadeEffect(1.0, 0.0, 1500, "koreaLabel");
+    fadeEffect(1.0, 0.0, 1500, "thailandLabel");
 }
 
 void view::fadeInCheckmarks(Country country){

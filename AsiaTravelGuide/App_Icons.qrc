@@ -20,6 +20,7 @@
         <file>bulguksa.png</file>
         <file>tteokbokki.png</file>
         <file>bossam.png</file>
+        <file>thailand_map.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

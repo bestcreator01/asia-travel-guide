@@ -50,6 +50,8 @@ private slots:
 
     void on_bossamButton_clicked();
 
+    void on_thailandButton_clicked();
+
 private:
     Ui::view *ui;
 
@@ -77,6 +79,7 @@ private:
     void fadeOutMarkers();
     void fadeInLandMarks(Country country);
     void hideLandMarks();
+    void hideCheckMarks();
     void fadeEffect(double startValue, double endValue, int duration, QString widget);
     void setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff);
 
