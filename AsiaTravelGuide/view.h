@@ -79,6 +79,9 @@ private:
     Form indiaWindow;
     Quiz quizWindow;
 
+    // shadow effect on text
+    void applyShadowEffect(QWidget *widget);
+
     // widgets fade in/out
     void fadeInWelcomeLabel();
     void fadeOutWelcomeLabel();

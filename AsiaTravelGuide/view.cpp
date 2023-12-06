@@ -13,7 +13,20 @@ view::view(Model& model, QWidget *parent)
 {
     ui->setupUi(this);
 
+    applyShadowEffect(ui->welcomeAsia);
+    applyShadowEffect(ui->welcomeTravel);
+    applyShadowEffect(ui->welcomeAdventure);
+    applyShadowEffect(ui->welcomeEmoji);
+
+    QGraphicsDropShadowEffect *shadow = new QGraphicsDropShadowEffect();
+    shadow->setBlurRadius(30);
+    shadow->setColor(QColor(255, 255, 0, 150));
+    shadow->setOffset(3, 3);
+    ui->playButton->setGraphicsEffect(shadow);
+
     this->setWindowTitle("Asia Travel Guide");
+
+    ui->playButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
 
     QIcon backArrowIcon(":/icons/left-arrow.png");
     QIcon markerIcon(":/icons/marker.png");
@@ -197,6 +210,16 @@ void view::closeEvent(QCloseEvent *)
     indiaWindow.closeWindow();
     quizWindow.closeWindow();
 }
+
+void view::applyShadowEffect(QWidget *widget) {
+    QGraphicsDropShadowEffect *shadow = new QGraphicsDropShadowEffect();
+    shadow->setBlurRadius(4);
+    shadow->setColor(QColor(0, 0, 0, 150));
+    shadow->setOffset(2, 2);
+
+    widget->setGraphicsEffect(shadow);
+}
+
 void view::setBgLabelOpacity()
 {
     QGraphicsOpacityEffect *backgroundOpacityEffect = new QGraphicsOpacityEffect(backgroundLabel);
@@ -287,13 +310,21 @@ void view::fadeInBackgroundLabel()
 void view::fadeInWelcomeLabel()
 {
     ui->welcomeLabel->show();
+    ui->welcomeAsia->show();
+    ui->welcomeTravel->show();
+    ui->welcomeAdventure->show();
+    ui->welcomeEmoji->show();
     fadeEffect(0.0, 1.0, 1000, "welcomeLabel");
 }
 
 void view::fadeOutWelcomeLabel()
 {
     fadeEffect(1.0, 0.0, 1000, "welcomeLabel");
-    QTimer::singleShot(1000, this, [this] {ui->welcomeLabel->hide();});
+    QTimer::singleShot(1000, this, [this] {ui->welcomeLabel->hide();
+                                           ui->welcomeAsia->hide();
+                                           ui->welcomeTravel->hide();
+                                           ui->welcomeAdventure->hide();
+                                           ui->welcomeEmoji->hide();});
 }
 
 void view::fadeInPlayButton()
@@ -426,6 +457,10 @@ void view::setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff)
     else if(name == "welcomeLabel")
     {
         ui->welcomeLabel->setGraphicsEffect(eff);
+        ui->welcomeAsia->setGraphicsEffect(eff);
+        ui->welcomeTravel->setGraphicsEffect(eff);
+        ui->welcomeAdventure->setGraphicsEffect(eff);
+        ui->welcomeEmoji->setGraphicsEffect(eff);
     }
     else if(name == "backgroundLabel")
     {
