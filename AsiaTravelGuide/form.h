@@ -38,8 +38,12 @@ private:
 
     int current = 0;
     bool flag = true;
-    QString landMarkInfo[4];
-    QString restaurantInfo[4];
+    QString indiaLandMarkInfo[4];
+    QString indiaRestaurantInfo[4];
+    QString koreaLandMarkInfo[4];
+    QString koreaRestaurantInfo[4];
+    QString thailandLandMarkInfo[4];
+    QString thailandRestaurantInfo[4];
     QString currentText;
     bool firstNextClicked = false;
     bool firstBackClicked = false;
