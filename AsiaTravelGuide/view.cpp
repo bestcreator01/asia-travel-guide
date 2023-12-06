@@ -214,6 +214,12 @@ void view::applyShadowEffect(QWidget *widget) {
 
 void view::showShadowEffect()
 {
+    applyShadowEffect(ui->welcomeAsia);
+    applyShadowEffect(ui->welcomeTravel);
+    applyShadowEffect(ui->welcomeAdventure);
+    applyShadowEffect(ui->welcomeEmoji);
+    applyShadowEffect(ui->welcomeLabel);
+
     applyShadowEffect(ui->indiaLabel);
     applyShadowEffect(ui->koreaLabel);
     applyShadowEffect(ui->thailandLabel);
@@ -323,11 +329,11 @@ void view::fadeInWelcomeLabel()
     ui->welcomeAdventure->show();
     ui->welcomeEmoji->show();
 
-    fadeEffect(0.0, 1.0, 2000, "welcomeLabel");
-    fadeEffect(0.0, 1.0, 2000, "welcomeAsia");
-    fadeEffect(0.0, 1.0, 2000, "welcomeTravel");
-    fadeEffect(0.0, 1.0, 2000, "welcomeAdventure");
-    fadeEffect(0.0, 1.0, 2000, "welcomeEmoji");
+    fadeEffect(0.0, 1.0, 1000, "welcomeLabel");
+    fadeEffect(0.0, 1.0, 1000, "welcomeAsia");
+    fadeEffect(0.0, 1.0, 1000, "welcomeTravel");
+    fadeEffect(0.0, 1.0, 1000, "welcomeAdventure");
+    fadeEffect(0.0, 1.0, 1000, "welcomeEmoji");
 
     showShadowEffect();
 }
@@ -350,9 +356,9 @@ void view::fadeOutWelcomeLabel()
 void view::fadeInPlayButton()
 {
     ui->playButton->show();
-    fadeEffect(0.0, 1.0, 2000, "playButton");
+    fadeEffect(0.0, 1.0, 1000, "playButton");
 
-    //showShadowPlayButton();
+    showShadowPlayButton();
 }
 
 void view::fadeOutPlayButton()
