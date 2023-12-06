@@ -123,8 +123,11 @@ view::view(Model& model, QWidget *parent)
     ui->tomYumButton->setIcon(tymIcon);
     ui->tomYumButton->setText("");
     ui->tomYumButton->hide();
-
-
+    ui->stickyRiceButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
+    ui->stickyRiceButton->setIconSize(QSize(60, 60));
+    ui->stickyRiceButton->setIcon(strIcon);
+    ui->stickyRiceButton->setText("");
+    ui->stickyRiceButton->hide();
 
     // quiz button
     ui->quizButton->setText("");
@@ -158,12 +161,12 @@ view::view(Model& model, QWidget *parent)
     ui->grandPalaceCheckLabel->setPixmap(scaledPixmap);
     ui->watMuangCheckLabel->setPixmap(scaledPixmap);
     ui->tomYumCheckLabel->setPixmap(scaledPixmap);
-    // sticky rice label
+    ui->stickyRiceCheckLabel->setPixmap(scaledPixmap);
 
     ui->grandPalaceCheckLabel->hide();
     ui->watMuangCheckLabel->hide();
     ui->tomYumCheckLabel->hide();
-    // sticky rice label
+    ui->stickyRiceCheckLabel->hide();
 
     // Background label
     backgroundLabel = new QLabel(this);
@@ -272,8 +275,7 @@ void view::hideCheckMarks(){
     ui->grandPalaceCheckLabel->hide();
     ui->watMuangCheckLabel->hide();
     ui->tomYumCheckLabel->hide();
-    // StickyRice
-
+    ui->stickyRiceCheckLabel->hide();
 }
 
 void view::fadeInBackgroundLabel()
@@ -368,12 +370,12 @@ void view::fadeInLandMarks(Country country)
         ui->grandPalaceButton->show();
         ui->watMuangButton->show();
         ui->tomYumButton->show();
-        // sticky rice
+        ui->stickyRiceButton->show();
 
         fadeEffect(0.0, 1.0, 1500, "grandPalaceButton");
         fadeEffect(0.0, 1.0, 1500, "watMuangButton");
         fadeEffect(0.0, 1.0, 1500, "tomYumButton");
-        // sticky rice
+        fadeEffect(0.0, 1.0, 1500, "stickyRiceButton");
     }
 }
 
@@ -395,7 +397,7 @@ void view::hideLandMarks()
     ui->grandPalaceButton->hide();
     ui->watMuangButton->hide();
     ui->tomYumButton->hide();
-    // sticky rice
+    ui->stickyRiceButton->hide();
 }
 
 void view::fadeEffect(double startValue, double endValue, int duration, QString widget)
@@ -507,9 +509,10 @@ void view::setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff)
     {
         ui->tomYumButton->setGraphicsEffect(eff);
     }
-    // sticky rice
-
-
+    else if(name == "stickyRiceButton")
+    {
+        ui->stickyRiceButton->setGraphicsEffect(eff);
+    }
 
     // india checkmark labels
     else if(name == "tajMahalCheckLabel")
@@ -560,9 +563,12 @@ void view::setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff)
     {
         ui->tomYumCheckLabel->setGraphicsEffect(eff);
     }
-    // sticky rice
+    else if(name == "stickyRiceCheckLabel")
+    {
+        ui->stickyRiceCheckLabel->setGraphicsEffect(eff);
+    }
 
-
+    // quiz button
     else if(name == "quizButton")
     {
         ui->quizButton->setGraphicsEffect(eff);
@@ -708,9 +714,9 @@ void view::fadeInCheckmarks(Country country){
         if (ThailandCompleteList.contains(TomYum)){
             ui->tomYumCheckLabel->show();
         }
-//        if (ThailandCompleteList.contains(StickyRice)){
-//            ui->bossamCheckLabel->show();
-//        }
+        if (ThailandCompleteList.contains(StickyRice)){
+            ui->stickyRiceCheckLabel->show();
+        }
         if (ThailandCompleteList.size() == 4)
         {
             ui->quizButton->show();
@@ -800,7 +806,6 @@ void view::enableButtonsAndCheck()
 }
 
 
-
 void view::on_bulguksaButton_clicked()
 {
 //    showInfo("Bulguksa");
@@ -885,6 +890,19 @@ void view::on_tomYumButton_clicked()
 
     ui->tomYumCheckLabel->show();
     ThailandCompleteList.insert(TomYum);
+    if (ThailandCompleteList.size() == 4)
+    {
+        ui->quizButton->show();
+    }
+}
+
+
+void view::on_stickyRiceButton_clicked()
+{
+    //    showInfo("StickyRice");
+
+    ui->stickyRiceCheckLabel->show();
+    ThailandCompleteList.insert(StickyRice);
     if (ThailandCompleteList.size() == 4)
     {
         ui->quizButton->show();

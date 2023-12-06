@@ -58,6 +58,8 @@ private slots:
 
     void on_tomYumButton_clicked();
 
+    void on_stickyRiceButton_clicked();
+
 private:
     Ui::view *ui;
 
