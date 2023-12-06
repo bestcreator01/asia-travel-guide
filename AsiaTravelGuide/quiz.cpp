@@ -26,6 +26,7 @@ Quiz::Quiz(QWidget *parent) : QWidget(parent),
     option3 = "Crown of Palaces";  // Correct
     option4 = "Pearl of Agra";
     questionBank[question1] = {option1, option2, option3, option4};
+    questions.push_back(question1);
     // second quesiton
     question2 =
         "What was the original purpose of the intricate latticework and "
@@ -36,7 +37,7 @@ Quiz::Quiz(QWidget *parent) : QWidget(parent),
               "\nbeing seen";  // Correct
     option4 = "To enhance the structural stability of the palace";
     questionBank[question2] = {option1, option2, option3, option4};
-
+    questions.push_back(question2);
     // third question
     question3 =
         "Pani Puri is a common street food in the Indian subcontinent."
@@ -46,7 +47,7 @@ Quiz::Quiz(QWidget *parent) : QWidget(parent),
     option3 = "chili powder, chaat masala, potato mash, and chickpeas";  // Correct
     option4 = "peppers, turmeric, coriander, and cumin";
     questionBank[question3] = {option1, option2, option3, option4};
-
+    questions.push_back(question3);
     // fourth question
     question4 =
         "What cooking method is most commonly used to prepare Biryani, "
@@ -57,9 +58,6 @@ Quiz::Quiz(QWidget *parent) : QWidget(parent),
     option3 = "Dum method";  // Correct
     option4 = "Stir-frying";
     questionBank[question4] = {option1, option2, option3, option4};
-    questions.push_back(question1);
-    questions.push_back(question2);
-    questions.push_back(question3);
     questions.push_back(question4);
 
     std::random_device rd;
@@ -89,22 +87,20 @@ Quiz::~Quiz()
 
 void Quiz::showRandomQuestion()
 {
+    // randomize
     quesIndex = 0;
     std::random_device rd;
     std::mt19937 g(rd());
 
     std::shuffle(questions.begin(), questions.end(), g);
-    // randomize
+    std::shuffle(numbers.begin(), numbers.end(), g);
     randomQuestion = questions[quesIndex];
     ui->question->setText(randomQuestion);
-    update();
-
-    std::shuffle(numbers.begin(), numbers.end(), g);
-
     ui->option1Button->setText(questionBank[randomQuestion][numbers[0]]);
     ui->option2Button->setText(questionBank[randomQuestion][numbers[1]]);
     ui->option3Button->setText(questionBank[randomQuestion][numbers[2]]);
     ui->option4Button->setText(questionBank[randomQuestion][numbers[3]]);
+    update();
 }
 
 void Quiz::resetButtons()
@@ -224,14 +220,14 @@ void Quiz::closeEvent(QCloseEvent *bar)
 
 void Quiz::closePaint()
 {
-    for (int i = 0; i < topConfettiPieces.size(); i++)
+    for (int i = 0; i < confettiPieces.size(); i += 2)
     {
-        top->DestroyBody(topConfettiPieces[i]);
-        bottom->DestroyBody(bottomConfettiPieces[i]);
+        top->DestroyBody(confettiPieces[i]);
+        bottom->DestroyBody(confettiPieces[i + 1]);
     }
 
-    topConfettiPieces.clear();
-    bottomConfettiPieces.clear();
+    confettiPieces.clear();
+    //bottomConfettiPieces.clear();
     confettiColors.clear();
 
     update();
@@ -239,7 +235,7 @@ void Quiz::closePaint()
 
 void Quiz::generateConfettiColors()
 {
-    for (int i = 0; i < 100; ++i)
+    for (int i = 0; i < confettiPieces.size(); i++)
     {
         QColor randomColor = QColor::fromRgb(rand() % 256, rand() % 256, rand() % 256);
         confettiColors.push_back(randomColor);
@@ -248,9 +244,6 @@ void Quiz::generateConfettiColors()
 
 void Quiz::createConfetti()
 {
-    // Create random set of colors for confetti
-    generateConfettiColors();
-
     // Create confetti pieces
     for (int i = 0; i < 100; ++i)
     {
@@ -271,11 +264,13 @@ void Quiz::createConfetti()
         confettiFixtureDef.restitution = 0.5f;
 
         topConfettiPiece->CreateFixture(&confettiFixtureDef);
-        topConfettiPieces.push_back(topConfettiPiece);
+        confettiPieces.push_back(topConfettiPiece);
 
         bottomConfettiPiece->CreateFixture(&confettiFixtureDef);
-        bottomConfettiPieces.push_back(bottomConfettiPiece);
+        confettiPieces.push_back(bottomConfettiPiece);
     }
+    // Create random set of colors for confetti
+    generateConfettiColors();
 }
 
 void Quiz::createGround(float neg, float pos)
@@ -306,31 +301,20 @@ void Quiz::paintEvent(QPaintEvent *event)
     painter.setRenderHint(QPainter::Antialiasing);
 
     // Draw confetti pieces
-    for (int i = 0; i < topConfettiPieces.size(); i++)
+    for (int i = 0; i < confettiPieces.size(); i += 2)
     {
         // Set the brush to the pre-generated color and no outline
         painter.setBrush(QBrush(confettiColors[i]));
         painter.setPen(Qt::NoPen);  // Set no outline
 
-        b2Vec2 topPosition = topConfettiPieces[i]->GetPosition();
-        b2Vec2 bottomPosition = bottomConfettiPieces[i]->GetPosition();
+        b2Vec2 topPosition = confettiPieces[i]->GetPosition();
+        b2Vec2 bottomPosition = confettiPieces[i + 1]->GetPosition();
 
-//        if (topPosition.y <= 0 && bottomPosition.y >= height())
-//        {
-//            topTouchedGround = true;
-//            bottomTouchedGround = true;
-//        }
-//        else
-//        {
-            bottomConfettiPieces[50]->ApplyForce(b2Vec2(0.0f, 10000.0f), bottomPosition, true);
-            topConfettiPieces[50]->ApplyForce(b2Vec2(0.0f, 10000.0f), topPosition, true);
-        //}
+        confettiPieces[50]->ApplyForce(b2Vec2(0.0f, 10000.0f), topPosition, true);
+        confettiPieces[150]->ApplyForce(b2Vec2(0.0f, 10000.0f), bottomPosition, true);
 
-//        if (topTouchedGround && bottomTouchedGround)
-//        {
-            painter.drawRect(QRectF(topPosition.x, topPosition.y, 5, 5));
-            painter.drawRect(QRectF(bottomPosition.x, bottomPosition.y, 5, 5));
-        //}
+        painter.drawRect(QRectF(topPosition.x, topPosition.y, 5, 5));
+        painter.drawRect(QRectF(bottomPosition.x, bottomPosition.y, 5, 5));
     }
 
     topTouchedGround = false;
