@@ -159,22 +159,47 @@ void Form::startTyping()
 
 void Form::receiveSignalToSetTextIndia(QString name)
 {
+    // india
     if (name == "HawaMahal")
     {
         setLandmarkIndiaHelper(0, ":/icons/hawa-mahal_Image.jpg");
+        currentCountry = "India";
     }
     else if (name == "TajMahal")
     {
         setLandmarkIndiaHelper(2, ":/icons/taj-mahal_Image.png");
+        currentCountry = "India";
     }
     else if (name == "PaniPuri")
     {        
         setRestaurantIndiaHelper(0, ":/icons/pani-puri_Image.jpg");
+        currentCountry = "India";
     }
     else if (name == "Biryani")
     {
         setRestaurantIndiaHelper(2, ":/icons/biryani_Image.jpg");
-
+        currentCountry = "India";
+    }
+    // thailand
+    else if (name == "GrandPalace")
+    {
+        setLandmarkThailandHelper(0, ":/icons/taj-mahal_Image.png");
+        currentCountry = "Thailand";
+    }
+    else if (name == "BigBuddha")
+    {
+        setLandmarkThailandHelper(2, ":/icons/taj-mahal_Image.png");
+        currentCountry = "Thailand";
+    }
+    else if (name == "TomYumKung")
+    {
+        setRestaurantThailandHelper(0, ":/icons/biryani_Image.jpg");
+        currentCountry = "Thailand";
+    }
+    else if (name == "MangoStickyRice")
+    {
+        setRestaurantThailandHelper(2, ":/icons/biryani_Image.jpg");
+        currentCountry = "Thailand";
     }
     this->setWindowTitle(name);
     ui->description->setText("");
@@ -191,7 +216,6 @@ void Form::on_backButton_clicked()
 {
     buttonHelper(false);
 }
-
 
 void Form::closeWindow()
 {
@@ -211,6 +235,26 @@ void Form::closeEvent(QCloseEvent *bar)
 /*
  * HELPER METHODS
  */
+
+void Form::setLandmarkThailandHelper(int currentNum, QString image)
+{
+    current = currentNum;
+    flag = true;
+    QPixmap pixmap(image);
+    ui->image->setPixmap(pixmap.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    splittedText = thailandLandMarkInfo[current].split("");
+    firstNextClicked = true;
+}
+
+void Form::setRestaurantThailandHelper(int currentNum, QString image)
+{
+    current = currentNum;
+    flag = true;
+    QPixmap pixmap(image);
+    ui->image->setPixmap(pixmap.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    splittedText = thailandRestaurantInfo[current].split("");
+    firstNextClicked = true;
+}
 
 void Form::setLandmarkIndiaHelper(int currentNum, QString image)
 {
@@ -267,22 +311,50 @@ void Form::buttonHelper(bool isNextButton)
     {
         if (isNextButton)
         {
-            nextButtonHelper(indiaLandMarkInfo);
+            if(currentCountry == "India")
+            {
+                nextButtonHelper(indiaLandMarkInfo);
+            }
+            else if(currentCountry == "Thailand")
+            {
+                nextButtonHelper(thailandLandMarkInfo);
+            }
         }
         else
         {
-            backButtonHelper(indiaLandMarkInfo);
+            if(currentCountry == "India")
+            {
+                backButtonHelper(indiaLandMarkInfo);
+            }
+            else if(currentCountry == "Thailand")
+            {
+                backButtonHelper(thailandLandMarkInfo);
+            }
         }
     }
     else
     {
         if (isNextButton)
         {
-            nextButtonHelper(indiaRestaurantInfo);
+            if(currentCountry == "India")
+            {
+                nextButtonHelper(indiaRestaurantInfo);
+            }
+            else if(currentCountry == "Thailand")
+            {
+                nextButtonHelper(thailandRestaurantInfo);
+            }
         }
         else
         {
-            backButtonHelper(indiaRestaurantInfo);
+            if(currentCountry == "India")
+            {
+                backButtonHelper(indiaRestaurantInfo);
+            }
+            else if(currentCountry == "Thailand")
+            {
+                backButtonHelper(thailandRestaurantInfo);
+            }
         }
     }
 

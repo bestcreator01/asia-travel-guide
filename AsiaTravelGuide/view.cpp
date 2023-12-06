@@ -935,7 +935,7 @@ void view::on_bossamButton_clicked()
 
 void view::on_grandPalaceButton_clicked()
 {
-    //    showInfo("GrandPalace");
+    showInfo("GrandPalace");
 
     ui->grandPalaceCheckLabel->show();
     ThailandCompleteList.insert(GrandPalace);
@@ -948,7 +948,7 @@ void view::on_grandPalaceButton_clicked()
 
 void view::on_watMuangButton_clicked()
 {
-    //    showInfo("WatMuang");
+    showInfo("BigBuddha");
 
     ui->watMuangCheckLabel->show();
     ThailandCompleteList.insert(WatMuang);
@@ -961,7 +961,7 @@ void view::on_watMuangButton_clicked()
 
 void view::on_tomYumButton_clicked()
 {
-    //    showInfo("TomYum");
+    showInfo("TomYumKung");
 
     ui->tomYumCheckLabel->show();
     ThailandCompleteList.insert(TomYum);
@@ -974,7 +974,7 @@ void view::on_tomYumButton_clicked()
 
 void view::on_stickyRiceButton_clicked()
 {
-    //    showInfo("StickyRice");
+    showInfo("MangoStickyRice");
 
     ui->stickyRiceCheckLabel->show();
     ThailandCompleteList.insert(StickyRice);

@@ -45,6 +45,7 @@ private:
     QString thailandLandMarkInfo[4];
     QString thailandRestaurantInfo[4];
     QString currentText;
+    QString currentCountry;
     bool firstNextClicked = false;
     bool firstBackClicked = false;
     int now = 0;
@@ -56,6 +57,8 @@ private:
     void nextButtonHelper(QString info[]);
     void backButtonHelper(QString info[]);
     void buttonHelper(bool isNextButton);
+    void setLandmarkThailandHelper(int currentNum, QString image);
+    void setRestaurantThailandHelper(int currentNum, QString image);
 };
 
 #endif // FORM_H
