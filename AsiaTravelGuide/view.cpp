@@ -396,9 +396,9 @@ void view::setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff)
     {
         ui->koreaLabel->setGraphicsEffect(eff);
     }
-    else if(name == "thailandButton")
+    else if(name == "thailandLabel")
     {
-        ui->thailandButton->setGraphicsEffect(eff);
+        ui->thailandLabel->setGraphicsEffect(eff);
     }
 
     // india place buttons
