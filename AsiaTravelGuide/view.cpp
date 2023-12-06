@@ -13,18 +13,10 @@ view::view(Model& model, QWidget *parent)
 {
     ui->setupUi(this);
 
-    applyShadowEffect(ui->welcomeAsia);
-    applyShadowEffect(ui->welcomeTravel);
-    applyShadowEffect(ui->welcomeAdventure);
-    applyShadowEffect(ui->welcomeEmoji);
-
-    QGraphicsDropShadowEffect *shadow = new QGraphicsDropShadowEffect();
-    shadow->setBlurRadius(30);
-    shadow->setColor(QColor(255, 255, 0, 150));
-    shadow->setOffset(3, 3);
-    ui->playButton->setGraphicsEffect(shadow);
-
     this->setWindowTitle("Asia Travel Guide");
+
+    showShadowEffect();
+    showShadowPlayButton();
 
     ui->playButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
 
@@ -220,6 +212,27 @@ void view::applyShadowEffect(QWidget *widget) {
     widget->setGraphicsEffect(shadow);
 }
 
+void view::showShadowEffect()
+{
+    applyShadowEffect(ui->welcomeAsia);
+    applyShadowEffect(ui->welcomeTravel);
+    applyShadowEffect(ui->welcomeAdventure);
+    applyShadowEffect(ui->welcomeEmoji);
+
+    applyShadowEffect(ui->indiaLabel);
+    applyShadowEffect(ui->koreaLabel);
+    applyShadowEffect(ui->thailandLabel);
+}
+
+void view::showShadowPlayButton()
+{
+    QGraphicsDropShadowEffect *shadow = new QGraphicsDropShadowEffect();
+    shadow->setBlurRadius(30);
+    shadow->setColor(QColor(255, 255, 0, 150));
+    shadow->setOffset(3, 3);
+    ui->playButton->setGraphicsEffect(shadow);
+}
+
 void view::setBgLabelOpacity()
 {
     QGraphicsOpacityEffect *backgroundOpacityEffect = new QGraphicsOpacityEffect(backgroundLabel);
@@ -314,12 +327,24 @@ void view::fadeInWelcomeLabel()
     ui->welcomeTravel->show();
     ui->welcomeAdventure->show();
     ui->welcomeEmoji->show();
-    fadeEffect(0.0, 1.0, 1000, "welcomeLabel");
+
+    fadeEffect(1.0, 0.0, 2000, "welcomeLabel");
+    fadeEffect(1.0, 0.0, 2000, "welcomeAsia");
+    fadeEffect(1.0, 0.0, 2000, "welcomeTravel");
+    fadeEffect(1.0, 0.0, 2000, "welcomeAdventure");
+    fadeEffect(1.0, 0.0, 2000, "welcomeEmoji");
+
+    showShadowEffect();
 }
 
 void view::fadeOutWelcomeLabel()
 {
     fadeEffect(1.0, 0.0, 1000, "welcomeLabel");
+    fadeEffect(1.0, 0.0, 1000, "welcomeAsia");
+    fadeEffect(1.0, 0.0, 1000, "welcomeTravel");
+    fadeEffect(1.0, 0.0, 1000, "welcomeAdventure");
+    fadeEffect(1.0, 0.0, 1000, "welcomeEmoji");
+
     QTimer::singleShot(1000, this, [this] {ui->welcomeLabel->hide();
                                            ui->welcomeAsia->hide();
                                            ui->welcomeTravel->hide();
@@ -330,7 +355,9 @@ void view::fadeOutWelcomeLabel()
 void view::fadeInPlayButton()
 {
     ui->playButton->show();
-    fadeEffect(0.0, 1.0, 1000, "playButton");
+    fadeEffect(0.0, 1.0, 2000, "playButton");
+
+    showShadowPlayButton();
 }
 
 void view::fadeOutPlayButton()

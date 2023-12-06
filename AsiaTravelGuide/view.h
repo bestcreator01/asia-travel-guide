@@ -81,6 +81,8 @@ private:
 
     // shadow effect on text
     void applyShadowEffect(QWidget *widget);
+    void showShadowEffect();
+    void showShadowPlayButton();
 
     // widgets fade in/out
     void fadeInWelcomeLabel();
