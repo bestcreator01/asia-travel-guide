@@ -214,11 +214,6 @@ void view::applyShadowEffect(QWidget *widget) {
 
 void view::showShadowEffect()
 {
-    applyShadowEffect(ui->welcomeAsia);
-    applyShadowEffect(ui->welcomeTravel);
-    applyShadowEffect(ui->welcomeAdventure);
-    applyShadowEffect(ui->welcomeEmoji);
-
     applyShadowEffect(ui->indiaLabel);
     applyShadowEffect(ui->koreaLabel);
     applyShadowEffect(ui->thailandLabel);
@@ -328,11 +323,11 @@ void view::fadeInWelcomeLabel()
     ui->welcomeAdventure->show();
     ui->welcomeEmoji->show();
 
-    fadeEffect(1.0, 0.0, 2000, "welcomeLabel");
-    fadeEffect(1.0, 0.0, 2000, "welcomeAsia");
-    fadeEffect(1.0, 0.0, 2000, "welcomeTravel");
-    fadeEffect(1.0, 0.0, 2000, "welcomeAdventure");
-    fadeEffect(1.0, 0.0, 2000, "welcomeEmoji");
+    fadeEffect(0.0, 1.0, 2000, "welcomeLabel");
+    fadeEffect(0.0, 1.0, 2000, "welcomeAsia");
+    fadeEffect(0.0, 1.0, 2000, "welcomeTravel");
+    fadeEffect(0.0, 1.0, 2000, "welcomeAdventure");
+    fadeEffect(0.0, 1.0, 2000, "welcomeEmoji");
 
     showShadowEffect();
 }
@@ -357,7 +352,7 @@ void view::fadeInPlayButton()
     ui->playButton->show();
     fadeEffect(0.0, 1.0, 2000, "playButton");
 
-    showShadowPlayButton();
+    //showShadowPlayButton();
 }
 
 void view::fadeOutPlayButton()
@@ -484,9 +479,21 @@ void view::setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff)
     else if(name == "welcomeLabel")
     {
         ui->welcomeLabel->setGraphicsEffect(eff);
+    }
+    else if(name == "welcomeAsia")
+    {
         ui->welcomeAsia->setGraphicsEffect(eff);
+    }
+    else if(name == "welcomeTravel")
+    {
         ui->welcomeTravel->setGraphicsEffect(eff);
+    }
+    else if(name == "welcomeAdventure")
+    {
         ui->welcomeAdventure->setGraphicsEffect(eff);
+    }
+    else if(name == "welcomeEmoji")
+    {
         ui->welcomeEmoji->setGraphicsEffect(eff);
     }
     else if(name == "backgroundLabel")
