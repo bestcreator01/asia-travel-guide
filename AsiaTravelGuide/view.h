@@ -52,6 +52,8 @@ private slots:
 
     void on_thailandButton_clicked();
 
+    void on_grandPalaceButton_clicked();
+
 private:
     Ui::view *ui;
 
@@ -62,6 +64,9 @@ private:
 
     enum KoreaPlace{Gyeongbokgung, Bulguksa, Tteokbokki, Bossam};
     QSet<KoreaPlace> koreaCompleteList;
+
+    enum ThailandPlace{GrandPalace, WatMuang, TomYum, StickyRice};
+    QSet<ThailandPlace> ThailandCompleteList;
 
     QLabel *backgroundLabel;
 

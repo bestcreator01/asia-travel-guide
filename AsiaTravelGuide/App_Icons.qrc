@@ -21,6 +21,10 @@
         <file>tteokbokki.png</file>
         <file>bossam.png</file>
         <file>thailand_map.png</file>
+        <file>grand_palace.png</file>
+        <file>great_buddha.png</file>
+        <file>sticky_rice.png</file>
+        <file>tomyum.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

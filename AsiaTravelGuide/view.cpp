@@ -32,7 +32,7 @@ view::view(Model& model, QWidget *parent)
     QIcon bssIcon(":/icons/bossam.png");
 
     // thailand place icons
-
+    QIcon gplIcon(":/icons/grand_palace.png");
 
     QPixmap checkPixmap(":/icons/check.png");
     QPixmap scaledPixmap = checkPixmap.scaled(ui->biryaniCheckLabel->size(), Qt::KeepAspectRatio);
@@ -104,6 +104,15 @@ view::view(Model& model, QWidget *parent)
     ui->bossamButton->setText("");
     ui->bossamButton->hide();
 
+    // thailand place buttons
+    ui->grandPalaceButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
+    ui->grandPalaceButton->setIconSize(QSize(60, 60));
+    ui->grandPalaceButton->setIcon(gplIcon);
+    ui->grandPalaceButton->setText("");
+    ui->grandPalaceButton->hide();
+
+
+
     // quiz button
     ui->quizButton->setText("");
     ui->quizButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
@@ -131,6 +140,10 @@ view::view(Model& model, QWidget *parent)
     ui->bulguksaCheckLabel->hide();
     ui->tteokbokkiCheckLabel->hide();
     ui->bossamCheckLabel->hide();
+
+    // thailand checkmarks
+    ui->grandPalaceCheckLabel->setPixmap(scaledPixmap);
+    ui->grandPalaceCheckLabel->hide();
 
     // Background label
     backgroundLabel = new QLabel(this);
@@ -236,6 +249,10 @@ void view::hideCheckMarks(){
     ui->bossamCheckLabel->hide();
 
     // thailand
+    ui->grandPalaceCheckLabel->hide();
+    // WatMuang
+    // TomYum
+    // StickyRice
 
 }
 
@@ -326,19 +343,29 @@ void view::fadeInLandMarks(Country country)
         fadeEffect(0.0, 1.0, 1500, "tteokbokkiButton");
         fadeEffect(0.0, 1.0, 1500, "bossamButton");
     }
+    else if (country == Thailand)
+    {
+        ui->grandPalaceButton->show();
+        fadeEffect(0.0, 1.0, 1500, "grandPalaceButton");
+    }
 }
 
 void view::hideLandMarks()
 {
+    // india
     ui->tajMahal->hide();
     ui->hawaMahal->hide();
     ui->paniPuri->hide();
     ui->biryani->hide();
 
+    // korea
     ui->gyeongbokgungButton->hide();
     ui->bulguksaButton->hide();
     ui->tteokbokkiButton->hide();
     ui->bossamButton->hide();
+
+    // thailand
+    ui->grandPalaceButton->hide();
 }
 
 void view::fadeEffect(double startValue, double endValue, int duration, QString widget)
@@ -436,6 +463,13 @@ void view::setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff)
     {
         ui->bossamButton->setGraphicsEffect(eff);
     }
+
+    // thailand place buttons
+    else if(name == "grandPalaceButton")
+    {
+        ui->grandPalaceButton->setGraphicsEffect(eff);
+    }
+
 
     // checkmark labels
     else if(name == "tajMahalCheckLabel")
@@ -588,6 +622,26 @@ void view::fadeInCheckmarks(Country country){
             fadeEffect(0.0, 1.0, 1500, "quizButton");
         }
     }
+    else if (country == Thailand)
+    {
+        if (ThailandCompleteList.contains(GrandPalace)){
+            ui->grandPalaceCheckLabel->show();
+        }
+        if (ThailandCompleteList.contains(WatMuang)){
+            ui->bulguksaCheckLabel->show();
+        }
+        if (ThailandCompleteList.contains(TomYum)){
+            ui->tteokbokkiCheckLabel->show();
+        }
+        if (ThailandCompleteList.contains(StickyRice)){
+            ui->bossamCheckLabel->show();
+        }
+        if (ThailandCompleteList.size() == 4)
+        {
+            ui->quizButton->show();
+            fadeEffect(0.0, 1.0, 1500, "quizButton");
+        }
+    }
 
 }
 
@@ -680,7 +734,7 @@ void view::on_bulguksaButton_clicked()
     koreaCompleteList.insert(Bulguksa);
     if (koreaCompleteList.size() == 4)
     {
-        ui->quizButton->show(); // korea quiz button?
+        ui->quizButton->show();
     }
 }
 
@@ -693,7 +747,7 @@ void view::on_gyeongbokgungButton_clicked()
     koreaCompleteList.insert(Gyeongbokgung);
     if (koreaCompleteList.size() == 4)
     {
-        ui->quizButton->show(); // korea quiz button?
+        ui->quizButton->show();
     }
 }
 
@@ -706,7 +760,7 @@ void view::on_tteokbokkiButton_clicked()
     koreaCompleteList.insert(Tteokbokki);
     if (koreaCompleteList.size() == 4)
     {
-        ui->quizButton->show(); // korea quiz button?
+        ui->quizButton->show();
     }
 }
 
@@ -719,7 +773,20 @@ void view::on_bossamButton_clicked()
     koreaCompleteList.insert(Bossam);
     if (koreaCompleteList.size() == 4)
     {
-        ui->quizButton->show(); // korea quiz button?
+        ui->quizButton->show();
+    }
+}
+
+
+void view::on_grandPalaceButton_clicked()
+{
+    //    showInfo("GrandPalace");
+
+    ui->grandPalaceCheckLabel->show();
+    ThailandCompleteList.insert(GrandPalace);
+    if (ThailandCompleteList.size() == 4)
+    {
+        ui->quizButton->show();
     }
 }
 
