@@ -56,6 +56,8 @@ private slots:
 
     void on_watMuangButton_clicked();
 
+    void on_tomYumButton_clicked();
+
 private:
     Ui::view *ui;
 
