@@ -241,7 +241,7 @@ void Quiz::generateConfettiColors()
 {
     for (int i = 0; i < 100; ++i)
     {
-        QColor randomColor = QColor::fromRgb(arc4random() % 256, arc4random() % 256, arc4random() % 256);
+        QColor randomColor = QColor::fromRgb(rand() % 256, rand() % 256, rand() % 256);
         confettiColors.push_back(randomColor);
     }
 }

@@ -1,6 +1,7 @@
 #include "form.h"
 #include "ui_form.h"
 #include <QDebug>
+#include <QMovie>
 #include <QTimer>
 
 
@@ -13,6 +14,14 @@ Form::Form(QWidget *parent) :
     connect(timer, &QTimer::timeout, this, &Form::startTyping);
     //ui->bgImage->setGeometry(0, 0, this->width(), this->height());  // Set to cover the entire window
     ui->image->lower();
+
+    backgroundLabel = new QLabel(this);
+    QMovie *movie = new QMovie(":/icons/clouds.gif");
+    movie->setScaledSize(this->size());
+    backgroundLabel->setMovie(movie);
+    backgroundLabel->setGeometry(0, 0, this->width(), this->height());  // Set to cover the entire window
+    backgroundLabel->lower();
+    movie->start();
 
     ui->nextButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
     ui->backButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");

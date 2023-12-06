@@ -1,6 +1,7 @@
 #ifndef FORM_H
 #define FORM_H
 
+#include <QLabel>
 #include <QWidget>
 
 namespace Ui {
@@ -11,6 +12,7 @@ class Form : public QWidget
 {
     Q_OBJECT
     QTimer *timer;
+    QLabel *backgroundLabel;
 
 public:
     explicit Form(QWidget *parent = nullptr);
