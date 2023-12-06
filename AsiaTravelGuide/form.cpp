@@ -183,22 +183,22 @@ void Form::receiveSignalToSetTextIndia(QString name)
     // thailand
     else if (name == "GrandPalace")
     {
-        setLandmarkThailandHelper(0, ":/icons/taj-mahal_Image.png");
+        setLandmarkThailandHelper(0, ":/icons/Grand-Palace_Image.png");
         currentCountry = "Thailand";
     }
     else if (name == "BigBuddha")
     {
-        setLandmarkThailandHelper(2, ":/icons/taj-mahal_Image.png");
+        setLandmarkThailandHelper(2, ":/icons/Big-Buddha_Image.png");
         currentCountry = "Thailand";
     }
     else if (name == "TomYumKung")
     {
-        setRestaurantThailandHelper(0, ":/icons/biryani_Image.jpg");
+        setRestaurantThailandHelper(0, ":/icons/Tom-Yum_Image.png");
         currentCountry = "Thailand";
     }
     else if (name == "MangoStickyRice")
     {
-        setRestaurantThailandHelper(2, ":/icons/biryani_Image.jpg");
+        setRestaurantThailandHelper(2, ":/icons/Mango-Rice_Image.png");
         currentCountry = "Thailand";
     }
     this->setWindowTitle(name);
@@ -249,7 +249,7 @@ void Form::setLandmarkThailandHelper(int currentNum, QString image)
 void Form::setRestaurantThailandHelper(int currentNum, QString image)
 {
     current = currentNum;
-    flag = true;
+    flag = false;
     QPixmap pixmap(image);
     ui->image->setPixmap(pixmap.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
     splittedText = thailandRestaurantInfo[current].split("");

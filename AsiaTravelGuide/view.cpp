@@ -808,6 +808,10 @@ void view::disableButtons()
     ui->hawaMahal->setDisabled(true);
     ui->paniPuri->setDisabled(true);
     ui->biryani->setDisabled(true);
+    ui->grandPalaceButton->setDisabled(true);
+    ui->watMuangButton->setDisabled(true);
+    ui->stickyRiceButton->setDisabled(true);
+    ui->tomYumButton->setDisabled(true);
 }
 
 void view::showInfo(QString info)
@@ -878,6 +882,10 @@ void view::enableButtonsAndCheck()
     ui->paniPuri->setEnabled(true);
     ui->biryani->setEnabled(true);
     ui->backButton->setEnabled(true);
+    ui->grandPalaceButton->setEnabled(true);
+    ui->watMuangButton->setEnabled(true);
+    ui->stickyRiceButton->setEnabled(true);
+    ui->tomYumButton->setEnabled(true);
 }
 
 

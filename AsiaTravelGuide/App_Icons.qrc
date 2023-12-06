@@ -25,6 +25,10 @@
         <file>great_buddha.png</file>
         <file>sticky_rice.png</file>
         <file>tomyum.png</file>
+        <file>Big-Buddha_Image.png</file>
+        <file>Grand-Palace_Image.png</file>
+        <file>Tom-Yum_Image.png</file>
+        <file>Mango-Rice_Image.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>
