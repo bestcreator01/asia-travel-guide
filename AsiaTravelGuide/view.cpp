@@ -804,14 +804,21 @@ void view::fadeInCheckmarks(Country country){
 void view::disableButtons()
 {
     ui->backButton->setDisabled(true);
+    //india
     ui->tajMahal->setDisabled(true);
     ui->hawaMahal->setDisabled(true);
     ui->paniPuri->setDisabled(true);
     ui->biryani->setDisabled(true);
+    //thailand
     ui->grandPalaceButton->setDisabled(true);
     ui->watMuangButton->setDisabled(true);
     ui->stickyRiceButton->setDisabled(true);
     ui->tomYumButton->setDisabled(true);
+    //korea
+    ui->bossamButton->setDisabled(true);
+    ui->bulguksaButton->setDisabled(true);
+    ui->gyeongbokgungButton->setDisabled(true);
+    ui->tteokbokkiButton->setDisabled(true);
 }
 
 void view::showInfo(QString info)
@@ -877,21 +884,28 @@ void view::on_quizButton_clicked()
 
 void view::enableButtonsAndCheck()
 {
+    ui->backButton->setEnabled(true);
+    //india
     ui->hawaMahal->setEnabled(true);
     ui->tajMahal->setEnabled(true);
     ui->paniPuri->setEnabled(true);
     ui->biryani->setEnabled(true);
-    ui->backButton->setEnabled(true);
+    //thailand
     ui->grandPalaceButton->setEnabled(true);
     ui->watMuangButton->setEnabled(true);
     ui->stickyRiceButton->setEnabled(true);
     ui->tomYumButton->setEnabled(true);
+    //korea
+    ui->bossamButton->setEnabled(true);
+    ui->bulguksaButton->setEnabled(true);
+    ui->gyeongbokgungButton->setEnabled(true);
+    ui->tteokbokkiButton->setEnabled(true);
 }
 
 
 void view::on_bulguksaButton_clicked()
 {
-//    showInfo("Bulguksa");
+    showInfo("Bulguksa");
 
     ui->bulguksaCheckLabel->show();
     koreaCompleteList.insert(Bulguksa);
@@ -904,7 +918,7 @@ void view::on_bulguksaButton_clicked()
 
 void view::on_gyeongbokgungButton_clicked()
 {
-    //    showInfo("Gyeongbokgung");
+    showInfo("Gyeongbokgung");
 
     ui->gyeongbokgungCheckLabel->show();
     koreaCompleteList.insert(Gyeongbokgung);
@@ -917,7 +931,7 @@ void view::on_gyeongbokgungButton_clicked()
 
 void view::on_tteokbokkiButton_clicked()
 {
-    //    showInfo("Tteokbokki");
+    showInfo("Tteokbokki");
 
     ui->tteokbokkiCheckLabel->show();
     koreaCompleteList.insert(Tteokbokki);
@@ -930,7 +944,7 @@ void view::on_tteokbokkiButton_clicked()
 
 void view::on_bossamButton_clicked()
 {
-    //    showInfo("Bossam");
+    showInfo("Bossam");
 
     ui->bossamCheckLabel->show();
     koreaCompleteList.insert(Bossam);

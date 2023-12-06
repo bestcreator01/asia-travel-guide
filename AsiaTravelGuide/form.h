@@ -59,6 +59,8 @@ private:
     void buttonHelper(bool isNextButton);
     void setLandmarkThailandHelper(int currentNum, QString image);
     void setRestaurantThailandHelper(int currentNum, QString image);
+    void setRestaurantKoreaHelper(int currentNum, QString image);
+    void setLandmarkKoreaHelper(int currentNum, QString image);
 };
 
 #endif // FORM_H

@@ -29,6 +29,10 @@
         <file>Grand-Palace_Image.png</file>
         <file>Tom-Yum_Image.png</file>
         <file>Mango-Rice_Image.png</file>
+        <file>Gyeongbokgung_Image.jpg</file>
+        <file>bossam_Image.jpg</file>
+        <file>bulguksa_Image.jpg</file>
+        <file>Tteokbokki_Image.jpg</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>
