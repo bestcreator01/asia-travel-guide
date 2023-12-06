@@ -54,6 +54,8 @@ private slots:
 
     void on_grandPalaceButton_clicked();
 
+    void on_watMuangButton_clicked();
+
 private:
     Ui::view *ui;
 

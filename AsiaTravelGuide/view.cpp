@@ -33,6 +33,9 @@ view::view(Model& model, QWidget *parent)
 
     // thailand place icons
     QIcon gplIcon(":/icons/grand_palace.png");
+    QIcon wmgIcon(":/icons/great_buddha.png");
+    QIcon tymIcon(":/icons/tomyum.png");
+    QIcon strIcon(":/icons/sticky_rice.png");
 
     QPixmap checkPixmap(":/icons/check.png");
     QPixmap scaledPixmap = checkPixmap.scaled(ui->biryaniCheckLabel->size(), Qt::KeepAspectRatio);
@@ -110,6 +113,11 @@ view::view(Model& model, QWidget *parent)
     ui->grandPalaceButton->setIcon(gplIcon);
     ui->grandPalaceButton->setText("");
     ui->grandPalaceButton->hide();
+    ui->watMuangButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
+    ui->watMuangButton->setIconSize(QSize(60, 60));
+    ui->watMuangButton->setIcon(wmgIcon);
+    ui->watMuangButton->setText("");
+    ui->watMuangButton->hide();
 
 
 
@@ -143,7 +151,10 @@ view::view(Model& model, QWidget *parent)
 
     // thailand checkmarks
     ui->grandPalaceCheckLabel->setPixmap(scaledPixmap);
+    ui->watMuangCheckLabel->setPixmap(scaledPixmap);
+
     ui->grandPalaceCheckLabel->hide();
+    ui->watMuangCheckLabel->hide();
 
     // Background label
     backgroundLabel = new QLabel(this);
@@ -250,7 +261,7 @@ void view::hideCheckMarks(){
 
     // thailand
     ui->grandPalaceCheckLabel->hide();
-    // WatMuang
+    ui->watMuangCheckLabel->hide();
     // TomYum
     // StickyRice
 
@@ -346,7 +357,9 @@ void view::fadeInLandMarks(Country country)
     else if (country == Thailand)
     {
         ui->grandPalaceButton->show();
+        ui->watMuangButton->show();
         fadeEffect(0.0, 1.0, 1500, "grandPalaceButton");
+        fadeEffect(0.0, 1.0, 1500, "watMuangButton");
     }
 }
 
@@ -366,6 +379,9 @@ void view::hideLandMarks()
 
     // thailand
     ui->grandPalaceButton->hide();
+    ui->watMuangButton->hide();
+    // tomyum
+    // sticky rice
 }
 
 void view::fadeEffect(double startValue, double endValue, int duration, QString widget)
@@ -469,9 +485,16 @@ void view::setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff)
     {
         ui->grandPalaceButton->setGraphicsEffect(eff);
     }
+    else if(name == "watMuangButton")
+    {
+        ui->watMuangButton->setGraphicsEffect(eff);
+    }
+    // tomyum
+    // sticky rice
 
 
-    // checkmark labels
+
+    // india checkmark labels
     else if(name == "tajMahalCheckLabel")
     {
         ui->tajMahalCheckLabel->setGraphicsEffect(eff);
@@ -488,6 +511,36 @@ void view::setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff)
     {
         ui->biryaniCheckLabel->setGraphicsEffect(eff);
     }
+
+    // korea checkmark labels
+    else if(name == "gyeongbokgungCheckLabel")
+    {
+        ui->gyeongbokgungCheckLabel->setGraphicsEffect(eff);
+    }
+    else if(name == "bulguksaCheckLabel")
+    {
+        ui->bulguksaCheckLabel->setGraphicsEffect(eff);
+    }
+    else if(name == "tteokbokkiCheckLabel")
+    {
+        ui->tteokbokkiCheckLabel->setGraphicsEffect(eff);
+    }
+    else if(name == "bossamCheckLabel")
+    {
+        ui->bossamCheckLabel->setGraphicsEffect(eff);
+    }
+
+    // thailand checkmark labels
+    else if(name == "grandPalaceCheckLabel")
+    {
+        ui->grandPalaceCheckLabel->setGraphicsEffect(eff);
+    }
+    else if(name == "watMuangCheckLabel")
+    {
+        ui->watMuangCheckLabel->setGraphicsEffect(eff);
+    }
+
+
     else if(name == "quizButton")
     {
         ui->quizButton->setGraphicsEffect(eff);
@@ -628,14 +681,14 @@ void view::fadeInCheckmarks(Country country){
             ui->grandPalaceCheckLabel->show();
         }
         if (ThailandCompleteList.contains(WatMuang)){
-            ui->bulguksaCheckLabel->show();
+            ui->watMuangCheckLabel->show();
         }
-        if (ThailandCompleteList.contains(TomYum)){
-            ui->tteokbokkiCheckLabel->show();
-        }
-        if (ThailandCompleteList.contains(StickyRice)){
-            ui->bossamCheckLabel->show();
-        }
+//        if (ThailandCompleteList.contains(TomYum)){
+//            ui->tteokbokkiCheckLabel->show();
+//        }
+//        if (ThailandCompleteList.contains(StickyRice)){
+//            ui->bossamCheckLabel->show();
+//        }
         if (ThailandCompleteList.size() == 4)
         {
             ui->quizButton->show();
@@ -784,6 +837,19 @@ void view::on_grandPalaceButton_clicked()
 
     ui->grandPalaceCheckLabel->show();
     ThailandCompleteList.insert(GrandPalace);
+    if (ThailandCompleteList.size() == 4)
+    {
+        ui->quizButton->show();
+    }
+}
+
+
+void view::on_watMuangButton_clicked()
+{
+    //    showInfo("WatMuang");
+
+    ui->watMuangCheckLabel->show();
+    ThailandCompleteList.insert(WatMuang);
     if (ThailandCompleteList.size() == 4)
     {
         ui->quizButton->show();
