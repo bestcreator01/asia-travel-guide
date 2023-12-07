@@ -28,7 +28,7 @@ void Model::showQuizInfo(QString country)
     }
     else if(country == "Thailand")
     {
-        //TODO: fill out questions
+        setThailand();
     }
     else if(country == "Korea")
     {
@@ -96,6 +96,56 @@ void Model::setIndia()
 
     std::shuffle(questions.begin(), questions.end(), g);
 
+}
+
+void Model::setThailand()
+{
+    question1 =
+        "Being a complex of buildings at the heart of Bangkok, Thailand."
+        "\nIn which year was the Thailand Grand Palace constructed, "
+        "\nand during whose reign was it built?";
+    option1 = "1682, King Rama II";
+    option2 = "1882, King Rama III";
+    option3 = "1782, King Rama I";  // Correct
+    option4 = "1982, King Bhumibol Adulyadej";
+    questionBank[question1] = {option1, option2, option3, option4};
+    questions.push_back(question1);
+    // second quesiton
+    question2 =
+        "What is the local name for the Great Buddha of Thailand, "
+        "\nand what unique feature sets it apart from other statues?";
+    option1 = "Golden Enlightenment, its panoramic views";
+    option2 = "Wat Muang, its serene expression";
+    option3 = "Luangpho Yai, its construction materials ";  // Correct
+    option4 = "Buddha Rama, its colossal size";
+    questionBank[question2] = {option1, option2, option3, option4};
+    questions.push_back(question2);
+    // third question
+    question3 =
+        "Originating from central Thailand and a quintessential Thai soup,"
+        "\nWhat is the English translation of \"Tom Yum\"?";
+    option1 = "Spicy Delight";
+    option2 = "Tasty Heat";
+    option3 = "Hot and Sour";  // Correct
+    option4 = "Flavorful Zest";
+    questionBank[question3] = {option1, option2, option3, option4};
+    questions.push_back(question3);
+    // fourth question
+    question4 =
+        "What is the key ingredient used to impart a creamy texture "
+        "\nand subtle sweetness to Mango Sticky Rice,"
+        "\nand during which months does this dessert typically get eaten?";
+    option1 = "Condensed Milk, July to September";
+    option2 = "Almond Milk, October to December";
+    option3 = "Coconut Milk, March to June";  // Correct
+    option4 = "Evaporated Milk, January to February";
+    questionBank[question4] = {option1, option2, option3, option4};
+    questions.push_back(question4);
+
+    std::random_device rd;
+    std::mt19937 g(rd());
+
+    std::shuffle(questions.begin(), questions.end(), g);
 }
 
 //void Model::receiveSignalToSendTextIndia(QString name)

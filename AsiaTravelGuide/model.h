@@ -37,8 +37,8 @@ signals:
 
 private:
     void setIndia();
-//    void setThailand();
-//    void setKorea();
+    void setThailand();
+    void setKorea();
 //    QString landMarkInfo[2];
 //    QString restaurantInfo[2];
 

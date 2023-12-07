@@ -87,14 +87,17 @@ Form::Form(QWidget *parent) :
                         "\nand slowly cooking it. The dish may be served with chutney or raita, and salad.";
 
     //thailand descriptions
-    thailandLandMarkInfo[0] = "The Thailand Grand Palace, an iconic symbol of Thai royalty and architectural grandeur, "
-                                "\nstands as a testament to the rich cultural heritage of the nation. Constructed in 1782, "
-                                "\nduring the reign of King Rama I, the palace serves as the official residence of the Kings of Siam. ";
+    thailandLandMarkInfo[0] = "The Thailand Grand Palace, a dazzling architectural masterpiece situated in the heart of Bangkok, "
+                              "\nstands as a testament to the nation's rich cultural heritage. Constructed in 1782 during the reign of King Rama I, "
+                              "\nthe palace served as the royal residence for generations of Thai monarchs. "
+                              "\nIts intricate design reflects a fusion of Thai, Chinese, and European influences, "
+                              "\nfeaturing gilded spires, vibrant murals, and ornate sculptures.";
 
-    thailandLandMarkInfo[1] = "The latter houses a meticulously carved Buddha statue made from a single piece of jade, "
-                              "\nshowcasing the craftsmanship of Thai artisans. The Grand Palace has witnessed historical events, "
-                              "\nincluding the abolition of absolute monarchy in 1932, yet continues to be a dazzling spectacle for visitors, "
-                              "\ndrawing them into a mesmerizing world of opulence and cultural significance.";
+    thailandLandMarkInfo[1] = "Notably, the palace houses the revered Emerald Buddha, a sacred icon carved from a single piece of jade. "
+                              "\nOver the centuries, it has been the backdrop for significant royal events and ceremonies. "
+                              "\nThe Grand Palace complex spans over 200,000 square meters and includes various halls, pavilions, and courtyards. "
+                              "\nWhile the royal family no longer resides here, the palace remains a symbol of Thailand's enduring cultural legacy and "
+                              "\ncontinues to captivate visitors with its grandeur and historical significance.";
 
     thailandLandMarkInfo[2] = "The Great Buddha of Thailand, an awe-inspiring testament to Buddhist devotion and engineering marvel,"
                             "\nstands prominently in Wat Muang. Erected in 1990, this colossal statue reaches a height of 92 meters, "

@@ -687,7 +687,7 @@ void view::on_koreaButton_clicked()
     fadeInLandMarks(Korea);
     fadeInCheckmarks(Korea);
 
-    country = "Thailand";
+    country = "Korea";
 
     ui->indiaButton->hide();
     ui->koreaButton->hide();
@@ -708,7 +708,7 @@ void view::on_thailandButton_clicked()
     fadeInLandMarks(Thailand);
     fadeInCheckmarks(Thailand);
 
-    country = "Korea";
+    country = "Thailand";
 
     ui->indiaButton->hide();
     ui->koreaButton->hide();
