@@ -1,11 +1,6 @@
 #include "view.h"
 #include "ui_view.h"
 #include "model.h"
-#include <QGraphicsOpacityEffect>
-#include <QHBoxLayout>
-#include <QPropertyAnimation>
-#include <QTimer>
-#include <QPalette>
 
 view::view(Model& model, QWidget *parent)
     : QMainWindow(parent)
@@ -140,7 +135,6 @@ view::view(Model& model, QWidget *parent)
     ui->quizButton->setIconSize(QSize(70,70));
     ui->quizButton->setIcon(quizIcon);
     ui->quizButton->hide();
-    // TODO
 
     // india checkmarks
     ui->biryaniCheckLabel->setPixmap(scaledPixmap);
@@ -183,6 +177,11 @@ view::view(Model& model, QWidget *parent)
 
     connect(this, &view::changedState, &model, &Model::changeState);
     connect(&model, &Model::changedScreenState, this, &view::updateState);
+    connect(&model, &Model::sendQuiz, &quizWindow, &Quiz::setValues);
+
+    // send random to model, model randomize selection, send back to quiz window
+    connect(&quizWindow, &Quiz::randomizeOption, &model, &Model::randomizeOption);
+    connect(&model, &Model::sendOptions, &quizWindow, &Quiz::setRandomOptions);
 
     connect(this, &view::informModelToSend, &indiaWindow, &Form::receiveSignalToSetTextIndia);
 
@@ -190,6 +189,7 @@ view::view(Model& model, QWidget *parent)
 
     connect(this, &view::generateRandomQuestion, &quizWindow, &Quiz::showRandomQuestion);
     connect(this, &view::resetButtons, &quizWindow, &Quiz::resetButtons);
+    connect(this, &view::sendQuizInfo, &model, &Model::showQuizInfo);
 }
 
 view::~view()
@@ -667,6 +667,8 @@ void view::on_indiaButton_clicked()
     fadeInLandMarks(India);
     fadeInCheckmarks(India);
 
+    country = "India";
+
     ui->indiaButton->hide();
     ui->koreaButton->hide();
     ui->thailandButton->hide();
@@ -684,6 +686,8 @@ void view::on_koreaButton_clicked()
     fadeInBackgroundLabel();
     fadeInLandMarks(Korea);
     fadeInCheckmarks(Korea);
+
+    country = "Thailand";
 
     ui->indiaButton->hide();
     ui->koreaButton->hide();
@@ -703,6 +707,8 @@ void view::on_thailandButton_clicked()
     fadeInBackgroundLabel();
     fadeInLandMarks(Thailand);
     fadeInCheckmarks(Thailand);
+
+    country = "Korea";
 
     ui->indiaButton->hide();
     ui->koreaButton->hide();
@@ -878,6 +884,7 @@ void view::on_biryani_clicked()
 void view::on_quizButton_clicked()
 {
     quizWindow.show();
+    emit sendQuizInfo(country);
     emit generateRandomQuestion();
     emit resetButtons();
 }

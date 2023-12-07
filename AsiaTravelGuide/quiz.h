@@ -4,9 +4,6 @@
 #include <QWidget>
 #include <QMap>
 #include <QList>
-#include <QRandomGenerator>
-#include <algorithm>
-#include <random>
 #include <Box2D/Box2D.h>
 #include <QTimer>
 #include <QPainter>
@@ -28,6 +25,12 @@ public:
     void showRandomQuestion();
     void resetButtons();
     void closeWindow();
+    void setValues(QMap<QString, QList<QString>> &questionBank, QList<QString> &questions);
+    void setRandomOptions(QList<int> &numbers);
+
+signals:
+    void randomizeOption();
+
 private slots:
     void on_option1Button_clicked();
 
@@ -49,13 +52,10 @@ protected:
 private:
     Ui::Quiz *ui;
     QString randomQuestion;
-    QString question1, question2, question3, question4;
-    QString option1, option2, option3, option4;
-    QList<int> numbers = {0, 1, 2, 3};
+    QList<int> numbers;
     QList<QString> questions;
-    int quesIndex = 0;
-
     QMap<QString, QList<QString>> questionBank;
+    int quesIndex = 0, correct = 2;
     void disableOptionButtons();
 
     void generateConfettiColors();
@@ -63,6 +63,7 @@ private:
     void createGround(float, float);
     void updateWorld();
     void applyExplosionForce(b2Vec2, float);
+    void randomizeSelection(QList<int> numbers);
 
     QTimer timer;
 
@@ -70,9 +71,6 @@ private:
     b2World *bottom;
     QVector<QColor> confettiColors;
     QList<b2Body*> confettiPieces;
-
-    bool topTouchedGround;
-    bool bottomTouchedGround;
 };
 
 #endif // QUIZ_H

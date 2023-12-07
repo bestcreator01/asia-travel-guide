@@ -1,5 +1,4 @@
 #include "quiz.h"
-#include <QLabel>
 #include "ui_quiz.h"
 #include <QMovie>
 
@@ -16,54 +15,6 @@ Quiz::Quiz(QWidget *parent) : QWidget(parent),
     backgroundLabel->setGeometry(0, 0, this->width(), this->height());  // Set to cover the entire window
     backgroundLabel->lower();
 //    movie->start();
-    // first question
-    question1 =
-        "The Taj Mahal is renowned for its distinctive features, "
-        "\nincluding a large, white, domed mausoleum surrounded by four minarets. "
-        "\nWhat is the meaning of the name \"Taj Mahal\" in Urdu and Persian?";
-    option1 = "Monument of Eternal Love";
-    option2 = "Ivory Marvel";
-    option3 = "Crown of Palaces";  // Correct
-    option4 = "Pearl of Agra";
-    questionBank[question1] = {option1, option2, option3, option4};
-    questions.push_back(question1);
-    // second quesiton
-    question2 =
-        "What was the original purpose of the intricate latticework and "
-        "\nnumerous small windows (Jharokhas) in the design of Hawa Mahal?";
-    option1 = "To serve as decorative elements for the palace's exterior";
-    option2 = "To create a honeycomb-like pattern for aesthetic appeal";
-    option3 = "To allow royal ladies to observe street activities without "
-              "\nbeing seen";  // Correct
-    option4 = "To enhance the structural stability of the palace";
-    questionBank[question2] = {option1, option2, option3, option4};
-    questions.push_back(question2);
-    // third question
-    question3 =
-        "Pani Puri is a common street food in the Indian subcontinent."
-        "\nWhat makes the ingredients of Pani Puri as a snack in India?";
-    option1 = "deep-fried and breaded exterior";
-    option2 = "yogurt, ginger, garlic, and herbs";
-    option3 = "chili powder, chaat masala, potato mash, and chickpeas";  // Correct
-    option4 = "peppers, turmeric, coriander, and cumin";
-    questionBank[question3] = {option1, option2, option3, option4};
-    questions.push_back(question3);
-    // fourth question
-    question4 =
-        "What cooking method is most commonly used to prepare Biryani, "
-        "\ninvolving sealing food in a round, heavy-bottomed pot "
-        "\nand slow cooking it over a low flame?";
-    option1 = "Grilling";
-    option2 = "Boiling";
-    option3 = "Dum method";  // Correct
-    option4 = "Stir-frying";
-    questionBank[question4] = {option1, option2, option3, option4};
-    questions.push_back(question4);
-
-    std::random_device rd;
-    std::mt19937 g(rd());
-
-    std::shuffle(questions.begin(), questions.end(), g);
 
     // Set up Box2D world
     b2Vec2 neg(0.0f, -30.0f);
@@ -85,22 +36,25 @@ Quiz::~Quiz()
     delete bottom;
 }
 
+void Quiz::setValues(QMap<QString, QList<QString>> &questionBank, QList<QString> &questions)
+{
+    this->questionBank = questionBank;
+    this->questions = questions;
+}
+
+void Quiz::setRandomOptions(QList<int> &numbers)
+{
+    this->numbers = numbers;
+}
+
 void Quiz::showRandomQuestion()
 {
-    // randomize
     quesIndex = 0;
-    std::random_device rd;
-    std::mt19937 g(rd());
-
-    std::shuffle(questions.begin(), questions.end(), g);
-    std::shuffle(numbers.begin(), numbers.end(), g);
     randomQuestion = questions[quesIndex];
     ui->question->setText(randomQuestion);
-    ui->option1Button->setText(questionBank[randomQuestion][numbers[0]]);
-    ui->option2Button->setText(questionBank[randomQuestion][numbers[1]]);
-    ui->option3Button->setText(questionBank[randomQuestion][numbers[2]]);
-    ui->option4Button->setText(questionBank[randomQuestion][numbers[3]]);
-    update();
+    // randomize
+    emit randomizeOption();
+    randomizeSelection(numbers);
 }
 
 void Quiz::resetButtons()
@@ -129,7 +83,7 @@ void Quiz::disableOptionButtons()
 
 void Quiz::on_option1Button_clicked()
 {
-    if (ui->option1Button->text() != questionBank[randomQuestion][2])
+    if (ui->option1Button->text() != questionBank[randomQuestion][correct])
     {
         ui->option1Button->setStyleSheet("background-color: red");
         ui->option1Button->setDisabled(true);
@@ -144,7 +98,7 @@ void Quiz::on_option1Button_clicked()
 
 void Quiz::on_option2Button_clicked()
 {
-    if (ui->option2Button->text() != questionBank[randomQuestion][2])
+    if (ui->option2Button->text() != questionBank[randomQuestion][correct])
     {
         ui->option2Button->setStyleSheet("background-color: red");
         ui->option2Button->setDisabled(true);
@@ -159,7 +113,7 @@ void Quiz::on_option2Button_clicked()
 
 void Quiz::on_option3Button_clicked()
 {
-    if (ui->option3Button->text() != questionBank[randomQuestion][2])
+    if (ui->option3Button->text() != questionBank[randomQuestion][correct])
     {
         ui->option3Button->setStyleSheet("background-color: red");
         ui->option3Button->setDisabled(true);
@@ -174,7 +128,7 @@ void Quiz::on_option3Button_clicked()
 
 void Quiz::on_option4Button_clicked()
 {
-    if (ui->option4Button->text() != questionBank[randomQuestion][2])
+    if (ui->option4Button->text() != questionBank[randomQuestion][correct])
     {
         ui->option4Button->setStyleSheet("background-color: red");
         ui->option4Button->setDisabled(true);
@@ -192,24 +146,25 @@ void Quiz::on_nextButton_clicked()
     ui->nextButton->hide();
     randomQuestion = questions[++quesIndex];
     ui->question->setText(randomQuestion);
-    update();
 
     // randomize
-    std::random_device rd;
-    std::mt19937 g(rd());
+    emit randomizeOption();
+    randomizeSelection(numbers);
 
-    std::shuffle(numbers.begin(), numbers.end(), g);
+    resetButtons();
+    if (quesIndex == questions.size() - 1)
+        ui->nextButton->hide();
 
+    closePaint();
+}
+
+void Quiz::randomizeSelection(QList<int> numbers)
+{
     ui->option1Button->setText(questionBank[randomQuestion][numbers[0]]);
     ui->option2Button->setText(questionBank[randomQuestion][numbers[1]]);
     ui->option3Button->setText(questionBank[randomQuestion][numbers[2]]);
     ui->option4Button->setText(questionBank[randomQuestion][numbers[3]]);
-
-    resetButtons();
-    if (quesIndex == 3)
-        ui->nextButton->hide();
-
-    closePaint();
+    update();
 }
 
 void Quiz::closeEvent(QCloseEvent *bar)
@@ -227,7 +182,6 @@ void Quiz::closePaint()
     }
 
     confettiPieces.clear();
-    //bottomConfettiPieces.clear();
     confettiColors.clear();
 
     update();
@@ -310,15 +264,12 @@ void Quiz::paintEvent(QPaintEvent *event)
         b2Vec2 topPosition = confettiPieces[i]->GetPosition();
         b2Vec2 bottomPosition = confettiPieces[i + 1]->GetPosition();
 
-        confettiPieces[50]->ApplyForce(b2Vec2(0.0f, 10000.0f), topPosition, true);
-        confettiPieces[150]->ApplyForce(b2Vec2(0.0f, 10000.0f), bottomPosition, true);
+        confettiPieces[75]->ApplyForce(b2Vec2(0.0f, 10000.0f), topPosition, true);
+        confettiPieces[100]->ApplyForce(b2Vec2(0.0f, 10000.0f), bottomPosition, true);
 
         painter.drawRect(QRectF(topPosition.x, topPosition.y, 5, 5));
         painter.drawRect(QRectF(bottomPosition.x, bottomPosition.y, 5, 5));
     }
-
-    topTouchedGround = false;
-    bottomTouchedGround = false;
 }
 
 void Quiz::updateWorld()

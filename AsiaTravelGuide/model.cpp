@@ -17,6 +17,87 @@ void Model::changeState(QString state)
     }
 }
 
+void Model::showQuizInfo(QString country)
+{
+    questionBank.clear();
+    questions.clear();
+    if (country == "India")
+    {
+        setIndia();
+
+    }
+    else if(country == "Thailand")
+    {
+        //TODO: fill out questions
+    }
+    else if(country == "Korea")
+    {
+        //TODO: fill out questions
+    }
+    emit sendQuiz(questionBank, questions);
+}
+
+void Model::randomizeOption()
+{
+    std::random_device rd;
+    std::mt19937 g(rd());
+
+    std::shuffle(numbers.begin(), numbers.end(), g);
+    emit sendOptions(numbers);
+}
+
+void Model::setIndia()
+{
+    question1 =
+        "The Taj Mahal is renowned for its distinctive features, "
+        "\nincluding a large, white, domed mausoleum surrounded by four minarets. "
+        "\nWhat is the meaning of the name \"Taj Mahal\" in Urdu and Persian?";
+    option1 = "Monument of Eternal Love";
+    option2 = "Ivory Marvel";
+    option3 = "Crown of Palaces";  // Correct
+    option4 = "Pearl of Agra";
+    questionBank[question1] = {option1, option2, option3, option4};
+    questions.push_back(question1);
+    // second quesiton
+    question2 =
+        "What was the original purpose of the intricate latticework and "
+        "\nnumerous small windows (Jharokhas) in the design of Hawa Mahal?";
+    option1 = "To serve as decorative elements for the palace's exterior";
+    option2 = "To create a honeycomb-like pattern for aesthetic appeal";
+    option3 = "To allow royal ladies to observe street activities without "
+              "\nbeing seen";  // Correct
+    option4 = "To enhance the structural stability of the palace";
+    questionBank[question2] = {option1, option2, option3, option4};
+    questions.push_back(question2);
+    // third question
+    question3 =
+        "Pani Puri is a common street food in the Indian subcontinent."
+        "\nWhat makes the ingredients of Pani Puri as a snack in India?";
+    option1 = "deep-fried and breaded exterior";
+    option2 = "yogurt, ginger, garlic, and herbs";
+    option3 = "chili powder, chaat masala, potato mash, and chickpeas";  // Correct
+    option4 = "peppers, turmeric, coriander, and cumin";
+    questionBank[question3] = {option1, option2, option3, option4};
+    questions.push_back(question3);
+    // fourth question
+    question4 =
+        "What cooking method is most commonly used to prepare Biryani, "
+        "\ninvolving sealing food in a round, heavy-bottomed pot "
+        "\nand slow cooking it over a low flame?";
+    option1 = "Grilling";
+    option2 = "Boiling";
+    option3 = "Dum method";  // Correct
+    option4 = "Stir-frying";
+    questionBank[question4] = {option1, option2, option3, option4};
+    questions.push_back(question4);
+
+    std::random_device rd;
+    std::mt19937 g(rd());
+
+    std::shuffle(questions.begin(), questions.end(), g);
+
+}
+
 //void Model::receiveSignalToSendTextIndia(QString name)
 //{
 //    landMarkInfo[0] = "Hawa Mahal is a palace in the city of Jaipur, India. Built from red and pink sandstone, "

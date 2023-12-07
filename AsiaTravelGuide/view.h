@@ -5,6 +5,11 @@
 #include <QMainWindow>
 #include <QLabel>
 #include <QSet>
+#include <QGraphicsOpacityEffect>
+#include <QHBoxLayout>
+#include <QPropertyAnimation>
+#include <QTimer>
+#include <QPalette>
 #include "model.h"
 #include "form.h"
 #include "quiz.h"
@@ -107,6 +112,7 @@ private:
     void enableButtonsAndCheck();
     void showInfo(QString);
     int count;
+    QString country = "";
 
     void fadeInCountryLabels();
     void fadeOutCountryLabels();
@@ -120,5 +126,6 @@ signals:
 
     void generateRandomQuestion();
     void resetButtons();
+    void sendQuizInfo(QString country);
 };
 #endif // VIEW_H
