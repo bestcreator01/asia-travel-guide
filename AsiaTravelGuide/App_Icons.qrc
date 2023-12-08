@@ -8,10 +8,6 @@
         <file>hawa-mahal.png</file>
         <file>biryani.png</file>
         <file>panipuri.png</file>
-        <file>biryani_Image.jpg</file>
-        <file>hawa-mahal_Image.jpg</file>
-        <file>pani-puri_Image.jpg</file>
-        <file>taj-mahal_Image.png</file>
         <file>check.png</file>
         <file>quiz.png</file>
         <file>clouds.gif</file>
@@ -25,14 +21,19 @@
         <file>great_buddha.png</file>
         <file>sticky_rice.png</file>
         <file>tomyum.png</file>
-        <file>Big-Buddha_Image.png</file>
-        <file>Grand-Palace_Image.png</file>
-        <file>Tom-Yum_Image.png</file>
-        <file>Mango-Rice_Image.png</file>
-        <file>Gyeongbokgung_Image.jpg</file>
-        <file>bossam_Image.jpg</file>
-        <file>bulguksa_Image.jpg</file>
-        <file>Tteokbokki_Image.jpg</file>
     </qresource>
-    <qresource prefix="/"/>
+    <qresource prefix="/images">
+        <file>Big-Buddha_Image.png</file>
+        <file>biryani_Image.jpg</file>
+        <file>bulguksa_Image.jpg</file>
+        <file>Grand-Palace_Image.png</file>
+        <file>Gyeongbokgung_Image.jpg</file>
+        <file>hawa-mahal_Image.jpg</file>
+        <file>Mango-Rice_Image.png</file>
+        <file>taj-mahal_Image.png</file>
+        <file>Tom-Yum_Image.png</file>
+        <file>bossam_Image.jpg</file>
+        <file>tteokbokki_Image.jpg</file>
+        <file>pani-puri_Image.jpg</file>
+    </qresource>
 </RCC>

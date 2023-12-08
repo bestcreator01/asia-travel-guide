@@ -214,64 +214,64 @@ void Form::receiveSignalToSetTextIndia(QString name)
     // india
     if (name == "HawaMahal")
     {
-        setLandmarkIndiaHelper(0, ":/icons/hawa-mahal_Image.jpg");
+        setLandmarkIndiaHelper(0, ":/images/hawa-mahal_Image.jpg");
         currentCountry = "India";
     }
     else if (name == "TajMahal")
     {
-        setLandmarkIndiaHelper(2, ":/icons/taj-mahal_Image.png");
+        setLandmarkIndiaHelper(2, ":/images/taj-mahal_Image.png");
         currentCountry = "India";
     }
     else if (name == "PaniPuri")
     {        
-        setRestaurantIndiaHelper(0, ":/icons/pani-puri_Image.jpg");
+        setRestaurantIndiaHelper(0, ":/images/pani-puri_Image.jpg");
         currentCountry = "India";
     }
     else if (name == "Biryani")
     {
-        setRestaurantIndiaHelper(2, ":/icons/biryani_Image.jpg");
+        setRestaurantIndiaHelper(2, ":/images/biryani_Image.jpg");
         currentCountry = "India";
     }
     // thailand
     else if (name == "GrandPalace")
     {
-        setLandmarkThailandHelper(0, ":/icons/Grand-Palace_Image.png");
+        setLandmarkThailandHelper(0, ":/images/Grand-Palace_Image.png");
         currentCountry = "Thailand";
     }
     else if (name == "BigBuddha")
     {
-        setLandmarkThailandHelper(2, ":/icons/Big-Buddha_Image.png");
+        setLandmarkThailandHelper(2, ":/images/Big-Buddha_Image.png");
         currentCountry = "Thailand";
     }
     else if (name == "TomYumKung")
     {
-        setRestaurantThailandHelper(0, ":/icons/Tom-Yum_Image.png");
+        setRestaurantThailandHelper(0, ":/images/Tom-Yum_Image.png");
         currentCountry = "Thailand";
     }
     else if (name == "MangoStickyRice")
     {
-        setRestaurantThailandHelper(2, ":/icons/Mango-Rice_Image.png");
+        setRestaurantThailandHelper(2, ":/images/Mango-Rice_Image.png");
         currentCountry = "Thailand";
     }
     // korea
     else if (name == "Gyeongbokgung")
     {
-        setLandmarkKoreaHelper(0, ":/icons/Gyeongbokgung_Image.jpg");
+        setLandmarkKoreaHelper(0, ":/images/Gyeongbokgung_Image.jpg");
         currentCountry = "Korea";
     }
     else if (name == "Bulguksa")
     {
-        setLandmarkKoreaHelper(2, ":/icons/bulguksa_Image.jpg");
+        setLandmarkKoreaHelper(2, ":/images/bulguksa_Image.jpg");
         currentCountry = "Korea";
     }
     else if (name == "Tteokbokki")
     {
-        setRestaurantKoreaHelper(0, ":/icons/Tteokbokki_Image.jpg");
+        setRestaurantKoreaHelper(0, ":/images/tteokbokki_Image.jpg");
         currentCountry = "Korea";
     }
     else if (name == "Bossam")
     {
-        setRestaurantKoreaHelper(2, ":/icons/bossam_Image.jpg");
+        setRestaurantKoreaHelper(2, ":/images/bossam_Image.jpg");
         currentCountry = "Korea";
     }
     this->setWindowTitle(name);
