@@ -201,7 +201,7 @@ void Form::startTyping()
 {
     ui->nextButton->hide();
     ui->backButton->hide();
-    ui->description->setText(ui->description->text()+splittedText[now]);
+    ui->description->setText(ui->description->text() + splittedText[now]);
     ++now;
     if(splittedText.length() == now)
     {
@@ -289,7 +289,7 @@ void Form::receiveSignalToSetTextIndia(QString name)
 
     this->setWindowTitle(name);
     ui->description->setText("");
-    timer->start(10);
+    timer->start(25);
     ui->backButton->hide();
 }
 
@@ -343,7 +343,7 @@ void Form::closeWindow()
     this->close();
 }
 
-void Form::closeEvent(QCloseEvent *bar)
+void Form::closeEvent(QCloseEvent *)
 {
     currentText = "";
     now = 0;
@@ -362,7 +362,7 @@ void Form::closeEvent(QCloseEvent *bar)
 void Form::setLandmarkKoreaHelper(int currentNum, QString image)
 {
     current = currentNum;
-    flag = true;
+    landMarkFlag = true;
     QPixmap pixmap(image);
     ui->image->setPixmap(pixmap.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
     splittedText = koreaLandMarkInfo[current].split("");
@@ -372,7 +372,7 @@ void Form::setLandmarkKoreaHelper(int currentNum, QString image)
 void Form::setRestaurantKoreaHelper(int currentNum, QString image)
 {
     current = currentNum;
-    flag = false;
+    landMarkFlag = false;
     QPixmap pixmap(image);
     ui->image->setPixmap(pixmap.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
     splittedText = koreaRestaurantInfo[current].split("");
@@ -382,7 +382,7 @@ void Form::setRestaurantKoreaHelper(int currentNum, QString image)
 void Form::setLandmarkThailandHelper(int currentNum, QString image)
 {
     current = currentNum;
-    flag = true;
+    landMarkFlag = true;
     QPixmap pixmap(image);
     ui->image->setPixmap(pixmap.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
     splittedText = thailandLandMarkInfo[current].split("");
@@ -392,7 +392,7 @@ void Form::setLandmarkThailandHelper(int currentNum, QString image)
 void Form::setRestaurantThailandHelper(int currentNum, QString image)
 {
     current = currentNum;
-    flag = false;
+    landMarkFlag = false;
     QPixmap pixmap(image);
     ui->image->setPixmap(pixmap.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
     splittedText = thailandRestaurantInfo[current].split("");
@@ -402,7 +402,7 @@ void Form::setRestaurantThailandHelper(int currentNum, QString image)
 void Form::setLandmarkIndiaHelper(int currentNum, QString image)
 {
     current = currentNum;
-    flag = true;
+    landMarkFlag = true;
     QPixmap pixmap(image);
     ui->image->setPixmap(pixmap.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
     splittedText = indiaLandMarkInfo[current].split("");
@@ -412,7 +412,7 @@ void Form::setLandmarkIndiaHelper(int currentNum, QString image)
 void Form::setRestaurantIndiaHelper(int currentNum, QString image)
 {
     current = currentNum;
-    flag = false;
+    landMarkFlag = false;
     QPixmap pixmap(image);
     ui->image->setPixmap(pixmap.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
     splittedText = indiaRestaurantInfo[current].split("");
@@ -425,7 +425,7 @@ void Form::nextButtonHelper(QString info[])
     {
         splittedText = info[++current].split("");
         ui->description->setText("");
-        timer->start(10);
+        timer->start(25);
         firstNextClicked = false;
         firstBackClicked = true;
     }
@@ -450,7 +450,7 @@ void Form::backButtonHelper(QString info[])
 
 void Form::buttonHelper(bool isNextButton)
 {
-    if (flag)
+    if (landMarkFlag)
     {
         if (isNextButton)
         {
