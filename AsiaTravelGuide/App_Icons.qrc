@@ -39,5 +39,6 @@
     <qresource prefix="/music">
         <file>bgm_India.wav</file>
         <file>bgm_Korea.mp4</file>
+        <file>bgm_Thailand.mp3</file>
     </qresource>
 </RCC>

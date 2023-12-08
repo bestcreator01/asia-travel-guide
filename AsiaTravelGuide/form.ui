@@ -54,6 +54,9 @@
      <pointsize>15</pointsize>
     </font>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
    <property name="text">
     <string>Next→</string>
    </property>
@@ -72,6 +75,9 @@
      <family>Fixedsys</family>
      <pointsize>15</pointsize>
     </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
     <string>← Back</string>

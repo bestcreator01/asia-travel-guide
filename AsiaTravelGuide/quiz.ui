@@ -33,13 +33,17 @@
    </property>
    <property name="font">
     <font>
-     <family>Arial Black</family>
-     <pointsize>14</pointsize>
+     <family>Fixedsys</family>
+     <pointsize>13</pointsize>
      <bold>true</bold>
     </font>
    </property>
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(254, 255, 206);</string>
    </property>
    <property name="text">
     <string>PushButton</string>
@@ -56,10 +60,14 @@
    </property>
    <property name="font">
     <font>
-     <family>Arial Black</family>
-     <pointsize>14</pointsize>
-     <bold>true</bold>
+     <family>Fixedsys</family>
+     <pointsize>9</pointsize>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(0, 0, 0);</string>
    </property>
    <property name="text">
     <string>Question</string>
@@ -79,13 +87,17 @@
    </property>
    <property name="font">
     <font>
-     <family>Arial Black</family>
-     <pointsize>14</pointsize>
+     <family>Fixedsys</family>
+     <pointsize>13</pointsize>
      <bold>true</bold>
     </font>
    </property>
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(254, 255, 206);</string>
    </property>
    <property name="text">
     <string>PushButton</string>
@@ -102,13 +114,17 @@
    </property>
    <property name="font">
     <font>
-     <family>Arial Black</family>
-     <pointsize>14</pointsize>
+     <family>Fixedsys</family>
+     <pointsize>13</pointsize>
      <bold>true</bold>
     </font>
    </property>
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(254, 255, 206);</string>
    </property>
    <property name="text">
     <string>PushButton</string>
@@ -125,13 +141,17 @@
    </property>
    <property name="font">
     <font>
-     <family>Arial Black</family>
-     <pointsize>14</pointsize>
+     <family>Fixedsys</family>
+     <pointsize>13</pointsize>
      <bold>true</bold>
     </font>
    </property>
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(254, 255, 206);</string>
    </property>
    <property name="text">
     <string>PushButton</string>
@@ -140,11 +160,21 @@
   <widget class="QPushButton" name="nextButton">
    <property name="geometry">
     <rect>
-     <x>540</x>
+     <x>520</x>
      <y>440</y>
-     <width>111</width>
+     <width>131</width>
      <height>51</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Fixedsys</family>
+     <pointsize>12</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(0, 0, 0);</string>
    </property>
    <property name="text">
     <string>Next Question</string>

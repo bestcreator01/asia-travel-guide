@@ -61,11 +61,15 @@ void Model::setIndia()
     question2 =
         "What was the original purpose of the intricate latticework and "
         "\nnumerous small windows (Jharokhas) in the design of Hawa Mahal?";
-    option1 = "To serve as decorative elements for the palace's exterior";
-    option2 = "To create a honeycomb-like pattern for aesthetic appeal";
-    option3 = "To allow royal ladies to observe street activities without "
+    option1 = "To serve as decorative "
+              "\nelements for the palace's exterior";
+    option2 = "To create a honeycomb-like "
+              "\npattern for aesthetic appeal";
+    option3 = "To allow royal ladies to "
+              "\nobserve street activities without "
               "\nbeing seen";  // Correct
-    option4 = "To enhance the structural stability of the palace";
+    option4 = "To enhance the structural "
+              "\nstability of the palace";
     putQuestionInQuestionBank(question2);
 
     // third question
@@ -73,9 +77,12 @@ void Model::setIndia()
         "Pani Puri is a common street food in the Indian subcontinent."
         "\nWhat makes the ingredients of Pani Puri as a snack in India?";
     option1 = "deep-fried and breaded exterior";
-    option2 = "yogurt, ginger, garlic, and herbs";
-    option3 = "chili powder, chaat masala, potato mash, and chickpeas";  // Correct
-    option4 = "peppers, turmeric, coriander, and cumin";
+    option2 = "yogurt, ginger, garlic, "
+              "\nand herbs";
+    option3 = "chili powder, chaat masala, "
+              "\npotato mash, and chickpeas";  // Correct
+    option4 = "peppers, turmeric, coriander, "
+              "\nand cumin";
     putQuestionInQuestionBank(question3);
 
     // fourth question
@@ -110,7 +117,8 @@ void Model::setThailand()
         "\nand what unique feature sets it apart from other statues?";
     option1 = "Golden Enlightenment, its panoramic views";
     option2 = "Wat Muang, its serene expression";
-    option3 = "Luangpho Yai, its construction materials ";  // Correct
+    option3 = "Luangpho Yai, "
+              "\nits construction materials ";  // Correct
     option4 = "Buddha Rama, its colossal size";
     putQuestionInQuestionBank(question2);
 
@@ -129,10 +137,14 @@ void Model::setThailand()
         "What is the key ingredient used to impart a creamy texture "
         "\nand subtle sweetness to Mango Sticky Rice,"
         "\nand during which months does this dessert typically get eaten?";
-    option1 = "Condensed Milk, July to September";
-    option2 = "Almond Milk, October to December";
-    option3 = "Coconut Milk, March to June";  // Correct
-    option4 = "Evaporated Milk, January to February";
+    option1 = "Condensed Milk, "
+              "\nJuly to September";
+    option2 = "Almond Milk, "
+              "\nOctober to December";
+    option3 = "Coconut Milk, "
+              "\nMarch to June";  // Correct
+    option4 = "Evaporated Milk, "
+              "\nJanuary to February";
     putQuestionInQuestionBank(question4);
 
     randomizeQuestions();

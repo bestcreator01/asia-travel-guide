@@ -306,7 +306,7 @@ void Form::setMusic(QString countryName)
     }
     else if (countryName == "Thailand")
     {
-
+        musicPlayer->setSource(QUrl("qrc:/music/bgm_Thailand.mp3"));
     }
     musicPlayer->play();
     musicOutput->setVolume(0.5);

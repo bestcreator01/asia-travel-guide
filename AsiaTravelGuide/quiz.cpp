@@ -27,6 +27,11 @@ Quiz::Quiz(QWidget *parent) : QWidget(parent),
 
     connect(&timer, &QTimer::timeout, this, &Quiz::updateWorld);
     timer.start(3);
+    ui->option1Button->setEnabled(true);
+    ui->option2Button->setEnabled(true);
+    ui->option3Button->setEnabled(true);
+    ui->option4Button->setEnabled(true);
+
 }
 
 Quiz::~Quiz()
