@@ -1012,4 +1012,3 @@ void view::on_stickyRiceButton_clicked()
         ui->quizButton->show();
     }
 }
-
