@@ -154,7 +154,8 @@ void Model::setKorea()
 {
     question1 =
         "During which war did Gyeongbokgung suffer damage and abandonment "
-        "\nfor two centuries before its comprehensive restoration in the 19th century?";
+        "\nfor two centuries before its comprehensive restoration"
+        "\nin the 19th century?";
     option1 = "World War I";
     option2 = "Korean War";
     option3 = "Imjin War";  // Correct
