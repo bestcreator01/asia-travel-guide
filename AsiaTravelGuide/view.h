@@ -32,37 +32,25 @@ private slots:
 
     void on_playButton_clicked();
     void on_backButton_clicked();
-    void on_indiaButton_clicked();
+    void on_quizButton_clicked();
     void updateState(QString state);
 
+    void on_indiaButton_clicked();
     void on_hawaMahal_clicked();
-
     void on_tajMahal_clicked();
-
     void on_paniPuri_clicked();
-
     void on_biryani_clicked();
 
-    void on_quizButton_clicked();
-
     void on_koreaButton_clicked();
-
     void on_bulguksaButton_clicked();
-
     void on_gyeongbokgungButton_clicked();
-
     void on_tteokbokkiButton_clicked();
-
     void on_bossamButton_clicked();
 
     void on_thailandButton_clicked();
-
     void on_grandPalaceButton_clicked();
-
     void on_watMuangButton_clicked();
-
     void on_tomYumButton_clicked();
-
     void on_stickyRiceButton_clicked();
 
 private:
