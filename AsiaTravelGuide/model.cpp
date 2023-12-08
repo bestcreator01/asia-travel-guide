@@ -24,7 +24,6 @@ void Model::showQuizInfo(QString country)
     if (country == "India")
     {
         setIndia();
-
     }
     else if(country == "Thailand")
     {
@@ -32,7 +31,7 @@ void Model::showQuizInfo(QString country)
     }
     else if(country == "Korea")
     {
-        //TODO: fill out questions
+        setKorea();
     }
     emit sendQuiz(questionBank, questions);
 }
@@ -56,8 +55,8 @@ void Model::setIndia()
     option2 = "Ivory Marvel";
     option3 = "Crown of Palaces";  // Correct
     option4 = "Pearl of Agra";
-    questionBank[question1] = {option1, option2, option3, option4};
-    questions.push_back(question1);
+    putQuestionInQuestionBank(question1);
+
     // second quesiton
     question2 =
         "What was the original purpose of the intricate latticework and "
@@ -67,8 +66,8 @@ void Model::setIndia()
     option3 = "To allow royal ladies to observe street activities without "
               "\nbeing seen";  // Correct
     option4 = "To enhance the structural stability of the palace";
-    questionBank[question2] = {option1, option2, option3, option4};
-    questions.push_back(question2);
+    putQuestionInQuestionBank(question2);
+
     // third question
     question3 =
         "Pani Puri is a common street food in the Indian subcontinent."
@@ -77,8 +76,8 @@ void Model::setIndia()
     option2 = "yogurt, ginger, garlic, and herbs";
     option3 = "chili powder, chaat masala, potato mash, and chickpeas";  // Correct
     option4 = "peppers, turmeric, coriander, and cumin";
-    questionBank[question3] = {option1, option2, option3, option4};
-    questions.push_back(question3);
+    putQuestionInQuestionBank(question3);
+
     // fourth question
     question4 =
         "What cooking method is most commonly used to prepare Biryani, "
@@ -88,14 +87,9 @@ void Model::setIndia()
     option2 = "Boiling";
     option3 = "Dum method";  // Correct
     option4 = "Stir-frying";
-    questionBank[question4] = {option1, option2, option3, option4};
-    questions.push_back(question4);
+    putQuestionInQuestionBank(question4);
 
-    std::random_device rd;
-    std::mt19937 g(rd());
-
-    std::shuffle(questions.begin(), questions.end(), g);
-
+    randomizeQuestions();
 }
 
 void Model::setThailand()
@@ -108,8 +102,8 @@ void Model::setThailand()
     option2 = "1882, King Rama III";
     option3 = "1782, King Rama I";  // Correct
     option4 = "1982, King Bhumibol Adulyadej";
-    questionBank[question1] = {option1, option2, option3, option4};
-    questions.push_back(question1);
+    putQuestionInQuestionBank(question1);
+
     // second quesiton
     question2 =
         "What is the local name for the Great Buddha of Thailand, "
@@ -118,8 +112,8 @@ void Model::setThailand()
     option2 = "Wat Muang, its serene expression";
     option3 = "Luangpho Yai, its construction materials ";  // Correct
     option4 = "Buddha Rama, its colossal size";
-    questionBank[question2] = {option1, option2, option3, option4};
-    questions.push_back(question2);
+    putQuestionInQuestionBank(question2);
+
     // third question
     question3 =
         "Originating from central Thailand and a quintessential Thai soup,"
@@ -128,8 +122,8 @@ void Model::setThailand()
     option2 = "Tasty Heat";
     option3 = "Hot and Sour";  // Correct
     option4 = "Flavorful Zest";
-    questionBank[question3] = {option1, option2, option3, option4};
-    questions.push_back(question3);
+    putQuestionInQuestionBank(question3);
+
     // fourth question
     question4 =
         "What is the key ingredient used to impart a creamy texture "
@@ -139,9 +133,64 @@ void Model::setThailand()
     option2 = "Almond Milk, October to December";
     option3 = "Coconut Milk, March to June";  // Correct
     option4 = "Evaporated Milk, January to February";
-    questionBank[question4] = {option1, option2, option3, option4};
-    questions.push_back(question4);
+    putQuestionInQuestionBank(question4);
 
+    randomizeQuestions();
+}
+
+void Model::setKorea()
+{
+    question1 =
+        "During which war did Gyeongbokgung suffer damage and abandonment "
+        "\nfor two centuries before its comprehensive restoration in the 19th century?";
+    option1 = "World War I";
+    option2 = "Korean War";
+    option3 = "Imjin War";  // Correct
+    option4 = "Vietnam War";
+    putQuestionInQuestionBank(question1);
+
+    // second quesiton
+    question2 =
+        "Bulguksa, a UNESCO World Heritage site in South Korea, "
+        "\nis known for housing one of the world's earliest woodblock prints."
+        "\n What is the content of this historical woodblock print?";
+    option1 = "Royal decrees";
+    option2 = "Landscape paintings";
+    option3 = "Buddhist scriptures";  // Correct
+    option4 = "Architectural blueprints";
+    putQuestionInQuestionBank(question2);
+
+    // third question
+    question3 =
+        "Apart from rice cakes, what are two common accompaniments "
+        "\nin a traditional serving of Tteokbokki?";
+    option1 = "Tofu and Kimchi";
+    option2 = "Fish cakes and Boiled eggs";
+    option3 = "Seaweed and Radishes";  // Correct
+    option4 = "Pork and Bean sprouts";
+    putQuestionInQuestionBank(question3);
+
+    // fourth question
+    question4 =
+        "In addition to pork shoulder, what is a key component of "
+        "\nthe side dishes served with Bossam in Korean cuisine?";
+    option1 = "Sliced Raw Beef";
+    option2 = "Fried Chicken";
+    option3 = "Spicy Radish Salad";  // Correct
+    option4 = "Steamed Vegetables";
+    putQuestionInQuestionBank(question4);
+
+    randomizeQuestions();
+}
+
+void Model::putQuestionInQuestionBank(QString question)
+{
+    questionBank[question] = {option1, option2, option3, option4};
+    questions.push_back(question);
+}
+
+void Model::randomizeQuestions()
+{
     std::random_device rd;
     std::mt19937 g(rd());
 

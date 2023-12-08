@@ -39,6 +39,8 @@ private:
     void setIndia();
     void setThailand();
     void setKorea();
+    void putQuestionInQuestionBank(QString question);
+    void randomizeQuestions();
 //    QString landMarkInfo[2];
 //    QString restaurantInfo[2];
 
@@ -47,11 +49,6 @@ private:
 
 //    Country currentCountry;
 //    Place currentPlace;
-
-
-
-
-
 };
 
 #endif // MODEL_H
