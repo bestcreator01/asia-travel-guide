@@ -36,4 +36,8 @@
         <file>tteokbokki_Image.jpg</file>
         <file>pani-puri_Image.jpg</file>
     </qresource>
+    <qresource prefix="/music">
+        <file>bgm_India.wav</file>
+        <file>bgm_Korea.mp4</file>
+    </qresource>
 </RCC>

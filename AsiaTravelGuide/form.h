@@ -3,6 +3,9 @@
 
 #include <QLabel>
 #include <QWidget>
+#include <QMediaPlayer>
+#include <QAudioOutput>
+#include <QStyle>
 
 namespace Ui {
 class Form;
@@ -29,6 +32,10 @@ private slots:
 
     void closeEvent(QCloseEvent *bar);
 
+    void on_playMusic_clicked();
+
+    void on_stopMusic_clicked();
+
 signals:
     void windowClosed();
     void stopTimer();
@@ -52,6 +59,9 @@ private:
     void startTyping();
     QStringList splittedText;
 
+    QMediaPlayer *musicPlayer;
+    QAudioOutput *musicOutput;
+
     void setLandmarkIndiaHelper(int currentNum, QString image);
     void setRestaurantIndiaHelper(int currentNum, QString image);
     void nextButtonHelper(QString info[]);
@@ -61,6 +71,8 @@ private:
     void setRestaurantThailandHelper(int currentNum, QString image);
     void setRestaurantKoreaHelper(int currentNum, QString image);
     void setLandmarkKoreaHelper(int currentNum, QString image);
+    void setMusic(QString countryName);
+    void updateVolume(int volume);
 };
 
 #endif // FORM_H

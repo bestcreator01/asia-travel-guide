@@ -4,10 +4,11 @@
 #include <QMovie>
 #include <QTimer>
 
-
 Form::Form(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::Form)
+    QWidget(parent)
+    , ui(new Ui::Form)
+    , musicPlayer(new QMediaPlayer)
+    , musicOutput(new QAudioOutput)
 {
     ui->setupUi(this);
     timer = new QTimer(this);
@@ -22,6 +23,13 @@ Form::Form(QWidget *parent) :
     backgroundLabel->setGeometry(0, 0, this->width(), this->height());  // Set to cover the entire window
     backgroundLabel->lower();
     movie->start();
+
+    ui->playMusic->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
+    ui->stopMusic->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
+    ui->playMusic->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
+    ui->stopMusic->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
+    ui->musicSlider->setSliderPosition(50);
+    connect(ui->musicSlider, &QSlider::valueChanged, this, &Form::updateVolume);
 
     ui->nextButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
     ui->backButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
@@ -185,6 +193,8 @@ Form::Form(QWidget *parent) :
 Form::~Form()
 {
     delete ui;
+    delete musicPlayer;
+    delete musicOutput;
 }
 
 void Form::startTyping()
@@ -274,10 +284,48 @@ void Form::receiveSignalToSetTextIndia(QString name)
         setRestaurantKoreaHelper(2, ":/images/bossam_Image.jpg");
         currentCountry = "Korea";
     }
+
+    setMusic(currentCountry);
+
     this->setWindowTitle(name);
     ui->description->setText("");
     timer->start(10);
     ui->backButton->hide();
+}
+
+void Form::setMusic(QString countryName)
+{
+    musicPlayer->setAudioOutput(musicOutput);
+    if (countryName == "India")
+    {
+        musicPlayer->setSource(QUrl("qrc:/music/bgm_India.wav"));
+    }
+    else if (countryName == "Korea")
+    {
+        musicPlayer->setSource(QUrl("qrc:/music/bgm_Korea.mp4"));
+    }
+    else if (countryName == "Thailand")
+    {
+
+    }
+    musicPlayer->play();
+    musicOutput->setVolume(0.5);
+}
+
+void Form::updateVolume(int volume)
+{
+    musicOutput->setVolume(volume/100.0);
+}
+
+void Form::on_playMusic_clicked()
+{
+    musicPlayer->play();
+}
+
+
+void Form::on_stopMusic_clicked()
+{
+    musicPlayer->pause();
 }
 
 void Form::on_nextButton_clicked()
@@ -302,6 +350,8 @@ void Form::closeEvent(QCloseEvent *bar)
     firstBackClicked = false;
     firstNextClicked = false;
     timer->stop();
+    ui->musicSlider->setSliderPosition(50);
+    musicPlayer->stop();
     emit windowClosed();
 }
 
@@ -470,4 +520,3 @@ void Form::buttonHelper(bool isNextButton)
     ui->nextButton->setVisible(!isNextButton);
     ui->backButton->setVisible(isNextButton);
 }
-
