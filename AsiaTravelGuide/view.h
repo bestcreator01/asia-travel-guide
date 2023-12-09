@@ -276,8 +276,20 @@ signals:
     ///
     void informModelToSend(QString name);
 
+    ///
+    /// \brief generateRandomQuestion generates questions in random order
+    ///
     void generateRandomQuestion();
+
+    ///
+    /// \brief resetButtons resets the quiz buttons to default
+    ///
     void resetButtons();
+
+    ///
+    /// \brief sendQuizInfo emitted to display quiz text based on the current country
+    /// \param country the current country
+    ///
     void sendQuizInfo(QString country);
 };
 #endif // VIEW_H
