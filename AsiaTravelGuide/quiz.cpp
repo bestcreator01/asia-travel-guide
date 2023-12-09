@@ -9,6 +9,7 @@ Quiz::Quiz(QWidget *parent) : QWidget(parent),
     ui->nextButton->hide();
     this->setWindowTitle("QUIZ");
     backgroundLabel = new QLabel(this);
+
 //    QMovie *movie = new QMovie(":/icons/clouds.gif");
 //    movie->setScaledSize(this->size());
 //    backgroundLabel->setMovie(movie);
@@ -39,6 +40,25 @@ Quiz::~Quiz()
     delete ui;
     delete top;
     delete bottom;
+}
+
+void Quiz::setBgImage(QString country)
+{
+    if (country == "India")
+    {
+        QPixmap bgImage(":/images/quiz_India.png");
+        backgroundLabel->setPixmap(bgImage.scaled(this->size()));
+    }
+    else if (country == "Thailand")
+    {
+        QPixmap bgImage(":/images/quiz_Thailand.png");
+        backgroundLabel->setPixmap(bgImage.scaled(this->size()));
+    }
+    else if (country == "Korea")
+    {
+        QPixmap bgImage(":/images/quiz_Korea.png");
+        backgroundLabel->setPixmap(bgImage.scaled(this->size()));
+    }
 }
 
 void Quiz::setValues(QMap<QString, QList<QString>> &questionBank, QList<QString> &questions)

@@ -34,6 +34,7 @@ signals:
     void sendQuiz(QMap<QString, QList<QString>> &questionbank, QList<QString> &questions);
     void sendOptions(QList<int> &numbers);
 //    void sendDescriptions(QString description);
+    void sendCountryForBgImage(QString country);
 
 private:
     void setIndia();

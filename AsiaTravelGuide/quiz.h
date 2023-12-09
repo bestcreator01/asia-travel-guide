@@ -56,6 +56,12 @@ public:
     ///
     void setRandomOptions(QList<int> &numbers);
 
+    ///
+    /// \brief setBgImage - This checks the status of the tour and sets a background image for this quiz window.
+    /// \param country - Status of the current country.
+    ///
+    void setBgImage(QString country);
+
 signals:
     ///
     /// \brief randomizeOption

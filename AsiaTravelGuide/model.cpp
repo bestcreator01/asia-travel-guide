@@ -23,14 +23,17 @@ void Model::showQuizInfo(QString country)
     questions.clear();
     if (country == "India")
     {
+        emit sendCountryForBgImage("India");
         setIndia();
     }
     else if(country == "Thailand")
     {
+        emit sendCountryForBgImage("Thailand");
         setThailand();
     }
     else if(country == "Korea")
     {
+        emit sendCountryForBgImage("Korea");
         setKorea();
     }
     emit sendQuiz(questionBank, questions);
