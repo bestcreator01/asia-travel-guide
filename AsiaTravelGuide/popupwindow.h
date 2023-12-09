@@ -89,11 +89,16 @@ private:
     QMediaPlayer *musicPlayer;
     QAudioOutput *musicOutput;
 
+    // keeps track of if the user has clicked next or back button for the first time
     bool firstNextClicked = false;
     bool firstBackClicked = false;
+
+    // checks if current popup window is about landmark or restaurant
     bool landMarkFlag = true;
 
+    // the current description from the landmark/restaurant arrays to display
     int current = 0;
+    // keeps track of the current letter to display on the popup window descriptions
     int now = 0;
     ///
     /// \brief startTyping starts showing the letters of the descriptions letter by letter with a help of
