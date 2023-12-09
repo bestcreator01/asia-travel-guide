@@ -20,11 +20,13 @@ PopUpWindow::PopUpWindow(QWidget *parent) :
     , musicOutput(new QAudioOutput)
 {
     ui->setupUi(this);
+
+    // setting up the typing animation
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &PopUpWindow::startTyping);
-    //ui->bgImage->setGeometry(0, 0, this->width(), this->height());  // Set to cover the entire window
-    ui->image->lower();
 
+    // setting up the background gif image
+    ui->image->lower();
     backgroundLabel = new QLabel(this);
     QMovie *movie = new QMovie(":/icons/clouds.gif");
     movie->setScaledSize(this->size());
@@ -33,6 +35,7 @@ PopUpWindow::PopUpWindow(QWidget *parent) :
     backgroundLabel->lower();
     movie->start();
 
+    // setting up the music
     ui->playMusic->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
     ui->stopMusic->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
     ui->playMusic->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
@@ -40,6 +43,7 @@ PopUpWindow::PopUpWindow(QWidget *parent) :
     ui->musicSlider->setSliderPosition(10);
     connect(ui->musicSlider, &QSlider::valueChanged, this, &PopUpWindow::updateVolume);
 
+    // design buttons
     ui->nextButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
     ui->backButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
 
@@ -296,6 +300,7 @@ void PopUpWindow::receiveSignalToSetTextCountry(QString name)
 
     setMusic(currentCountry);
 
+    // typing animation logic
     this->setWindowTitle(name);
     ui->description->setText("");
     timer->start(25);
@@ -354,6 +359,7 @@ void PopUpWindow::closeWindow()
 
 void PopUpWindow::closeEvent(QCloseEvent *)
 {
+    // making sure everything is set as default
     currentText = "";
     now = 0;
     firstBackClicked = false;
