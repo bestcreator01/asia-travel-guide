@@ -379,7 +379,7 @@ void PopUpWindow::setLandmarkKoreaHelper(int currentNum, QString image)
     current = currentNum;
     landMarkFlag = true;
     QPixmap pixmap(image);
-    ui->image->setPixmap(pixmap.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    ui->image->setPixmap(pixmap.scaled(ui->image->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation) );
     splittedText = koreaLandMarkInfo[current].split("");
     firstNextClicked = true;
 }
@@ -389,7 +389,7 @@ void PopUpWindow::setRestaurantKoreaHelper(int currentNum, QString image)
     current = currentNum;
     landMarkFlag = false;
     QPixmap pixmap(image);
-    ui->image->setPixmap(pixmap.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    ui->image->setPixmap(pixmap.scaled(ui->image->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
     splittedText = koreaRestaurantInfo[current].split("");
     firstNextClicked = true;
 }
@@ -399,7 +399,7 @@ void PopUpWindow::setLandmarkThailandHelper(int currentNum, QString image)
     current = currentNum;
     landMarkFlag = true;
     QPixmap pixmap(image);
-    ui->image->setPixmap(pixmap.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    ui->image->setPixmap(pixmap.scaled(ui->image->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
     splittedText = thailandLandMarkInfo[current].split("");
     firstNextClicked = true;
 }
@@ -409,7 +409,7 @@ void PopUpWindow::setRestaurantThailandHelper(int currentNum, QString image)
     current = currentNum;
     landMarkFlag = false;
     QPixmap pixmap(image);
-    ui->image->setPixmap(pixmap.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    ui->image->setPixmap(pixmap.scaled(ui->image->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
     splittedText = thailandRestaurantInfo[current].split("");
     firstNextClicked = true;
 }
@@ -419,7 +419,7 @@ void PopUpWindow::setLandmarkIndiaHelper(int currentNum, QString image)
     current = currentNum;
     landMarkFlag = true;
     QPixmap pixmap(image);
-    ui->image->setPixmap(pixmap.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    ui->image->setPixmap(pixmap.scaled(ui->image->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
     splittedText = indiaLandMarkInfo[current].split("");
     firstNextClicked = true;
 }
