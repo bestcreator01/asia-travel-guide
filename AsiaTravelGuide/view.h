@@ -24,7 +24,17 @@ class view : public QMainWindow
     QString previousState;
 
 public:
+
+    ///
+    /// \brief view a constructor
+    /// \param model reference to the model
+    /// \param parent the parent widget
+    ///
     view(Model& model, QWidget *parent = nullptr);
+
+    ///
+    /// \brief a destructor
+    ///
     ~view();
 
     void closeEvent(QCloseEvent *event);
