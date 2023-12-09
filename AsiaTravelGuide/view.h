@@ -236,8 +236,14 @@ private:
     ///
     void enableButtonsAndCheck();
 
+    ///
+    /// \brief showInfo emit a signal to display a popup window and disable buttons on the mainwindow
+    ///
     void showInfo(QString);
-    int count;
+
+    ///
+    /// \brief country a string representing a country
+    ///
     QString country = "";
 
     ///
