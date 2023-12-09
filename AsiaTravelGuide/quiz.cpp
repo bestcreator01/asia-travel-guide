@@ -17,7 +17,7 @@
 Quiz::Quiz(QWidget *parent) : QWidget(parent),
                               ui(new Ui::Quiz)
 {
-    // Setup Contructor
+    // Setup ui
     ui->setupUi(this);
     ui->nextButton->hide();
     ui->congrats->hide();
@@ -55,10 +55,6 @@ Quiz::~Quiz()
     delete bottom;
 }
 
-///
-/// \brief Set background Image for a given quiz of country
-/// \param country
-///
 void Quiz::setBgImage(QString country)
 {
     if (country == "India")
@@ -78,11 +74,6 @@ void Quiz::setBgImage(QString country)
     }
 }
 
-///
-/// \brief Grab information form model
-/// \param questionBank map with question & answer
-/// \param questions random
-///
 void Quiz::setValues(QMap<QString, QList<QString>> &questionBank, QList<QString> &questions)
 {
     this->questionBank = questionBank;
@@ -102,6 +93,7 @@ void Quiz::showRandomQuestion()
     // randomize
     emit randomizeOption();
     randomizeSelection(numbers);
+    // set ui accordingly
     ui->congrats->hide();
     ui->option1Button->show();
     ui->option2Button->show();
@@ -134,6 +126,7 @@ void Quiz::disableOptionButtons()
         ui->nextButton->show();
     else
     {
+        // show when completed the quiz
         ui->congrats->show();
         ui->option1Button->hide();
         ui->option2Button->hide();
@@ -169,12 +162,13 @@ void Quiz::handleOptionButtonClick(QPushButton *button)
     QString selectedOption = button->text();
     QString correctOption = questionBank[randomQuestion][correct];
 
+    // Wrong option
     if (selectedOption != correctOption)
     {
         button->setStyleSheet("background-color: red");
         button->setDisabled(true);
     }
-    else
+    else // Correct option
     {
         button->setStyleSheet("background-color: green");
         disableOptionButtons();
@@ -184,6 +178,7 @@ void Quiz::handleOptionButtonClick(QPushButton *button)
 
 void Quiz::on_nextButton_clicked()
 {
+    // set ui accordingly
     ui->nextButton->hide();
     randomQuestion = questions[++quesIndex];
     ui->question->setText(randomQuestion);
@@ -192,6 +187,7 @@ void Quiz::on_nextButton_clicked()
     emit randomizeOption();
     randomizeSelection(numbers);
 
+    // reset Quiz buttons
     resetButtons();
     closePaint();
 }
@@ -205,6 +201,9 @@ void Quiz::randomizeSelection(QList<int> numbers)
     update();
 }
 
+///
+/// \brief Close Window
+///
 void Quiz::closeEvent(QCloseEvent *bar)
 {
     quesIndex = 0;
@@ -213,6 +212,7 @@ void Quiz::closeEvent(QCloseEvent *bar)
 
 void Quiz::closePaint()
 {
+    // Destructor & clear the confettis
     for (int i = 0; i < confettiPieces.size(); i += 2)
     {
         top->DestroyBody(confettiPieces[i]);
@@ -247,14 +247,16 @@ void Quiz::createConfetti()
         b2Body *bottomConfettiPiece = bottom->CreateBody(&confettiBodyDef);
 
         b2PolygonShape confettiShape;
-        confettiShape.SetAsBox(0.1f, 0.1f);  // Adjust the size as needed
+        confettiShape.SetAsBox(0.1f, 0.1f);
 
+        // Set physics
         b2FixtureDef confettiFixtureDef;
         confettiFixtureDef.shape = &confettiShape;
         confettiFixtureDef.density = 1.0f;
         confettiFixtureDef.friction = 0.3f;
         confettiFixtureDef.restitution = 0.5f;
 
+        // add b2body to specific world
         topConfettiPiece->CreateFixture(&confettiFixtureDef);
         confettiPieces.push_back(topConfettiPiece);
 
@@ -302,14 +304,19 @@ void Quiz::paintEvent(QPaintEvent *event)
         b2Vec2 topPosition = confettiPieces[i]->GetPosition();
         b2Vec2 bottomPosition = confettiPieces[i + 1]->GetPosition();
 
+        // make explosion in the middle
         confettiPieces[75]->ApplyForce(b2Vec2(0.0f, 10000.0f), topPosition, true);
         confettiPieces[100]->ApplyForce(b2Vec2(0.0f, 10000.0f), bottomPosition, true);
 
+        // draw accordingly to confetti's
         painter.drawRect(QRectF(topPosition.x, topPosition.y, 5, 5));
         painter.drawRect(QRectF(bottomPosition.x, bottomPosition.y, 5, 5));
     }
 }
 
+///
+/// \brief update World
+///
 void Quiz::updateWorld()
 {
     top->Step(1.0 / 60.0, 6, 2);
