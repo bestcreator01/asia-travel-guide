@@ -76,13 +76,12 @@ void Model::setIndia()
     question3 =
         "Pani Puri is a common street food in the Indian subcontinent."
         "\nWhat makes the ingredients of Pani Puri as a snack in India?";
-    option1 = "deep-fried and breaded exterior";
-    option2 = "yogurt, ginger, garlic, "
+    option1 = "butter, frosting, sugar syrup";
+    option2 = "yogurt, ginger, chicken, "
               "\nand herbs";
     option3 = "chili powder, chaat masala, "
               "\npotato mash, and chickpeas";  // Correct
-    option4 = "peppers, turmeric, coriander, "
-              "\nand cumin";
+    option4 = "rice flour, corn flour, oil";
     putQuestionInQuestionBank(question3);
 
     // fourth question
