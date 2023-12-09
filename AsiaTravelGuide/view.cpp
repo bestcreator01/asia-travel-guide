@@ -1,3 +1,12 @@
+/**
+ * Author:     Crazy Broke Asians
+ * Date:       Dec-08-2023
+ * Course:     CS 3505, University of Utah
+ * Assignment: A9: An Educational App
+ * File Contents
+ *      It contains all necessary codes needed to form a zoomed-in/out popup.
+*/
+
 #include "view.h"
 #include "ui_view.h"
 #include "model.h"

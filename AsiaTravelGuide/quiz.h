@@ -1,3 +1,12 @@
+/**
+ * Author:     Crazy Broke Asians
+ * Date:       Dec-08-2023
+ * Course:     CS 3505, University of Utah
+ * Assignment: A9: An Educational App
+ * File Contents
+ *      It contains all necessary information needed to form a quiz popup.
+*/
+
 #ifndef QUIZ_H
 #define QUIZ_H
 
