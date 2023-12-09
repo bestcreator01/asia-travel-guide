@@ -55,9 +55,9 @@ SOURCES += \
     Box2D/Dynamics/b2World.cpp \
     Box2D/Dynamics/b2WorldCallbacks.cpp \
     Box2D/Rope/b2Rope.cpp \
-    form.cpp \
     main.cpp \
     model.cpp \
+    popupwindow.cpp \
     quiz.cpp \
     view.cpp
 
@@ -109,13 +109,13 @@ HEADERS += \
     Box2D/Dynamics/b2World.h \
     Box2D/Dynamics/b2WorldCallbacks.h \
     Box2D/Rope/b2Rope.h \
-    form.h \
     model.h \
+    popupwindow.h \
     quiz.h \
     view.h
 
 FORMS += \
-    form.ui \
+    popupwindow.ui \
     quiz.ui \
     view.ui
 

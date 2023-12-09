@@ -7,21 +7,21 @@
  *      It contains all necessary codes needed to form a description popup.
 */
 
-#include "form.h"
-#include "ui_form.h"
+#include "popupwindow.h"
+#include "ui_popupwindow.h"
 #include <QDebug>
 #include <QMovie>
 #include <QTimer>
 
-Form::Form(QWidget *parent) :
+PopUpWindow::PopUpWindow(QWidget *parent) :
     QWidget(parent)
-    , ui(new Ui::Form)
+    , ui(new Ui::PopUpWindow)
     , musicPlayer(new QMediaPlayer)
     , musicOutput(new QAudioOutput)
 {
     ui->setupUi(this);
     timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, &Form::startTyping);
+    connect(timer, &QTimer::timeout, this, &PopUpWindow::startTyping);
     //ui->bgImage->setGeometry(0, 0, this->width(), this->height());  // Set to cover the entire window
     ui->image->lower();
 
@@ -38,7 +38,7 @@ Form::Form(QWidget *parent) :
     ui->playMusic->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
     ui->stopMusic->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
     ui->musicSlider->setSliderPosition(50);
-    connect(ui->musicSlider, &QSlider::valueChanged, this, &Form::updateVolume);
+    connect(ui->musicSlider, &QSlider::valueChanged, this, &PopUpWindow::updateVolume);
 
     ui->nextButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
     ui->backButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
@@ -199,14 +199,14 @@ Form::Form(QWidget *parent) :
                              "\naligning with the dish's literal meaning of 'wrapped' or 'packaged'";
     }
 
-Form::~Form()
+PopUpWindow::~PopUpWindow()
 {
     delete ui;
     delete musicPlayer;
     delete musicOutput;
 }
 
-void Form::startTyping()
+void PopUpWindow::startTyping()
 {
     ui->nextButton->hide();
     ui->backButton->hide();
@@ -228,9 +228,9 @@ void Form::startTyping()
     }
 }
 
-void Form::receiveSignalToSetTextIndia(QString name)
+void PopUpWindow::receiveSignalToSetTextCountry(QString name)
 {
-    // india
+    // India
     if (name == "HawaMahal")
     {
         setLandmarkIndiaHelper(0, ":/images/hawa-mahal_Image.jpg");
@@ -251,7 +251,7 @@ void Form::receiveSignalToSetTextIndia(QString name)
         setRestaurantIndiaHelper(2, ":/images/biryani_Image.jpg");
         currentCountry = "India";
     }
-    // thailand
+    // Thailand
     else if (name == "GrandPalace")
     {
         setLandmarkThailandHelper(0, ":/images/Grand-Palace_Image.png");
@@ -272,7 +272,7 @@ void Form::receiveSignalToSetTextIndia(QString name)
         setRestaurantThailandHelper(2, ":/images/Mango-Rice_Image.png");
         currentCountry = "Thailand";
     }
-    // korea
+    // Korea
     else if (name == "Gyeongbokgung")
     {
         setLandmarkKoreaHelper(0, ":/images/Gyeongbokgung_Image.jpg");
@@ -302,7 +302,7 @@ void Form::receiveSignalToSetTextIndia(QString name)
     ui->backButton->hide();
 }
 
-void Form::setMusic(QString countryName)
+void PopUpWindow::setMusic(QString countryName)
 {
     musicPlayer->setAudioOutput(musicOutput);
     if (countryName == "India")
@@ -321,38 +321,38 @@ void Form::setMusic(QString countryName)
     musicOutput->setVolume(0.5);
 }
 
-void Form::updateVolume(int volume)
+void PopUpWindow::updateVolume(int volume)
 {
     musicOutput->setVolume(volume/100.0);
 }
 
-void Form::on_playMusic_clicked()
+void PopUpWindow::on_playMusic_clicked()
 {
     musicPlayer->play();
 }
 
 
-void Form::on_stopMusic_clicked()
+void PopUpWindow::on_stopMusic_clicked()
 {
     musicPlayer->pause();
 }
 
-void Form::on_nextButton_clicked()
+void PopUpWindow::on_nextButton_clicked()
 {
     buttonHelper(true);
 }
 
-void Form::on_backButton_clicked()
+void PopUpWindow::on_backButton_clicked()
 {
     buttonHelper(false);
 }
 
-void Form::closeWindow()
+void PopUpWindow::closeWindow()
 {
     this->close();
 }
 
-void Form::closeEvent(QCloseEvent *)
+void PopUpWindow::closeEvent(QCloseEvent *)
 {
     currentText = "";
     now = 0;
@@ -368,7 +368,7 @@ void Form::closeEvent(QCloseEvent *)
  * HELPER METHODS
  */
 
-void Form::setLandmarkKoreaHelper(int currentNum, QString image)
+void PopUpWindow::setLandmarkKoreaHelper(int currentNum, QString image)
 {
     current = currentNum;
     landMarkFlag = true;
@@ -378,7 +378,7 @@ void Form::setLandmarkKoreaHelper(int currentNum, QString image)
     firstNextClicked = true;
 }
 
-void Form::setRestaurantKoreaHelper(int currentNum, QString image)
+void PopUpWindow::setRestaurantKoreaHelper(int currentNum, QString image)
 {
     current = currentNum;
     landMarkFlag = false;
@@ -388,7 +388,7 @@ void Form::setRestaurantKoreaHelper(int currentNum, QString image)
     firstNextClicked = true;
 }
 
-void Form::setLandmarkThailandHelper(int currentNum, QString image)
+void PopUpWindow::setLandmarkThailandHelper(int currentNum, QString image)
 {
     current = currentNum;
     landMarkFlag = true;
@@ -398,7 +398,7 @@ void Form::setLandmarkThailandHelper(int currentNum, QString image)
     firstNextClicked = true;
 }
 
-void Form::setRestaurantThailandHelper(int currentNum, QString image)
+void PopUpWindow::setRestaurantThailandHelper(int currentNum, QString image)
 {
     current = currentNum;
     landMarkFlag = false;
@@ -408,7 +408,7 @@ void Form::setRestaurantThailandHelper(int currentNum, QString image)
     firstNextClicked = true;
 }
 
-void Form::setLandmarkIndiaHelper(int currentNum, QString image)
+void PopUpWindow::setLandmarkIndiaHelper(int currentNum, QString image)
 {
     current = currentNum;
     landMarkFlag = true;
@@ -418,7 +418,7 @@ void Form::setLandmarkIndiaHelper(int currentNum, QString image)
     firstNextClicked = true;
 }
 
-void Form::setRestaurantIndiaHelper(int currentNum, QString image)
+void PopUpWindow::setRestaurantIndiaHelper(int currentNum, QString image)
 {
     current = currentNum;
     landMarkFlag = false;
@@ -428,7 +428,7 @@ void Form::setRestaurantIndiaHelper(int currentNum, QString image)
     firstNextClicked = true;
 }
 
-void Form::nextButtonHelper(QString info[])
+void PopUpWindow::nextButtonHelper(QString info[])
 {
     if (firstNextClicked)
     {
@@ -445,7 +445,7 @@ void Form::nextButtonHelper(QString info[])
     }
 }
 
-void Form::backButtonHelper(QString info[])
+void PopUpWindow::backButtonHelper(QString info[])
 {
     if(firstBackClicked)
     {
@@ -457,7 +457,7 @@ void Form::backButtonHelper(QString info[])
     }
 }
 
-void Form::buttonHelper(bool isNextButton)
+void PopUpWindow::buttonHelper(bool isNextButton)
 {
     if (landMarkFlag)
     {

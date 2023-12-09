@@ -195,9 +195,9 @@ view::view(Model& model, QWidget *parent)
     // send country status to set up the background image in quiz window
     connect(&model, &Model::sendCountryForBgImage, &quizWindow, &Quiz::setBgImage);
 
-    connect(this, &view::informModelToSend, &indiaWindow, &Form::receiveSignalToSetTextIndia);
+    connect(this, &view::informModelToSend, &popUpWindow, &PopUpWindow::receiveSignalToSetTextCountry);
 
-    connect(&indiaWindow, &Form::windowClosed, this, &view::enableButtonsAndCheck);
+    connect(&popUpWindow, &PopUpWindow::windowClosed, this, &view::enableButtonsAndCheck);
 
     connect(this, &view::generateRandomQuestion, &quizWindow, &Quiz::showRandomQuestion);
     connect(this, &view::resetButtons, &quizWindow, &Quiz::resetButtons);
@@ -211,7 +211,7 @@ view::~view()
 
 void view::closeEvent(QCloseEvent *)
 {
-    indiaWindow.closeWindow();
+    popUpWindow.closeWindow();
     quizWindow.closeWindow();
 }
 
@@ -841,7 +841,7 @@ void view::disableButtons()
 
 void view::showInfo(QString info)
 {
-    indiaWindow.show();
+    popUpWindow.show();
     emit informModelToSend(info);
     disableButtons();
 }

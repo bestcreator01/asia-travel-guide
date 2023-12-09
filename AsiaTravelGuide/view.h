@@ -20,7 +20,7 @@
 #include <QTimer>
 #include <QPalette>
 #include "model.h"
-#include "form.h"
+#include "popupwindow.h"
 #include "quiz.h"
 
 QT_BEGIN_NAMESPACE
@@ -128,7 +128,7 @@ private:
     ///
     QLabel *backgroundLabel;
 
-    Form indiaWindow;
+    PopUpWindow popUpWindow;
     Quiz quizWindow;
 
     // shadow effect on text
