@@ -185,15 +185,25 @@ background-color: rgb(190, 255, 255);</string>
   <widget class="QLabel" name="congrats">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>230</y>
+     <x>100</x>
+     <y>220</y>
      <width>441</width>
      <height>91</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Fixedsys</family>
+     <pointsize>15</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(170, 0, 0);</string>
+   </property>
    <property name="text">
-    <string>Congrats on Completing the quiz!!! 
- you may now close window.</string>
+    <string>CONGRATS ON COMPLETING THE QUIZ!!! 
+ You may now close window.</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
