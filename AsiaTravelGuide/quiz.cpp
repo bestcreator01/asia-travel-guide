@@ -11,11 +11,16 @@
 #include "ui_quiz.h"
 #include <QMovie>
 
+///
+/// \brief Constructor
+///
 Quiz::Quiz(QWidget *parent) : QWidget(parent),
                               ui(new Ui::Quiz)
 {
+    // Setup Contructor
     ui->setupUi(this);
     ui->nextButton->hide();
+    ui->congrats->hide();
     this->setWindowTitle("QUIZ");
     backgroundLabel = new QLabel(this);
     backgroundLabel->setGeometry(0, 0, this->width(), this->height());  // Set to cover the entire window
@@ -30,15 +35,19 @@ Quiz::Quiz(QWidget *parent) : QWidget(parent),
     // Create ground
     createGround(-7.0f, height() + 5.0f);
 
+    // Create a Timer for Box2D
     connect(&timer, &QTimer::timeout, this, &Quiz::updateWorld);
     timer.start(3);
+    // Show all the option to be clicked
     ui->option1Button->setEnabled(true);
     ui->option2Button->setEnabled(true);
     ui->option3Button->setEnabled(true);
     ui->option4Button->setEnabled(true);
-
 }
 
+///
+/// \brief Destructor
+///
 Quiz::~Quiz()
 {
     delete ui;
@@ -46,6 +55,10 @@ Quiz::~Quiz()
     delete bottom;
 }
 
+///
+/// \brief Set background Image for a given quiz of country
+/// \param country
+///
 void Quiz::setBgImage(QString country)
 {
     if (country == "India")
@@ -65,6 +78,11 @@ void Quiz::setBgImage(QString country)
     }
 }
 
+///
+/// \brief Grab information form model
+/// \param questionBank map with question & answer
+/// \param questions random
+///
 void Quiz::setValues(QMap<QString, QList<QString>> &questionBank, QList<QString> &questions)
 {
     this->questionBank = questionBank;
@@ -84,6 +102,12 @@ void Quiz::showRandomQuestion()
     // randomize
     emit randomizeOption();
     randomizeSelection(numbers);
+    ui->congrats->hide();
+    ui->option1Button->show();
+    ui->option2Button->show();
+    ui->option3Button->show();
+    ui->option4Button->show();
+    ui->question->show();
 }
 
 void Quiz::resetButtons()
@@ -106,8 +130,18 @@ void Quiz::disableOptionButtons()
     ui->option2Button->setDisabled(true);
     ui->option3Button->setDisabled(true);
     ui->option4Button->setDisabled(true);
-    if (quesIndex != 3)
+    if (quesIndex != questions.size() - 1)
         ui->nextButton->show();
+    else
+    {
+        ui->congrats->show();
+        ui->option1Button->hide();
+        ui->option2Button->hide();
+        ui->option3Button->hide();
+        ui->option4Button->hide();
+        ui->question->hide();
+    }
+
 }
 
 void Quiz::on_option1Button_clicked()
@@ -159,9 +193,6 @@ void Quiz::on_nextButton_clicked()
     randomizeSelection(numbers);
 
     resetButtons();
-    if (quesIndex == questions.size() - 1)
-        ui->nextButton->hide();
-
     closePaint();
 }
 
