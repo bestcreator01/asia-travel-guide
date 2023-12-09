@@ -69,17 +69,44 @@ private slots:
 private:
     Ui::view *ui;
 
+    ///
+    /// \brief The Country enum represents three countries
+    ///
     enum Country {India, Korea, Thailand};
 
+    ///
+    /// \brief The IndiaPlace enum represents four places in India
+    ///
     enum IndiaPlace{HawaMaha, TajMahal, PaniPuri, Biryani};
+
+    ///
+    /// \brief indiaCompleteList contains visited places in India
+    ///
     QSet<IndiaPlace> indiaCompleteList;
 
+    ///
+    /// \brief The KoreaPlace enum represents four places in Korea
+    ///
     enum KoreaPlace{Gyeongbokgung, Bulguksa, Tteokbokki, Bossam};
+
+    ///
+    /// \brief koreaCompleteList contains visited places in Korea
+    ///
     QSet<KoreaPlace> koreaCompleteList;
 
+    ///
+    /// \brief The ThailandPlace enum represents four places in Thailand
+    ///
     enum ThailandPlace{GrandPalace, WatMuang, TomYum, StickyRice};
+
+    ///
+    /// \brief ThailandCompleteList contains visited places in Thailand
+    ///
     QSet<ThailandPlace> ThailandCompleteList;
 
+    ///
+    /// \brief backgroundLabel a pointer to background label of window
+    ///
     QLabel *backgroundLabel;
 
     Form indiaWindow;
@@ -110,25 +137,43 @@ private:
     /// \brief fadeOutPlayButton fades out the play button when pressed on the welcome screen
     ///
     void fadeOutPlayButton();
+
     ///
     /// \brief fadeInBackArrow fades in the back arrow
     ///
     void fadeInBackArrow();
+
     ///
     /// \brief fadeOutBackArrow fades out the back arrow
     ///
     void fadeOutBackArrow();
+
     ///
     /// \brief fadeInMarkers fades in all the country's markers on the Asia country map
     ///
     void fadeInMarkers();
+
     ///
     /// \brief fadeOutMarkers fades out all the country's markers on the Asia country map
     ///
     void fadeOutMarkers();
+
+    ///
+    /// \brief fadeInLandMarks fades in buttons for landmarks based on a specified country
+    /// \param country the country whose landmarks will be faded in
+    ///
     void fadeInLandMarks(Country country);
+
+    ///
+    /// \brief hideLandMarks hide the landmarks/foods of all countries
+    ///
     void hideLandMarks();
+
+    ///
+    /// \brief hideCheckMarks hide checkmarks of landmarks/foods
+    ///
     void hideCheckMarks();
+
     ///
     /// \brief fadeEffect Gives the effect of fading in and out on widgets like labels and buttons
     /// on our window
@@ -146,22 +191,54 @@ private:
     ///
     void setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff);
 
+    ///
+    /// \brief fadeInBackgroundLabel applies fade-in affect to the background label
+    ///
     void fadeInBackgroundLabel();
+
+    ///
+    /// \brief setBgLabel sets the background label to the given QPixmap
+    /// \param background new background image
+    ///
     void setBgLabel(QPixmap background);
+
+    ///
+    /// \brief setBgLabelOpacity sets the background label opacity to 0.5
+    ///
     void setBgLabelOpacity();
 
+    ///
+    /// \brief disableButtons disables landmark/food buttons. called when a popup window is displaying
+    ///
     void disableButtons();
+
+    ///
+    /// \brief enableButtonsAndCheck enable landmark/food buttons and checkmark labels
+    ///
     void enableButtonsAndCheck();
+
     void showInfo(QString);
     int count;
     QString country = "";
 
+    ///
+    /// \brief fadeInCountryLabels fades in country name labels
+    ///
     void fadeInCountryLabels();
+
+    ///
+    /// \brief fadeOutCountryLabels fades out country name labels
+    ///
     void fadeOutCountryLabels();
+
+    ///
+    /// \brief fadeInCheckmarks fades in checkmarks for landmarks/food related to a specified country
+    /// \param country the country for which to show checkmarks
+    ///
     void fadeInCheckmarks(Country country);
 
 signals:
-    void hideWidgets();
+
     void changedState(QString state);
 
     void informModelToSend(QString name);
