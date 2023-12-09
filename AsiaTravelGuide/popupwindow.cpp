@@ -37,7 +37,7 @@ PopUpWindow::PopUpWindow(QWidget *parent) :
     ui->stopMusic->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
     ui->playMusic->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
     ui->stopMusic->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
-    ui->musicSlider->setSliderPosition(50);
+    ui->musicSlider->setSliderPosition(10);
     connect(ui->musicSlider, &QSlider::valueChanged, this, &PopUpWindow::updateVolume);
 
     ui->nextButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
@@ -318,7 +318,7 @@ void PopUpWindow::setMusic(QString countryName)
         musicPlayer->setSource(QUrl("qrc:/music/bgm_Thailand.mp3"));
     }
     musicPlayer->play();
-    musicOutput->setVolume(0.5);
+    musicOutput->setVolume(0.1);
 }
 
 void PopUpWindow::updateVolume(int volume)
@@ -359,7 +359,7 @@ void PopUpWindow::closeEvent(QCloseEvent *)
     firstBackClicked = false;
     firstNextClicked = false;
     timer->stop();
-    ui->musicSlider->setSliderPosition(50);
+    ui->musicSlider->setSliderPosition(10);
     musicPlayer->stop();
     emit windowClosed();
 }
