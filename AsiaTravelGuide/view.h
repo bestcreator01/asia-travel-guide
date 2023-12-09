@@ -264,8 +264,16 @@ private:
 
 signals:
 
+    ///
+    /// \brief changedState emitted to change the previous state in model
+    /// \param state current state
+    ///
     void changedState(QString state);
 
+    ///
+    /// \brief informModelToSend emitted to display text information on the popup window
+    /// \param name a name of landmark/food
+    ///
     void informModelToSend(QString name);
 
     void generateRandomQuestion();
