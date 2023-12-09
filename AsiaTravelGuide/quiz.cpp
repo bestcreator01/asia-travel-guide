@@ -15,7 +15,7 @@
 /// \brief Constructor
 ///
 Quiz::Quiz(QWidget *parent) : QWidget(parent),
-                              ui(new Ui::Quiz)
+    ui(new Ui::Quiz)
 {
     // Setup ui
     ui->setupUi(this);

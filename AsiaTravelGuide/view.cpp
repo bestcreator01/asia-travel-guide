@@ -730,7 +730,8 @@ void view::on_thailandButton_clicked()
     ui->thailandLabel->hide();
 }
 
-void view::fadeInCountryLabels(){
+void view::fadeInCountryLabels()
+{
     ui->indiaLabel->show();
     ui->koreaLabel->show();
     ui->thailandLabel->show();
@@ -740,13 +741,15 @@ void view::fadeInCountryLabels(){
     fadeEffect(0.0, 1.0, 1500, "thailandLabel");
 }
 
-void view::fadeOutCountryLabels(){
+void view::fadeOutCountryLabels()
+{
     fadeEffect(1.0, 0.0, 1500, "indiaLabel");
     fadeEffect(1.0, 0.0, 1500, "koreaLabel");
     fadeEffect(1.0, 0.0, 1500, "thailandLabel");
 }
 
-void view::fadeInCheckmarks(Country country){
+void view::fadeInCheckmarks(Country country)
+{
 
     if (country == India)
     {
@@ -778,16 +781,20 @@ void view::fadeInCheckmarks(Country country){
     }
     else if (country == Korea)
     {
-        if (koreaCompleteList.contains(Gyeongbokgung)){
+        if (koreaCompleteList.contains(Gyeongbokgung))
+        {
             ui->gyeongbokgungCheckLabel->show();
         }
-        if (koreaCompleteList.contains(Bulguksa)){
+        if (koreaCompleteList.contains(Bulguksa))
+        {
             ui->bulguksaCheckLabel->show();
         }
-        if (koreaCompleteList.contains(Tteokbokki)){
+        if (koreaCompleteList.contains(Tteokbokki))
+        {
             ui->tteokbokkiCheckLabel->show();
         }
-        if (koreaCompleteList.contains(Bossam)){
+        if (koreaCompleteList.contains(Bossam))
+        {
             ui->bossamCheckLabel->show();
         }
         if (koreaCompleteList.size() == 4)
@@ -798,16 +805,20 @@ void view::fadeInCheckmarks(Country country){
     }
     else if (country == Thailand)
     {
-        if (ThailandCompleteList.contains(GrandPalace)){
+        if (ThailandCompleteList.contains(GrandPalace))
+        {
             ui->grandPalaceCheckLabel->show();
         }
-        if (ThailandCompleteList.contains(WatMuang)){
+        if (ThailandCompleteList.contains(WatMuang))
+        {
             ui->watMuangCheckLabel->show();
         }
-        if (ThailandCompleteList.contains(TomYum)){
+        if (ThailandCompleteList.contains(TomYum))
+        {
             ui->tomYumCheckLabel->show();
         }
-        if (ThailandCompleteList.contains(StickyRice)){
+        if (ThailandCompleteList.contains(StickyRice))
+        {
             ui->stickyRiceCheckLabel->show();
         }
         if (ThailandCompleteList.size() == 4)
@@ -816,7 +827,6 @@ void view::fadeInCheckmarks(Country country){
             fadeEffect(0.0, 1.0, 1500, "quizButton");
         }
     }
-
 }
 
 void view::disableButtons()
@@ -852,7 +862,8 @@ void view::on_hawaMahal_clicked()
 
     ui->hawaMahalCheckLabel->show();
     indiaCompleteList.insert(HawaMaha);
-    if (indiaCompleteList.size() == 4){
+    if (indiaCompleteList.size() == 4)
+    {
         ui->quizButton->show();
     }
 }
@@ -864,7 +875,8 @@ void view::on_tajMahal_clicked()
 
     ui->tajMahalCheckLabel->show();
     indiaCompleteList.insert(TajMahal);
-    if (indiaCompleteList.size() == 4){
+    if (indiaCompleteList.size() == 4)
+    {
         ui->quizButton->show();
     }
 }
@@ -876,7 +888,8 @@ void view::on_paniPuri_clicked()
 
     ui->paniPuriCheckLabel->show();
     indiaCompleteList.insert(PaniPuri);
-    if (indiaCompleteList.size() == 4){
+    if (indiaCompleteList.size() == 4)
+    {
         ui->quizButton->show();
     }
 }
@@ -888,7 +901,8 @@ void view::on_biryani_clicked()
 
     ui->biryaniCheckLabel->show();
     indiaCompleteList.insert(Biryani);
-    if (indiaCompleteList.size() == 4){
+    if (indiaCompleteList.size() == 4)
+    {
         ui->quizButton->show();
     }
 }

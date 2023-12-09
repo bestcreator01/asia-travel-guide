@@ -33,7 +33,8 @@ public:
 public slots:
 
     ///
-    /// \brief changeState update the previous state based on the current state
+    /// \brief changeState update the previous state based on the current state. This is used for back button
+    /// to keep track of on which screen the current user is on.
     /// \param state current state
     ///
     void changeState(QString state);
@@ -42,6 +43,7 @@ public slots:
 
 
 signals:
+    // inform the mainwindow that the current state is changed
     void changedScreenState(QString state);
     void sendQuiz(QMap<QString, QList<QString>> &questionbank, QList<QString> &questions);
     void sendOptions(QList<int> &numbers);

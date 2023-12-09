@@ -49,63 +49,63 @@ PopUpWindow::PopUpWindow(QWidget *parent) :
 
     //india descriptions
     indiaLandMarkInfo[0] = "Hawa Mahal is a palace in the city of Jaipur, India. Built from red and pink sandstone, "
-                      "\nit is on the edge of the City Palace, Jaipur. "
-                      "\nThe structure was built in 1799 by the Maharaja Sawai Pratap Singh. "
-                      "\nIts five-floor exterior is akin to a honeycomb with its 953 small windows "
-                      "\ncalled Jharokhas decorated with intricate latticework. "
-                      "\nThe original intent of the lattice design was to allow royal "
-                      "\nladies to observe everyday life and festivals celebrated in the street below without being seen.";
+                           "\nit is on the edge of the City Palace, Jaipur. "
+                           "\nThe structure was built in 1799 by the Maharaja Sawai Pratap Singh. "
+                           "\nIts five-floor exterior is akin to a honeycomb with its 953 small windows "
+                           "\ncalled Jharokhas decorated with intricate latticework. "
+                           "\nThe original intent of the lattice design was to allow royal "
+                           "\nladies to observe everyday life and festivals celebrated in the street below without being seen.";
 
     indiaLandMarkInfo[1] = "This architectural feature also allowed cool air from the Venturi effect to pass through, "
-                      "\nthus making the whole area more pleasant during the high temperatures in summer. "
-                      "\nThis amazing ventilation that the palace enjoys is the reason why it was named as the Hawa Mahal, "
-                      "\nwhich literally translates into the “Palace of the Winds”. "
-                      "\nIt is the tallest building in the world that has been built without a foundation. "
-                      "\nIt has a curved architecture that leans at an 87-degree angle, "
-                      "\nand a pyramidal shape which has helped it stay erect for centuries.";
+                           "\nthus making the whole area more pleasant during the high temperatures in summer. "
+                           "\nThis amazing ventilation that the palace enjoys is the reason why it was named as the Hawa Mahal, "
+                           "\nwhich literally translates into the “Palace of the Winds”. "
+                           "\nIt is the tallest building in the world that has been built without a foundation. "
+                           "\nIt has a curved architecture that leans at an 87-degree angle, "
+                           "\nand a pyramidal shape which has helped it stay erect for centuries.";
 
     indiaLandMarkInfo[2] = "Taj Mahal is an ivory-white marble mausoleum on the right bank of the river Yamuna in Agra, Uttar Pradesh, India. "
-                      "\nIt was commissioned in 1631 by the fifth Mughal emperor, "
-                      "\nShah Jahan (r. 1628–1658) to house the tomb of his beloved wife, "
-                      "\nMumtaz Mahal; it also houses the tomb of Shah Jahan himself. The Taj Mahal took 22 years to build. "
-                      "\nMore than 22,000 laborers worked in the construction of the Taj Mahal. ";
+                           "\nIt was commissioned in 1631 by the fifth Mughal emperor, "
+                           "\nShah Jahan (r. 1628–1658) to house the tomb of his beloved wife, "
+                           "\nMumtaz Mahal; it also houses the tomb of Shah Jahan himself. The Taj Mahal took 22 years to build. "
+                           "\nMore than 22,000 laborers worked in the construction of the Taj Mahal. ";
 
     indiaLandMarkInfo[3] = "It is believed that around INR 32 million was spent to complete the construction of this white mausoleum (in 1653). "
-                      "\nToday, the cost of building the Taj would be somewhere around INR 70 billion (nearly $1 billion). "
-                      "\nVarious Precious stones were brought from various countries for the building of the Taj Mahal. "
-                      "\nIt is one of the 7 wonders of the world. “Taj Mahal” means “crown of palaces” in Urdu and Persian. "
-                      "\nThe most recognizable feature of the Taj Mahal is the large, white, domed mausoleum, "
-                      "\nwhich is surrounded by four tall minarets on each corner. "
-                      "\nThe color of the monument keeps changing throughout the day.";
+                           "\nToday, the cost of building the Taj would be somewhere around INR 70 billion (nearly $1 billion). "
+                           "\nVarious Precious stones were brought from various countries for the building of the Taj Mahal. "
+                           "\nIt is one of the 7 wonders of the world. “Taj Mahal” means “crown of palaces” in Urdu and Persian. "
+                           "\nThe most recognizable feature of the Taj Mahal is the large, white, domed mausoleum, "
+                           "\nwhich is surrounded by four tall minarets on each corner. "
+                           "\nThe color of the monument keeps changing throughout the day.";
 
     indiaRestaurantInfo[0] = "Pani Puri is a famous snack in India which is a  "
-                        "\ndeep-fried breaded sphere filled with a mixture of spicy water, "
-                        "\ntamarind chutney, chili powder, chaat masala, potato mash, onion, or chickpeas. "
-                        "\nIt is a common street food in the Indian subcontinent. "
-                        "\nThe combination of different flavors and textures "
-                        "\n- crispy, soft, spicy, tangy, and sweet - is what makes Pani Puri so popular. ";
+                             "\ndeep-fried breaded sphere filled with a mixture of spicy water, "
+                             "\ntamarind chutney, chili powder, chaat masala, potato mash, onion, or chickpeas. "
+                             "\nIt is a common street food in the Indian subcontinent. "
+                             "\nThe combination of different flavors and textures "
+                             "\n- crispy, soft, spicy, tangy, and sweet - is what makes Pani Puri so popular. ";
 
 
     indiaRestaurantInfo[1] = "Additionally, the interactive nature of eating Pani Puri "
-                        "\nmakes each one chooses the way they want, be it the filling, or the water. "
-                        "\nIt is also a very affordable snack and can be found in various parts of India, "
-                        "\nsold by street vendors and in restaurants. "
-                        "\nOverall, Pani Puri is a delicious and enjoyable snack that has gained popularity not just in India, "
-                        "\nbut in other parts of the world as well.";
+                             "\nmakes each one chooses the way they want, be it the filling, or the water. "
+                             "\nIt is also a very affordable snack and can be found in various parts of India, "
+                             "\nsold by street vendors and in restaurants. "
+                             "\nOverall, Pani Puri is a delicious and enjoyable snack that has gained popularity not just in India, "
+                             "\nbut in other parts of the world as well.";
 
     indiaRestaurantInfo[2] = "Biryani is a mixed rice dish which is very popular in India. "
-                        "\nIt is made with rice, some type of meat (chicken, beef, goat, lamb, prawn, or fish) and spices."
-                        "\nTo cater to vegetarians, in some cases, it is prepared without any meat, substituting vegetables for the meat. "
-                        "\nSometimes eggs and/or potatoes, are added. Biryani is one of the most popular dishes in South Asia, "
-                        "\nas well as among the diaspora from the region. "
-                        "\nSimilar dishes are also prepared in other parts of the world such as in Iraq, Myanmar, Thailand, and Malaysia." ;
+                             "\nIt is made with rice, some type of meat (chicken, beef, goat, lamb, prawn, or fish) and spices."
+                             "\nTo cater to vegetarians, in some cases, it is prepared without any meat, substituting vegetables for the meat. "
+                             "\nSometimes eggs and/or potatoes, are added. Biryani is one of the most popular dishes in South Asia, "
+                             "\nas well as among the diaspora from the region. "
+                             "\nSimilar dishes are also prepared in other parts of the world such as in Iraq, Myanmar, Thailand, and Malaysia." ;
 
     indiaRestaurantInfo[3] = "Biryani is the single most-ordered dish on Indian online food ordering and delivery services, "
-                        "\nand has been labelled as the most popular dish overall in India. "
-                        "\nThe most popular way to prepare Biryani is by using the Dum method, "
-                        "\nwhich involves cooking over a low flame. This procedure involves sealing food in a round, "
-                        "\nheavy-bottomed pot, preferably a handi (clay pot), "
-                        "\nand slowly cooking it. The dish may be served with chutney or raita, and salad.";
+                             "\nand has been labelled as the most popular dish overall in India. "
+                             "\nThe most popular way to prepare Biryani is by using the Dum method, "
+                             "\nwhich involves cooking over a low flame. This procedure involves sealing food in a round, "
+                             "\nheavy-bottomed pot, preferably a handi (clay pot), "
+                             "\nand slowly cooking it. The dish may be served with chutney or raita, and salad.";
 
     //thailand descriptions
     thailandLandMarkInfo[0] = "The Thailand Grand Palace, a dazzling architectural masterpiece situated in the heart of Bangkok, "
@@ -121,11 +121,11 @@ PopUpWindow::PopUpWindow(QWidget *parent) :
                               "\ncontinues to captivate visitors with its grandeur and historical significance.";
 
     thailandLandMarkInfo[2] = "The Great Buddha of Thailand, an awe-inspiring testament to Buddhist devotion and engineering marvel,"
-                            "\nstands prominently in Wat Muang. Erected in 1990, this colossal statue reaches a height of 92 meters, "
-                            "\nmaking it one of the tallest Buddha statues in the world. The serene giant, known locally as Luangpho Yai, "
-                            "\nis positioned in a seated meditative posture, exuding tranquility and grace. "
-                            "\nWhat sets this monument apart is the surrounding complex, offering visitors a"
-                            "\nglimpse into Thai Buddhist artistry and culture. ";
+                              "\nstands prominently in Wat Muang. Erected in 1990, this colossal statue reaches a height of 92 meters, "
+                              "\nmaking it one of the tallest Buddha statues in the world. The serene giant, known locally as Luangpho Yai, "
+                              "\nis positioned in a seated meditative posture, exuding tranquility and grace. "
+                              "\nWhat sets this monument apart is the surrounding complex, offering visitors a"
+                              "\nglimpse into Thai Buddhist artistry and culture. ";
 
 
     thailandLandMarkInfo[3] = "The statue's construction involved a meticulous combination of concrete and golden paint, "
@@ -201,7 +201,7 @@ PopUpWindow::PopUpWindow(QWidget *parent) :
     koreaRestaurantInfo[3] = "Widely enjoyed in South Korea, Bossam is commonly served as anju, complementing alcoholic drinks. "
                              "\nThe dining experience involves wrapping the meat and side dishes in ssam vegetables, "
                              "\naligning with the dish's literal meaning of 'wrapped' or 'packaged'";
-    }
+}
 
 PopUpWindow::~PopUpWindow()
 {
