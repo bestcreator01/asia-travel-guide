@@ -192,6 +192,9 @@ view::view(Model& model, QWidget *parent)
     connect(&quizWindow, &Quiz::randomizeOption, &model, &Model::randomizeOption);
     connect(&model, &Model::sendOptions, &quizWindow, &Quiz::setRandomOptions);
 
+    // send country status to set up the background image in quiz window
+    connect(&model, &Model::sendCountryForBgImage, &quizWindow, &Quiz::setBgImage);
+
     connect(this, &view::informModelToSend, &indiaWindow, &Form::receiveSignalToSetTextIndia);
 
     connect(&indiaWindow, &Form::windowClosed, this, &view::enableButtonsAndCheck);

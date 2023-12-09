@@ -46,6 +46,25 @@ Quiz::~Quiz()
     delete bottom;
 }
 
+void Quiz::setBgImage(QString country)
+{
+    if (country == "India")
+    {
+        QPixmap bgImage(":/images/quiz_India.png");
+        backgroundLabel->setPixmap(bgImage.scaled(this->size()));
+    }
+    else if (country == "Thailand")
+    {
+        QPixmap bgImage(":/images/quiz_Thailand.png");
+        backgroundLabel->setPixmap(bgImage.scaled(this->size()));
+    }
+    else if (country == "Korea")
+    {
+        QPixmap bgImage(":/images/quiz_Korea.png");
+        backgroundLabel->setPixmap(bgImage.scaled(this->size()));
+    }
+}
+
 void Quiz::setValues(QMap<QString, QList<QString>> &questionBank, QList<QString> &questions)
 {
     this->questionBank = questionBank;

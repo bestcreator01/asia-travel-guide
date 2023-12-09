@@ -67,7 +67,8 @@ background-color: rgb(254, 255, 206);</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(0, 0, 0);</string>
+    <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(190, 255, 255);</string>
    </property>
    <property name="text">
     <string>Question</string>
@@ -174,7 +175,8 @@ background-color: rgb(254, 255, 206);</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(0, 0, 0);</string>
+    <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(190, 255, 255);</string>
    </property>
    <property name="text">
     <string>Next Question</string>

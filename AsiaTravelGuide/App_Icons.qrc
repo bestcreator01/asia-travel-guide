@@ -35,6 +35,9 @@
         <file>bossam_Image.jpg</file>
         <file>tteokbokki_Image.jpg</file>
         <file>pani-puri_Image.jpg</file>
+        <file>quiz_India.png</file>
+        <file>quiz_Korea.png</file>
+        <file>quiz_Thailand.png</file>
     </qresource>
     <qresource prefix="/music">
         <file>bgm_India.wav</file>
