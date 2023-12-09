@@ -182,6 +182,23 @@ background-color: rgb(190, 255, 255);</string>
     <string>Next Question</string>
    </property>
   </widget>
+  <widget class="QLabel" name="congrats">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>230</y>
+     <width>441</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Congrats on Completing the quiz!!! 
+ you may now close window.</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
