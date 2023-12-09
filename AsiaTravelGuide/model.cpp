@@ -189,8 +189,8 @@ void Model::setKorea()
         "Apart from rice cakes, what are two common accompaniments "
         "\nin a traditional serving of Tteokbokki?";
     option1 = "Tofu and Kimchi";
-    option2 = "Fish cakes and Boiled eggs";
-    option3 = "Seaweed and Radishes";  // Correct
+    option2 = "Seaweed and Radishes";
+    option3 = "Fish cakes and Boiled eggs";  // Correct
     option4 = "Pork and Bean sprouts";
     putQuestionInQuestionBank(question3);
 
