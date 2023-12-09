@@ -1,3 +1,12 @@
+/**
+ * Author:     Crazy Broke Asians
+ * Date:       Dec-08-2023
+ * Course:     CS 3505, University of Utah
+ * Assignment: A9: An Educational App
+ * File Contents
+ *      It contains all necessary information needed to form a zoomed-in/out popup.
+*/
+
 #ifndef VIEW_H
 #define VIEW_H
 
@@ -11,7 +20,7 @@
 #include <QTimer>
 #include <QPalette>
 #include "model.h"
-#include "form.h"
+#include "popupwindow.h"
 #include "quiz.h"
 
 QT_BEGIN_NAMESPACE
@@ -119,7 +128,7 @@ private:
     ///
     QLabel *backgroundLabel;
 
-    Form indiaWindow;
+    PopUpWindow popUpWindow;
     Quiz quizWindow;
 
     // shadow effect on text
@@ -227,8 +236,14 @@ private:
     ///
     void enableButtonsAndCheck();
 
+    ///
+    /// \brief showInfo emit a signal to display a popup window and disable buttons on the mainwindow
+    ///
     void showInfo(QString);
-    int count;
+
+    ///
+    /// \brief country a string representing a country
+    ///
     QString country = "";
 
     ///
@@ -249,12 +264,32 @@ private:
 
 signals:
 
+    ///
+    /// \brief changedState emitted to change the previous state in model
+    /// \param state current state
+    ///
     void changedState(QString state);
 
+    ///
+    /// \brief informModelToSend emitted to display text information on the popup window
+    /// \param name a name of landmark/food
+    ///
     void informModelToSend(QString name);
 
+    ///
+    /// \brief generateRandomQuestion generates questions in random order
+    ///
     void generateRandomQuestion();
+
+    ///
+    /// \brief resetButtons resets the quiz buttons to default
+    ///
     void resetButtons();
+
+    ///
+    /// \brief sendQuizInfo emitted to display quiz text based on the current country
+    /// \param country the current country
+    ///
     void sendQuizInfo(QString country);
 };
 #endif // VIEW_H

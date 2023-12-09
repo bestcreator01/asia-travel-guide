@@ -1,3 +1,12 @@
+/**
+ * Author:     Crazy Broke Asians
+ * Date:       Dec-08-2023
+ * Course:     CS 3505, University of Utah
+ * Assignment: A9: An Educational App
+ * File Contents
+ *      It contains all necessary codes needed to form a quiz popup.
+*/
+
 #include "quiz.h"
 #include "ui_quiz.h"
 #include <QMovie>
@@ -14,7 +23,6 @@ Quiz::Quiz(QWidget *parent) : QWidget(parent),
     ui->congrats->hide();
     this->setWindowTitle("QUIZ");
     backgroundLabel = new QLabel(this);
-
     backgroundLabel->setGeometry(0, 0, this->width(), this->height());  // Set to cover the entire window
     backgroundLabel->lower();
 
