@@ -8,6 +8,7 @@
 #include <QTimer>
 #include <QPainter>
 #include <QLabel>
+#include <QPushButton>
 
 namespace Ui {
 class Quiz;
@@ -121,6 +122,13 @@ private:
     QList<QString> questions;
     QMap<QString, QList<QString>> questionBank;
     int quesIndex = 0, correct = 2;
+
+    ///
+    /// \brief handleOptionButtonClick
+    /// Helper method for clicking buttons
+    /// \param button - the button which is clicked by user
+    ///
+    void handleOptionButtonClick(QPushButton *button);
 
     ///
     /// \brief disableOptionButtons

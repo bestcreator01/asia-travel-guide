@@ -88,59 +88,37 @@ void Quiz::disableOptionButtons()
 
 void Quiz::on_option1Button_clicked()
 {
-    if (ui->option1Button->text() != questionBank[randomQuestion][correct])
-    {
-        ui->option1Button->setStyleSheet("background-color: red");
-        ui->option1Button->setDisabled(true);
-    }
-    else
-    {
-        ui->option1Button->setStyleSheet("background-color: green");
-        disableOptionButtons();
-        createConfetti();
-    }
+    handleOptionButtonClick(ui->option1Button);
 }
 
 void Quiz::on_option2Button_clicked()
 {
-    if (ui->option2Button->text() != questionBank[randomQuestion][correct])
-    {
-        ui->option2Button->setStyleSheet("background-color: red");
-        ui->option2Button->setDisabled(true);
-    }
-    else
-    {
-        ui->option2Button->setStyleSheet("background-color: green");
-        disableOptionButtons();
-        createConfetti();
-    }
+    handleOptionButtonClick(ui->option2Button);
 }
 
 void Quiz::on_option3Button_clicked()
 {
-    if (ui->option3Button->text() != questionBank[randomQuestion][correct])
-    {
-        ui->option3Button->setStyleSheet("background-color: red");
-        ui->option3Button->setDisabled(true);
-    }
-    else
-    {
-        ui->option3Button->setStyleSheet("background-color: green");
-        disableOptionButtons();
-        createConfetti();
-    }
+    handleOptionButtonClick(ui->option3Button);
 }
 
 void Quiz::on_option4Button_clicked()
 {
-    if (ui->option4Button->text() != questionBank[randomQuestion][correct])
+    handleOptionButtonClick(ui->option4Button);
+}
+
+void Quiz::handleOptionButtonClick(QPushButton *button)
+{
+    QString selectedOption = button->text();
+    QString correctOption = questionBank[randomQuestion][correct];
+
+    if (selectedOption != correctOption)
     {
-        ui->option4Button->setStyleSheet("background-color: red");
-        ui->option4Button->setDisabled(true);
+        button->setStyleSheet("background-color: red");
+        button->setDisabled(true);
     }
     else
     {
-        ui->option4Button->setStyleSheet("background-color: green");
+        button->setStyleSheet("background-color: green");
         disableOptionButtons();
         createConfetti();
     }
