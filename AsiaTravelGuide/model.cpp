@@ -69,7 +69,7 @@ void Model::setIndia()
     option4 = "Pearl of Agra";
     putQuestionInQuestionBank(question1);
 
-    // second quesiton
+    // Second quesiton
     question2 =
         "What was the original purpose of the intricate latticework and "
         "\nnumerous small windows (Jharokhas) in the design of Hawa Mahal?";
@@ -84,7 +84,7 @@ void Model::setIndia()
               "\nstability of the palace";
     putQuestionInQuestionBank(question2);
 
-    // third question
+    // Third question
     question3 =
         "Pani Puri is a common street food in the Indian subcontinent."
         "\nWhat makes the ingredients of Pani Puri as a snack in India?";
@@ -96,7 +96,7 @@ void Model::setIndia()
     option4 = "rice flour, corn flour, oil";
     putQuestionInQuestionBank(question3);
 
-    // fourth question
+    // Fourth question
     question4 =
         "What cooking method is most commonly used to prepare Biryani, "
         "\ninvolving sealing food in a round, heavy-bottomed pot "
@@ -122,7 +122,7 @@ void Model::setThailand()
     option4 = "1982, King Bhumibol Adulyadej";
     putQuestionInQuestionBank(question1);
 
-    // second quesiton
+    // Second quesiton
     question2 =
         "What is the local name for the Great Buddha of Thailand, "
         "\nand what unique feature sets it apart from other statues?";
@@ -133,7 +133,7 @@ void Model::setThailand()
     option4 = "Buddha Rama, its colossal size";
     putQuestionInQuestionBank(question2);
 
-    // third question
+    // Third question
     question3 =
         "Originating from central Thailand and a quintessential Thai soup,"
         "\nWhat is the English translation of \"Tom Yum\"?";
@@ -143,7 +143,7 @@ void Model::setThailand()
     option4 = "Flavorful Zest";
     putQuestionInQuestionBank(question3);
 
-    // fourth question
+    // Fourth question
     question4 =
         "What is the key ingredient used to impart a creamy texture "
         "\nand subtle sweetness to Mango Sticky Rice,"
@@ -173,7 +173,7 @@ void Model::setKorea()
     option4 = "Vietnam War";
     putQuestionInQuestionBank(question1);
 
-    // second quesiton
+    // Second quesiton
     question2 =
         "Bulguksa, a UNESCO World Heritage site in South Korea, "
         "\nis known for housing one of the world's earliest woodblock prints."
@@ -184,7 +184,7 @@ void Model::setKorea()
     option4 = "Architectural blueprints";
     putQuestionInQuestionBank(question2);
 
-    // third question
+    // Third question
     question3 =
         "Apart from rice cakes, what are two common accompaniments "
         "\nin a traditional serving of Tteokbokki?";
@@ -194,7 +194,7 @@ void Model::setKorea()
     option4 = "Pork and Bean sprouts";
     putQuestionInQuestionBank(question3);
 
-    // fourth question
+    // Fourth question
     question4 =
         "In addition to pork shoulder, what is a key component of "
         "\nthe side dishes served with Bossam in Korean cuisine?";

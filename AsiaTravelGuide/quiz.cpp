@@ -11,13 +11,10 @@
 #include "ui_quiz.h"
 #include <QMovie>
 
-///
-/// \brief Constructor
-///
 Quiz::Quiz(QWidget *parent) : QWidget(parent),
     ui(new Ui::Quiz)
 {
-    // Setup ui
+    // Setup ui.
     ui->setupUi(this);
     ui->nextButton->hide();
     ui->congrats->hide();
@@ -26,28 +23,26 @@ Quiz::Quiz(QWidget *parent) : QWidget(parent),
     backgroundLabel->setGeometry(0, 0, this->width(), this->height());  // Set to cover the entire window
     backgroundLabel->lower();
 
-    // Set up Box2D world
+    // Set up Box2D world.
     b2Vec2 neg(0.0f, -30.0f);
     b2Vec2 pos(0.0f, 30.0f);
     top = new b2World(neg);
     bottom = new b2World(pos);
 
-    // Create ground
+    // Create ground.
     createGround(-7.0f, height() + 5.0f);
 
-    // Create a Timer for Box2D
+    // Create a Timer for Box2D.
     connect(&timer, &QTimer::timeout, this, &Quiz::updateWorld);
     timer.start(3);
-    // Show all the option to be clicked
+
+    // Show all the option to be clicked.
     ui->option1Button->setEnabled(true);
     ui->option2Button->setEnabled(true);
     ui->option3Button->setEnabled(true);
     ui->option4Button->setEnabled(true);
 }
 
-///
-/// \brief Destructor
-///
 Quiz::~Quiz()
 {
     delete ui;
@@ -90,10 +85,12 @@ void Quiz::showRandomQuestion()
     quesIndex = 0;
     randomQuestion = questions[quesIndex];
     ui->question->setText(randomQuestion);
-    // randomize
+
+    // Randomize options.
     emit randomizeOption();
     randomizeSelection(numbers);
-    // set ui accordingly
+
+    // Set ui accordingly.
     ui->congrats->hide();
     ui->option1Button->show();
     ui->option2Button->show();
@@ -117,7 +114,7 @@ void Quiz::resetButtons()
 
 void Quiz::disableOptionButtons()
 {
-    // disable all the option buttons
+    // Disable all the option buttons.
     ui->option1Button->setDisabled(true);
     ui->option2Button->setDisabled(true);
     ui->option3Button->setDisabled(true);
@@ -126,7 +123,7 @@ void Quiz::disableOptionButtons()
         ui->nextButton->show();
     else
     {
-        // show when completed the quiz
+        // Show when completed the quiz.
         ui->congrats->show();
         ui->option1Button->hide();
         ui->option2Button->hide();
@@ -162,13 +159,13 @@ void Quiz::handleOptionButtonClick(QPushButton *button)
     QString selectedOption = button->text();
     QString correctOption = questionBank[randomQuestion][correct];
 
-    // Wrong option
+    // Wrong option.
     if (selectedOption != correctOption)
     {
         button->setStyleSheet("background-color: red");
         button->setDisabled(true);
     }
-    else // Correct option
+    else // Correct option.
     {
         button->setStyleSheet("background-color: green");
         disableOptionButtons();
@@ -178,16 +175,16 @@ void Quiz::handleOptionButtonClick(QPushButton *button)
 
 void Quiz::on_nextButton_clicked()
 {
-    // set ui accordingly
+    // Set ui accordingly.
     ui->nextButton->hide();
     randomQuestion = questions[++quesIndex];
     ui->question->setText(randomQuestion);
 
-    // randomize
+    // Randomize options.
     emit randomizeOption();
     randomizeSelection(numbers);
 
-    // reset Quiz buttons
+    // Reset Quiz buttons.
     resetButtons();
     closePaint();
 }
@@ -201,9 +198,6 @@ void Quiz::randomizeSelection(QList<int> numbers)
     update();
 }
 
-///
-/// \brief Close Window
-///
 void Quiz::closeEvent(QCloseEvent *bar)
 {
     quesIndex = 0;
@@ -212,7 +206,7 @@ void Quiz::closeEvent(QCloseEvent *bar)
 
 void Quiz::closePaint()
 {
-    // Destructor & clear the confettis
+    // Destructor & clear the confettis.
     for (int i = 0; i < confettiPieces.size(); i += 2)
     {
         top->DestroyBody(confettiPieces[i]);
@@ -236,7 +230,7 @@ void Quiz::generateConfettiColors()
 
 void Quiz::createConfetti()
 {
-    // Create confetti pieces
+    // Create confetti pieces.
     for (int i = 0; i < 100; ++i)
     {
         b2BodyDef confettiBodyDef;
@@ -249,14 +243,14 @@ void Quiz::createConfetti()
         b2PolygonShape confettiShape;
         confettiShape.SetAsBox(0.1f, 0.1f);
 
-        // Set physics
+        // Set physics.
         b2FixtureDef confettiFixtureDef;
         confettiFixtureDef.shape = &confettiShape;
         confettiFixtureDef.density = 1.0f;
         confettiFixtureDef.friction = 0.3f;
         confettiFixtureDef.restitution = 0.5f;
 
-        // add b2body to specific world
+        // Add b2body to specific world.
         topConfettiPiece->CreateFixture(&confettiFixtureDef);
         confettiPieces.push_back(topConfettiPiece);
 
@@ -290,33 +284,30 @@ void Quiz::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
 
-    // Paint the scene
+    // Paint the scene.
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
-    // Draw confetti pieces
+    // Draw confetti pieces.
     for (int i = 0; i < confettiPieces.size(); i += 2)
     {
-        // Set the brush to the pre-generated color and no outline
+        // Set the brush to the pre-generated color and no outline.
         painter.setBrush(QBrush(confettiColors[i]));
         painter.setPen(Qt::NoPen);  // Set no outline
 
         b2Vec2 topPosition = confettiPieces[i]->GetPosition();
         b2Vec2 bottomPosition = confettiPieces[i + 1]->GetPosition();
 
-        // make explosion in the middle
+        // Make explosion in the middle.
         confettiPieces[75]->ApplyForce(b2Vec2(0.0f, 10000.0f), topPosition, true);
         confettiPieces[100]->ApplyForce(b2Vec2(0.0f, 10000.0f), bottomPosition, true);
 
-        // draw accordingly to confetti's
+        // Draw accordingly to confetti's.
         painter.drawRect(QRectF(topPosition.x, topPosition.y, 5, 5));
         painter.drawRect(QRectF(bottomPosition.x, bottomPosition.y, 5, 5));
     }
 }
 
-///
-/// \brief update World
-///
 void Quiz::updateWorld()
 {
     top->Step(1.0 / 60.0, 6, 2);

@@ -21,11 +21,11 @@ PopUpWindow::PopUpWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // setting up the typing animation
+    // Setting up the typing animation.
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &PopUpWindow::startTyping);
 
-    // setting up the background gif image
+    // Setting up the background gif image.
     ui->image->lower();
     backgroundLabel = new QLabel(this);
     QMovie *movie = new QMovie(":/icons/clouds.gif");
@@ -35,7 +35,7 @@ PopUpWindow::PopUpWindow(QWidget *parent) :
     backgroundLabel->lower();
     movie->start();
 
-    // setting up the music
+    // Setting up the music.
     ui->playMusic->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
     ui->stopMusic->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
     ui->playMusic->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
@@ -43,11 +43,11 @@ PopUpWindow::PopUpWindow(QWidget *parent) :
     ui->musicSlider->setSliderPosition(10);
     connect(ui->musicSlider, &QSlider::valueChanged, this, &PopUpWindow::updateVolume);
 
-    // design buttons
+    // Design buttons.
     ui->nextButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
     ui->backButton->setStyleSheet("QPushButton { background-color: transparent; border: none; }");
 
-    //india descriptions
+    // India descriptions.
     indiaLandMarkInfo[0] = "Hawa Mahal is a palace in the city of Jaipur, India. Built from red and pink sandstone, "
                            "\nit is on the edge of the City Palace, Jaipur. "
                            "\nThe structure was built in 1799 by the Maharaja Sawai Pratap Singh. "
@@ -107,7 +107,7 @@ PopUpWindow::PopUpWindow(QWidget *parent) :
                              "\nheavy-bottomed pot, preferably a handi (clay pot), "
                              "\nand slowly cooking it. The dish may be served with chutney or raita, and salad.";
 
-    //thailand descriptions
+    //Thailand descriptions.
     thailandLandMarkInfo[0] = "The Thailand Grand Palace, a dazzling architectural masterpiece situated in the heart of Bangkok, "
                               "\nstands as a testament to the nation's rich cultural heritage. Constructed in 1782 during the reign of King Rama I, "
                               "\nthe palace served as the royal residence for generations of Thai monarchs. "
@@ -164,7 +164,7 @@ PopUpWindow::PopUpWindow(QWidget *parent) :
                                 "\nenjoyed in local eateries, or prepared at home, this dessert encapsulates the essence of Thai culinary "
                                 "\ningenuity and the celebration of seasonal bounty.";
 
-    // Korea descriptions
+    // Korea descriptions.
     koreaLandMarkInfo[0] = "Gyeongbokgung, the primary royal palace of the Joseon dynasty in Seoul, South Korea, was built in 1395. "
                            "\nDespite suffering damage and abandonment for two centuries after the Imjin War, "
                            "\na comprehensive restoration in the 19th century, led by Prince Regent Heungseon, "
@@ -255,6 +255,7 @@ void PopUpWindow::receiveSignalToSetTextCountry(QString name)
         setRestaurantIndiaHelper(2, ":/images/biryani_Image.jpg");
         currentCountry = "India";
     }
+
     // Thailand
     else if (name == "GrandPalace")
     {
@@ -276,6 +277,7 @@ void PopUpWindow::receiveSignalToSetTextCountry(QString name)
         setRestaurantThailandHelper(2, ":/images/Mango-Rice_Image.png");
         currentCountry = "Thailand";
     }
+
     // Korea
     else if (name == "Gyeongbokgung")
     {
@@ -300,7 +302,7 @@ void PopUpWindow::receiveSignalToSetTextCountry(QString name)
 
     setMusic(currentCountry);
 
-    // typing animation logic
+    // Typing animation logic.
     this->setWindowTitle(name);
     ui->description->setText("");
     timer->start(25);
@@ -359,7 +361,7 @@ void PopUpWindow::closeWindow()
 
 void PopUpWindow::closeEvent(QCloseEvent *)
 {
-    // making sure everything is set as default
+    // Making sure everything is set as default.
     currentText = "";
     now = 0;
     firstBackClicked = false;
