@@ -234,7 +234,7 @@ private:
 
     ///
     /// \brief backgroundLabel
-    /// A pointer to the background label of the window.
+    /// A pointer to background label of window.
     ///
     QLabel *backgroundLabel;
 
@@ -253,8 +253,8 @@ private:
     // shadow effect on text
     ///
     /// \brief applyShadowEffect
-    ///     Sets the shadow effect on a widget.
-    /// \param widget - A widget to apply shadow effect on.
+    ///     Sets the shawdow effect on a widget.
+    /// \param widget - A widget to apply shawdow effect on.
     ///
     void applyShadowEffect(QWidget *widget);
 
@@ -266,9 +266,192 @@ private:
 
     ///
     /// \brief showShadowPlayButton
-    /// Applies the shadow effect on the play button.
+    /// Applies the shadow eefect on the play button.
     ///
     void showShadowPlayButton();
-};
+
+    // widgets fade in/out
+    ///
+    /// \brief fadeInWelcomeLabel
+    /// Fades in the welcome screen's labels.
+    ///
+    void fadeInWelcomeLabel();
+
+    ///
+    /// \brief fadeOutWelcomeLabel
+    /// Fades out the welcome screen's labels.
+    ///
+    void fadeOutWelcomeLabel();
+
+    ///
+    /// \brief fadeInPlayButton
+    /// Fades in the play button on the welcome screen.
+    ///
+    void fadeInPlayButton();
+
+    ///
+    /// \brief fadeOutPlayButton
+    /// Fades out the play button when pressed on the welcome screen.
+    ///
+    void fadeOutPlayButton();
+
+    ///
+    /// \brief fadeInBackArrow
+    /// Fades in the back arrow.
+    ///
+    void fadeInBackArrow();
+
+    ///
+    /// \brief fadeOutBackArrow
+    /// Fades out the back arrow.
+    ///
+    void fadeOutBackArrow();
+
+    ///
+    /// \brief fadeInMarkers
+    /// Fades in all the country's markers on the Asia country map.
+    ///
+    void fadeInMarkers();
+
+    ///
+    /// \brief fadeOutMarkers
+    /// Fades out all the country's markers on the Asia country map.
+    ///
+    void fadeOutMarkers();
+
+    ///
+    /// \brief fadeInLandMarks
+    ///     Fades in buttons for landmarks based on a specified country.
+    /// \param country - The country whose landmarks will be faded in.
+    ///
+    void fadeInLandMarks(Country country);
+
+    ///
+    /// \brief hideLandMarks
+    /// Hide the landmarks/foods of all countries.
+    ///
+    void hideLandMarks();
+
+    ///
+    /// \brief hideCheckMarks
+    /// Hide checkmarks of landmarks/foods.
+    ///
+    void hideCheckMarks();
+
+    ///
+    /// \brief fadeEffect
+    ///     Gives the effect of fading in and out on widgets like labels and buttons
+    ///     on our window.
+    /// \param startValue - The starting opacity value of the widget to start the fade effect.
+    /// \param endValue - The ending opacity value of the widget to start the fade effect.
+    /// \param duration - The amount of the time the fade effect will occur for.
+    /// \param widget - On which widget the fade effect is applied for.
+    ///
+    void fadeEffect(double startValue, double endValue, int duration, QString widget);
+
+    ///
+    /// \brief setWidgetGraphicsEffect
+    ///     Specifies on which widget we want the fade effect to occur on.
+    /// \param name - The name of the widget.
+    /// \param eff - The opacity effect to be applied on a widget.
+    ///
+    void setWidgetGraphicsEffect(QString name, QGraphicsOpacityEffect *eff);
+
+    ///
+    /// \brief fadeInBackgroundLabel
+    /// Applies fade-in affect to the background label
+    ///
+    void fadeInBackgroundLabel();
+
+    ///
+    /// \brief setBgLabel
+    ///     Sets the background label to the given QPixmap
+    /// \param background - New background image.
+    ///
+    void setBgLabel(QPixmap background);
+
+    ///
+    /// \brief setBgLabelOpacity
+    /// Sets the background label opacity to 0.5.
+    ///
+    void setBgLabelOpacity();
+
+    ///
+    /// \brief disableButtons
+    /// Disables landmark/food buttons. Called when a popup window is displaying.
+    ///
+    void disableButtons();
+
+    ///
+    /// \brief enableButtonsAndCheck
+    /// Enable landmark/food buttons and checkmark labels.
+    ///
+    void enableButtonsAndCheck();
+
+    ///
+    /// \brief showInfo
+    /// Emit a signal to display a popup window and disable buttons on the mainwindow.
+    ///
+    void showInfo(QString);
+
+    ///
+    /// \brief country
+    /// A string representing a country.
+    ///
+    QString country = "";
+
+    ///
+    /// \brief fadeInCountryLabels
+    /// Fades in country name labels.
+    ///
+    void fadeInCountryLabels();
+
+    ///
+    /// \brief fadeOutCountryLabels
+    /// Fades out country name labels.
+    ///
+    void fadeOutCountryLabels();
+
+    ///
+    /// \brief fadeInCheckmarks
+    ///     Fades in checkmarks for landmarks/food related to a specified country.
+    /// \param country - The country for which to show checkmarks.
+    ///
+    void fadeInCheckmarks(Country country);
+
+signals:
+
+    ///
+    /// \brief changedState
+    ///     Emitted to change the previous state in model.
+    /// \param state - The current state.
+    ///
+    void changedState(QString state);
+
+    ///
+    /// \brief informModelToSend
+    ///     Emitted to display text information on the popup window.
+    /// \param name - A name of landmark/food.
+    ///
+    void informModelToSend(QString name);
+
+    ///
+    /// \brief generateRandomQuestion
+    /// Generates questions in random order.
+    ///
+    void generateRandomQuestion();
+
+    ///
+    /// \brief resetButtons
+    /// Resets the quiz buttons to default.
+    ///
+    void resetButtons();
+
+    ///
+    /// \brief sendQuizInfo
+    ///     Emitted to display quiz text based on the current country.
+    /// \param country - The current country.
+    ///
+    void sendQuizInfo(QString country);};
 
 #endif // VIEW_H
