@@ -57,29 +57,118 @@ private slots:
 
     // handle button clicked events
     // system buttons
+
+    ///
+    /// \brief on_playButton_clicked
+    /// Handles play button clicked event
+    ///
     void on_playButton_clicked();
+
+    ///
+    /// \brief on_backButton_clicked
+    /// Handles back button clicked event
+    ///
     void on_backButton_clicked();
+
+    ///
+    /// \brief on_quizButton_clicked
+    /// Handles quiz button clicked event
+    ///
     void on_quizButton_clicked();
 
     // india buttons
+    ///
+    /// \brief on_indiaButton_clicked
+    /// Handles India country marker button clicked event
+    ///
     void on_indiaButton_clicked();
+
+    ///
+    /// \brief on_hawaMahal_clicked
+    /// Handles hawa mahal button (India) clicked event
+    ///
     void on_hawaMahal_clicked();
+
+    ///
+    /// \brief on_tajMahal_clicked
+    /// Handles taj mahal button (India) clicked event
+    ///
     void on_tajMahal_clicked();
+
+    ///
+    /// \brief on_paniPuri_clicked
+    /// Handles pani puri button (India) clicked event
+    ///
     void on_paniPuri_clicked();
+
+    ///
+    /// \brief on_biryani_clicked
+    /// Handles biryani button (India) clicked event
+    ///
     void on_biryani_clicked();
 
     // korea buttons
+
+    ///
+    /// \brief on_koreaButton_clicked
+    /// Handles Korea country marker button clicked event
+    ///
     void on_koreaButton_clicked();
+
+    ///
+    /// \brief on_bulguksaButton_clicked
+    /// Handles bulguksa button (Korea) clicked event
+    ///
     void on_bulguksaButton_clicked();
+
+    ///
+    /// \brief on_gyeongbokgungButton_clicked
+    /// Handles gyeonbokgung button (Korea) clicked event
+    ///
     void on_gyeongbokgungButton_clicked();
+
+    ///
+    /// \brief on_tteokbokkiButton_clicked
+    /// Handles tteokbokki button (Korea) clicked event
+    ///
     void on_tteokbokkiButton_clicked();
+
+    ///
+    /// \brief on_bossamButton_clicked
+    /// Handles bossam button (Korea) clicked event
+    ///
     void on_bossamButton_clicked();
 
     // thailand buttons
+
+    ///
+    /// \brief on_thailandButton_clicked
+    /// Handles Thailand country marker button clicked event
+    ///
     void on_thailandButton_clicked();
+
+    ///
+    /// \brief on_grandPalaceButton_clicked
+    /// Handles grand palace button (Thailand) clicked event
+    ///
     void on_grandPalaceButton_clicked();
+
+    ///
+    /// \brief on_watMuangButton_clicked
+    /// Handles wat muang button (Thailand) clicked event
+    ///
     void on_watMuangButton_clicked();
+
+    ///
+    /// \brief on_tomYumButton_clicked
+    /// Handles tom yum button (Thailand) clicked event
+    ///
     void on_tomYumButton_clicked();
+
+    ///
+    /// \brief on_stickyRiceButton_clicked
+    /// Handles sticky rice button (Thailand) clicked event
+    ///
     void on_stickyRiceButton_clicked();
 
     ///
