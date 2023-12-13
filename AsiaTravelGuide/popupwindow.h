@@ -50,16 +50,15 @@ private slots:
     ///
     void on_backButton_clicked();
     ///
-    /// \brief closeEvent
-    /// \param bar
+    /// \brief closeEvent does certain things like stops the timer and music when the popup window is closed
     ///
-    void closeEvent(QCloseEvent *bar);
+    void closeEvent(QCloseEvent *);
     ///
-    /// \brief on_playMusic_clicked
+    /// \brief on_playMusic_clicked plays music when clicked
     ///
     void on_playMusic_clicked();
     ///
-    /// \brief on_stopMusic_clicked
+    /// \brief on_stopMusic_clicked stops music when clicked
     ///
     void on_stopMusic_clicked();
 
