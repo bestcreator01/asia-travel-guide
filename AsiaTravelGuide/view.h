@@ -30,66 +30,75 @@ QT_END_NAMESPACE
 class view : public QMainWindow
 {
     Q_OBJECT
+
+    ///
+    /// \brief previousState
+    /// Stores previous state (screen) for back button functionality
+    ///
     QString previousState;
 
 public:
 
     ///
-    /// \brief view a constructor
+    /// \brief view
+    ///  A constructor
     /// \param model reference to the model
     /// \param parent the parent widget
     ///
     view(Model& model, QWidget *parent = nullptr);
 
     ///
-    /// \brief a destructor
+    /// \brief A destructor
     ///
     ~view();
 
     void closeEvent(QCloseEvent *event);
 private slots:
 
-    ///
-    /// \brief on_playButton_clicked will fade in the background and 3 country clickable markers. With this
-    /// it will fade out the labels and the button itself.
-    ///
+    // handle button clicked events
+    // system buttons
     void on_playButton_clicked();
-
-    ///
-    /// \brief on_backButton_clicked the user can go back to the previous state of the window. Keeps track
-    /// of the current window the user is on and fades in/out the screen as per the current state.
-    ///
     void on_backButton_clicked();
     void on_quizButton_clicked();
-    void updateState(QString state);
 
-    ///
-    /// \brief on_indiaButton_clicked will fade out the Asia country map and zoom in to the India's map
-    /// and hide/unhide and fade in/out all necessary buttons.
-    ///
+    // india buttons
     void on_indiaButton_clicked();
     void on_hawaMahal_clicked();
     void on_tajMahal_clicked();
     void on_paniPuri_clicked();
     void on_biryani_clicked();
 
+    // korea buttons
     void on_koreaButton_clicked();
     void on_bulguksaButton_clicked();
     void on_gyeongbokgungButton_clicked();
     void on_tteokbokkiButton_clicked();
     void on_bossamButton_clicked();
 
+    // thailand buttons
     void on_thailandButton_clicked();
     void on_grandPalaceButton_clicked();
     void on_watMuangButton_clicked();
     void on_tomYumButton_clicked();
     void on_stickyRiceButton_clicked();
 
+    ///
+    /// \brief updateState
+    /// Updates the previous state
+    /// \param state - The previous state
+    ///
+    void updateState(QString state);
+
 private:
+    ///
+    /// \brief ui
+    /// UI for the view (main window0
+    ///
     Ui::view *ui;
 
     ///
-    /// \brief The Country enum represents three countries
+    /// \brief The Country enum
+    /// Represents three countries
     ///
     enum Country {India, Korea, Thailand};
 
@@ -128,12 +137,36 @@ private:
     ///
     QLabel *backgroundLabel;
 
+    ///
+    /// \brief popUpWindow
+    /// A pop-up window object
+    ///
     PopUpWindow popUpWindow;
+
+    ///
+    /// \brief quizWindow
+    /// A quiz window object
+    ///
     Quiz quizWindow;
 
     // shadow effect on text
+    ///
+    /// \brief applyShadowEffect
+    /// Sets the shawdow effect on a widget
+    /// \param widget - A widget to apply shawdow effect on
+    ///
     void applyShadowEffect(QWidget *widget);
+
+    ///
+    /// \brief showShadowEffect
+    /// Applies the shadow effect on labels
+    ///
     void showShadowEffect();
+
+    ///
+    /// \brief showShadowPlayButton
+    /// Applies the shadow eefect on the play button
+    ///
     void showShadowPlayButton();
 
     // widgets fade in/out
